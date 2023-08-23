@@ -17,7 +17,7 @@ public class Personaje : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    public virtual void Move(float horizontal, float vertical)
+    public virtual void Move(float horizontal, float vertical, bool enElAire)
     {
 
     }
