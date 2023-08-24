@@ -17,7 +17,7 @@ public class JugadorSanti : Personaje
     // Update is called once per frame
     void Update()
     {
-        Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), false);
         Debug.DrawRay(transform.position, transform.up * -1);
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -29,7 +29,7 @@ public class JugadorSanti : Personaje
         }
     }
 
-    public override void Move(float horizontal, float vertical)
+    public override void Move(float horizontal, float vertical, bool enElAire)
     {
         if (horizontal != 0)
         {

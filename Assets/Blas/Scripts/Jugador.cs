@@ -13,6 +13,13 @@ public class Jugador : Personaje
     float cuantoTiempoDesdeQueToqueElPiso = 0;
     [SerializeField] float tiempoCoyote;
 
+    [SerializeField] float fuerzaDeSalto;
+
+    void Awake()
+    {
+        EntityLister.Jugador = transform;
+    }
+
     void FixedUpdate()
     {
         //Chequeo si estoy tocando el piso
@@ -36,12 +43,27 @@ public class Jugador : Personaje
             cuantoTiempoDesdeQueToqueElPiso = 0;
 
             Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), false);
+
+            
+            if(Input.GetButton("Jump"))
+            {
+                Salto();
+                cuantoTiempoDesdeQueToqueElPiso = tiempoCoyote;
+            }
         }
     }
 
     bool TocandoElPiso()
     {
-        return Physics.Raycast(transform.position, Vector3.down, 1);
+        return Physics.Raycast(transform.position, Vector3.down, 0.5F);
+    }
+
+    bool TocandoPared(int direccion)
+    {
+        direccion = Mathf.Clamp(direccion, -1, 1);
+        Debug.Log(Physics.Raycast(transform.position, Vector3.right * direccion, 0.5F));
+
+        return Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.right * direccion, 0.5F) || Physics.Raycast(transform.position - Vector3.up * 0.5f, Vector3.right * direccion, 0.5F);        
     }
 
     public override void Move(float horizontal, float vertical, bool enElAire)
@@ -56,9 +78,12 @@ public class Jugador : Personaje
             }
 
             //Cambias la velocidad en base a cuanto estas moviendote
-            porCualPuntoDeAceleracionVa = Mathf.Clamp(porCualPuntoDeAceleracionVa, 0, 1);
+            porCualPuntoDeAceleracionVa = Mathf.Clamp(porCualPuntoDeAceleracionVa, 0, 0.5f);
 
-            rig.velocity = new Vector3(horizontal * Aceleracion.Evaluate(porCualPuntoDeAceleracionVa) * MaxVelocidadHorizontal, rig.velocity.y, 0);
+            if(!TocandoPared((int)(horizontal)))
+            {
+                rig.velocity = new Vector3(horizontal * Aceleracion.Evaluate(porCualPuntoDeAceleracionVa) * MaxVelocidadHorizontal, rig.velocity.y, 0);
+            }
         }
         #endregion
 
@@ -75,7 +100,17 @@ public class Jugador : Personaje
             porCualPuntoDeAceleracionVa = Mathf.Clamp(porCualPuntoDeAceleracionVa, 0, 1);
 
             rig.velocity = new Vector3(horizontal * Aceleracion.Evaluate(porCualPuntoDeAceleracionVa) * MaxVelocidadHorizontal, rig.velocity.y, 0);
+
+            if(!TocandoPared((int)(horizontal)))
+            {
+                rig.velocity = new Vector3(horizontal * Aceleracion.Evaluate(porCualPuntoDeAceleracionVa) * MaxVelocidadHorizontal, rig.velocity.y, 0);
+            }
         }
         #endregion
+    }
+
+    void Salto()
+    {
+        rig.velocity = Vector3.up * fuerzaDeSalto;
     }
 }
