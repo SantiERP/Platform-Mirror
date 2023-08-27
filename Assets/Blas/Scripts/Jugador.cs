@@ -14,6 +14,11 @@ public class Jugador : Personaje
 
     [SerializeField] float fuerzaDeSalto;
 
+    [Header ("Stats Movimiento Aereo")]
+    [SerializeField] float velocidadAerea;
+    [SerializeField] AnimationCurve CurvaDeImportanciaDeApretarElBotonDeSalto;
+    float tiempoApretandoElBotonDeSalto = 0;
+
     void Awake()
     {
         EntityLister.Jugador = transform;
@@ -40,15 +45,21 @@ public class Jugador : Personaje
         else
         {
             cuantoTiempoDesdeQueToqueElPiso = 0;
+            tiempoApretandoElBotonDeSalto = 0;
 
             Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), false);
-
+        }
+        
+        if(Input.GetButton("Jump"))
+        {
+            tiempoApretandoElBotonDeSalto += Time.fixedDeltaTime;
             
-            if(Input.GetButton("Jump"))
+            if(tiempoApretandoElBotonDeSalto < 0.5f)
             {
                 Salto();
-                cuantoTiempoDesdeQueToqueElPiso = tiempoCoyote;
             }
+
+            cuantoTiempoDesdeQueToqueElPiso = tiempoCoyote;
         }
     }
 
@@ -57,7 +68,7 @@ public class Jugador : Personaje
         int layerMask = 1 << 6;
         layerMask = ~layerMask;
 
-        return Physics.Raycast(transform.position, Vector3.down, 0.6F, layerMask);
+        return Physics.Raycast(transform.position + Vector3.right * 0.48f, Vector3.down, 0.6F, layerMask) || Physics.Raycast(transform.position - Vector3.right * 0.48f, Vector3.down, 0.6F, layerMask);
     }
 
     bool TocandoPared(int direccion)
@@ -78,7 +89,7 @@ public class Jugador : Personaje
         {
             if(!TocandoPared((int)(horizontal)))
             {
-                rig.AddForce(horizontal * Vector3.right * 5);
+                rig.AddForce(horizontal * Vector3.right * velocidadAerea);
             }
         }
         #endregion
@@ -107,6 +118,8 @@ public class Jugador : Personaje
 
     void Salto()
     {
-        rig.velocity = Vector3.up * fuerzaDeSalto + Vector3.right * rig.velocity.x;
+        Debug.Log("Salto");
+        rig.AddForce(Vector3.up * fuerzaDeSalto * CurvaDeImportanciaDeApretarElBotonDeSalto.Evaluate(tiempoApretandoElBotonDeSalto) * Time.fixedDeltaTime, ForceMode.Impulse);
+        // rig.velocity = Vector3.up * fuerzaDeSalto * CurvaDeImportanciaDeApretarElBotonDeSalto.Evaluate(tiempoApretandoElBotonDeSalto) + Vector3.right * rig.velocity.x;
     }
 }

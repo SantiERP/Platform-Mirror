@@ -355,7 +355,32 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   tiempoCoyote: 0.5
-  fuerzaDeSalto: 15
+  fuerzaDeSalto: 50
+  velocidadAerea: 5
+  CurvaDeImportanciaDeApretarElBotonDeSalto:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -3.1150062
+      outSlope: -3.1150062
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.02320675
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &126178996
 Transform:
   m_ObjectHideFlags: 0
@@ -364,7 +389,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 126178990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.28, y: 7.72, z: 0}
+  m_LocalPosition: {x: -3.53, y: 7.72, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
