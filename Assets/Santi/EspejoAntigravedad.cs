@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EspejoAntigravedad : Espejos
 {
-    public override void Skill(Personaje personaje)
+    public override void Skill(Rigidbody r)
     {
         Debug.Log("entra");
-        personaje.rig.AddForce(transform.up * 300);
+        r.AddForce(transform.up * 300);
     }
 }

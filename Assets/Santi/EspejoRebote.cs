@@ -23,17 +23,17 @@ public class EspejoRebote : Espejos
         }
     }
     */
-    public override void Skill(Personaje personaje)
+    public override void Skill(Rigidbody r)
     {
        
 
        Debug.DrawRay(transform.position, transform.up * 3, Color.white);
        
-       Debug.DrawRay(transform.position, -personaje.rig.velocity, Color.red);
+       Debug.DrawRay(transform.position, -r.velocity, Color.red);
        
-       personaje.rig.velocity = Vector3.Reflect(personaje.rig.velocity, transform.up);
+       r.velocity = Vector3.Reflect(r.velocity, transform.up);
        
        
-       Debug.DrawRay(transform.position, personaje.rig.velocity, Color.blue);
+       Debug.DrawRay(transform.position, r.velocity, Color.blue);
     }
 }

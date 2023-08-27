@@ -5,9 +5,9 @@ using UnityEngine;
 public class EspejoBurst : Espejos
 {
 
-    public override void Skill(Personaje personaje)
+    public override void Skill(Rigidbody rig)
     {
-        personaje.rig.velocity *= 2; 
+        rig.velocity *= 2; 
     }
 
 }

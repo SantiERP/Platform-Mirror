@@ -4,15 +4,15 @@ using UnityEngine;
 
 public abstract class Espejos : MonoBehaviour 
 {
-    public abstract void Skill( Personaje per);
+    public abstract void Skill( Rigidbody rig);
 
     public void OnTriggerEnter(Collider other)
     {
-        Personaje personaje = other.GetComponent<Personaje>();
+        Rigidbody rig = other.GetComponent<Rigidbody>();
 
-        if (personaje != null)
+        if (other.gameObject.layer == 7)
         {
-            Skill(personaje);
+            Skill(rig);
         }
     }
 
