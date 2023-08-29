@@ -21,7 +21,7 @@ public class Jugador : Personaje
 
     void Awake()
     {
-        EntityLister.Jugador = transform;
+        EntityLister.JugadorT = transform;
     }
 
     void FixedUpdate()
@@ -77,7 +77,7 @@ public class Jugador : Personaje
         layerMask = ~layerMask;
 
         direccion = Mathf.Clamp(direccion, -1, 1);
-        Debug.Log(Physics.Raycast(transform.position, Vector3.right * direccion, 0.5F));
+        Debug.Log(Physics.Raycast(transform.position, Vector3.right * direccion, 0.5F,0));
 
         return Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.right * direccion, 0.5F, layerMask) || Physics.Raycast(transform.position - Vector3.up * 0.5f, Vector3.right * direccion, 0.5F, layerMask);        
     }
@@ -119,7 +119,7 @@ public class Jugador : Personaje
     void Salto()
     {
         Debug.Log("Salto");
-        rig.AddForce(Vector3.up * fuerzaDeSalto * CurvaDeImportanciaDeApretarElBotonDeSalto.Evaluate(tiempoApretandoElBotonDeSalto) * Time.fixedDeltaTime, ForceMode.Impulse);
+        rig.AddForce(Vector3.down * fuerzaDeSalto * CurvaDeImportanciaDeApretarElBotonDeSalto.Evaluate(tiempoApretandoElBotonDeSalto) * Time.fixedDeltaTime, ForceMode.Impulse);
         // rig.velocity = Vector3.up * fuerzaDeSalto * CurvaDeImportanciaDeApretarElBotonDeSalto.Evaluate(tiempoApretandoElBotonDeSalto) + Vector3.right * rig.velocity.x;
     }
 }

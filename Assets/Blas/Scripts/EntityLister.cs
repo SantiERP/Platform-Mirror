@@ -6,7 +6,7 @@ public static class EntityLister
 {
     static Transform TransformJugador;
 
-    public static Transform Jugador
+    public static Transform JugadorT
     {
         get{return TransformJugador;}
         set{TransformJugador = value;}

@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
     {
         toVector2 = Vector3.right + Vector3.up;
 
-        target = EntityLister.Jugador;
+        target = EntityLister.JugadorT;
     }
 
     // Update is called once per frame
