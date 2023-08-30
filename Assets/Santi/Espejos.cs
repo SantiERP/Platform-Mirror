@@ -8,11 +8,9 @@ public abstract class Espejos : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        Rigidbody rig = other.GetComponent<Rigidbody>();
-
-        if (other.gameObject.layer == 7)
+        if (other.TryGetComponent<Rebotable>(out Rebotable rebotable))
         {
-            Skill(rig);
+            Skill(rebotable.rig);
         }
     }
 

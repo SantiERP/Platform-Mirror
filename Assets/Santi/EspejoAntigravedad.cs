@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EspejoAntigravedad : Espejos
 {
-    bool _empujearriba;
+    [SerializeField] bool _empujearriba;
     Rigidbody rb;
     [Header("Fuerza de empuje")]
     [SerializeField,Range(0,100)] float _fuerzadeempuje;
@@ -16,24 +16,57 @@ public class EspejoAntigravedad : Espejos
 
     private void Update()
     {
-        if(_empujearriba)
-        {
-            Quaternion _rotation = new Quaternion (0,0,180,0);
-            rb.AddForce(Vector3.up * _fuerzadeempuje);
-            EntityLister.JugadorT.rotation = Quaternion.Slerp(transform.rotation, _rotation, speed * timeCount);
-            timeCount = timeCount + Time.deltaTime;
-            /*
-            if (rb.velocity.x < 0.9f)
-            {
-                Debug.Log("deja de empujar");
-                _empujearriba = false;
-            }
-            */
-        }
+        // if(EntityLister.DadoVuelta)
+        // {
+        //     Quaternion _rotation = new Quaternion (0,0,180,0);
+        //     EntityLister.JugadorT.rotation = Quaternion.Slerp(transform.rotation, _rotation, speed * timeCount);
+            
+        //     timeCount += Time.deltaTime;
+        // }
+
+        // else
+        // {
+        //     Quaternion _rotation = new Quaternion (0,0,0,0);
+        //     EntityLister.JugadorT.rotation = Quaternion.Slerp(transform.rotation, _rotation, speed * timeCount);
+            
+        //     timeCount += Time.deltaTime;
+        // }
+
+            
     }
     public override void Skill(Rigidbody r)
+    {       
+        EntityLister.DadoVuelta = !EntityLister.DadoVuelta;
+
+
+        Physics.gravity = -Physics.gravity;
+
+        if(EntityLister.DadoVuelta)
+        {
+            StartCoroutine(Rotar(new Quaternion (0,0,180,0)));
+            
+        }
+
+        else
+        {
+            StartCoroutine(Rotar(new Quaternion (0,0,0,0)));
+        }
+    }
+
+    IEnumerator Rotar(Quaternion _rotation)
     {
-        rb = r;
-        _empujearriba=true;
+        timeCount = 0f;
+        Quaternion rotacionInicial = EntityLister.JugadorT.rotation;
+
+        EntityLister.JugadorT.rotation = _rotation;
+
+        yield return null;
+        
+        // while(timeCount < 1)
+        // {
+        //     EntityLister.JugadorT.rotation = Quaternion.Slerp(rotacionInicial, _rotation, timeCount);
+        //     timeCount += 0.1f;
+        //     yield return new WaitForSeconds(0.1f);
+        // }
     }
 }

@@ -19,9 +19,15 @@ public class Jugador : Personaje
     [SerializeField] AnimationCurve CurvaDeImportanciaDeApretarElBotonDeSalto;
     float tiempoApretandoElBotonDeSalto = 0;
 
+    delegate void MovementType(float horizontal, float vertical, bool enElAire);
+
+    MovementType Movement;
+
     void Awake()
     {
         EntityLister.JugadorT = transform;
+
+        Movement += NormalMove;
     }
 
     void FixedUpdate()
@@ -38,7 +44,7 @@ public class Jugador : Personaje
                 rig.AddForce(Physics.gravity, ForceMode.Acceleration);
             }
 
-            Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), true);
+            Movement(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), true);
         }
 
         //Si toque el piso, el contador vuelve a 0
@@ -47,7 +53,7 @@ public class Jugador : Personaje
             cuantoTiempoDesdeQueToqueElPiso = 0;
             tiempoApretandoElBotonDeSalto = 0;
 
-            Move(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), false);
+            Movement(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), false);
         }
         
         if(Input.GetButton("Jump"))
@@ -68,7 +74,7 @@ public class Jugador : Personaje
         int layerMask = 1 << 6;
         layerMask = ~layerMask;
 
-        return Physics.Raycast(transform.position + Vector3.right * 0.48f, Vector3.down, 0.6F, layerMask) || Physics.Raycast(transform.position - Vector3.right * 0.48f, Vector3.down, 0.6F, layerMask);
+        return Physics.Raycast(transform.position + Vector3.right * 0.48f, -transform.up, 0.6F, layerMask) || Physics.Raycast(transform.position - Vector3.right * 0.48f, -transform.up, 0.6F, layerMask);
     }
 
     bool TocandoPared(int direccion)
@@ -77,12 +83,11 @@ public class Jugador : Personaje
         layerMask = ~layerMask;
 
         direccion = Mathf.Clamp(direccion, -1, 1);
-        Debug.Log(Physics.Raycast(transform.position, Vector3.right * direccion, 0.5F,0));
 
         return Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.right * direccion, 0.5F, layerMask) || Physics.Raycast(transform.position - Vector3.up * 0.5f, Vector3.right * direccion, 0.5F, layerMask);        
     }
 
-    public override void Move(float horizontal, float vertical, bool enElAire)
+    public override void NormalMove(float horizontal, float vertical, bool enElAire)
     {
         #region Movimiento Aereo
         if(enElAire)
@@ -118,8 +123,7 @@ public class Jugador : Personaje
 
     void Salto()
     {
-        Debug.Log("Salto");
-        rig.AddForce(Vector3.down * fuerzaDeSalto * CurvaDeImportanciaDeApretarElBotonDeSalto.Evaluate(tiempoApretandoElBotonDeSalto) * Time.fixedDeltaTime, ForceMode.Impulse);
+        rig.AddForce(transform.up * fuerzaDeSalto * CurvaDeImportanciaDeApretarElBotonDeSalto.Evaluate(tiempoApretandoElBotonDeSalto) * Time.fixedDeltaTime, ForceMode.Impulse);
         // rig.velocity = Vector3.up * fuerzaDeSalto * CurvaDeImportanciaDeApretarElBotonDeSalto.Evaluate(tiempoApretandoElBotonDeSalto) + Vector3.right * rig.velocity.x;
     }
 }
