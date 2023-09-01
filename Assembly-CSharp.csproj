@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Blas\Scripts\Rebotable.cs" />
      <Compile Include="Assets\Santi\JugadorSanti.cs" />
      <Compile Include="Assets\Blas\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Santi\EspejoAntigravedad.cs" />
@@ -45,7 +46,7 @@
      <Compile Include="Assets\Blas\Scripts\EntityLister.cs" />
      <Compile Include="Assets\Santi\EspejoBurst.cs" />
      <Compile Include="Assets\Santi\EspejoRebote.cs" />
-     <Compile Include="Assets\Blas\Scripts\Rebotable.cs" />
+     <Compile Include="Assets\Blas\Scripts\EventManager.cs" />
      <None Include="Assets\QueFaltaAlMovimiento.txt" />
      <None Include="Assets\Ideas.txt" />
     <Reference Include="UnityEngine">

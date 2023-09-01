@@ -28,6 +28,8 @@ public class Jugador : Personaje
         EntityLister.JugadorT = transform;
 
         Movement += NormalMove;
+
+        EventManager.SubscribeToEvent(EventManager.EventsType.Event_PlayerDead, Muerte);
     }
 
     void FixedUpdate()
@@ -125,5 +127,15 @@ public class Jugador : Personaje
     {
         rig.AddForce(transform.up * fuerzaDeSalto * CurvaDeImportanciaDeApretarElBotonDeSalto.Evaluate(tiempoApretandoElBotonDeSalto) * Time.fixedDeltaTime, ForceMode.Impulse);
         // rig.velocity = Vector3.up * fuerzaDeSalto * CurvaDeImportanciaDeApretarElBotonDeSalto.Evaluate(tiempoApretandoElBotonDeSalto) + Vector3.right * rig.velocity.x;
+    }
+
+    void Muerte(object[] parameters)
+    {
+
+    }
+
+    void FinalizarNivel()
+    {
+        EventManager.TriggerEvent(EventManager.EventsType.Event_EndOfLevel, new object[1]);
     }
 }

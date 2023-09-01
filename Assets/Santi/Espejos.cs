@@ -4,14 +4,38 @@ using UnityEngine;
 
 public abstract class Espejos : MonoBehaviour 
 {
+    [SerializeField] AnimationCurve entradaDePersonaje;
+
     public abstract void Skill( Rigidbody rig);
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Rebotable>(out Rebotable rebotable))
         {
-            Skill(rebotable.rig);
+            StartCoroutine(EntradaPersonaje(rebotable.transform.position, rebotable.rig));
         }
+    }
+
+    IEnumerator EntradaPersonaje(Vector3 posicionInicial, Rigidbody rig)
+    {
+        float instanteActual = 0f;
+        Vector3 posicionFinal = posicionInicial - transform.up;
+
+        rig.constraints = RigidbodyConstraints.FreezePosition;
+
+        while (instanteActual < 1)
+        {
+            rig.transform.position = Vector3.Lerp(posicionInicial, posicionFinal, entradaDePersonaje.Evaluate(instanteActual));
+
+            instanteActual += 0.01f;
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        rig.constraints = RigidbodyConstraints.FreezePositionZ;
+        
+
+        Skill(rig);
     }
 
 }

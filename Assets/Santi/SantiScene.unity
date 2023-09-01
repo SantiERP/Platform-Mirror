@@ -230,7 +230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190560730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.65, y: 1.6, z: -0.02377517}
+  m_LocalPosition: {x: -10.26, y: 4.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -332,6 +332,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd11ad63a9c942c42a2f055e9a58d2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entradaDePersonaje:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _empujearriba: 0
   _fuerzadeempuje: 20
   _forceMode: 0
@@ -531,7 +537,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425315635}
   m_LocalRotation: {x: -0, y: -0, z: -0.00000086426724, w: 1}
-  m_LocalPosition: {x: -12.34, y: 0.95, z: 0}
+  m_LocalPosition: {x: -13.99, y: 2.8, z: 0}
   m_LocalScale: {x: 1, y: 0.24710834, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -550,6 +556,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd11ad63a9c942c42a2f055e9a58d2f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entradaDePersonaje:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.079174
+      outSlope: 4.079174
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.021097045
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -4.6230454
+      outSlope: -4.6230454
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.037974834
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _empujearriba: 0
   _fuerzadeempuje: 20
   _forceMode: 0
@@ -857,7 +896,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1590142474}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.23, y: 2.14, z: 0}
+  m_LocalPosition: {x: -13.93, y: 4.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1024,6 +1063,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f550e5163b436e4596ee8d0b6e08354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  entradaDePersonaje:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &1748953929
 Transform:
   m_ObjectHideFlags: 0
