@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Personaje : Rebotable
 {
-    public virtual void NormalMove(float horizontal, float vertical, bool enElAire)
+    public virtual void NormalMove(float horizontal, float vertical, bool enElAire, float velocidadenAire, float MaxVelocidadHorizontal, AnimationCurve Aceleracion)
     {
 
     }

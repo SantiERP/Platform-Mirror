@@ -17,7 +17,7 @@ public class JugadorSanti : Personaje
     // Update is called once per frame
     void Update()
     {
-        NormalMove(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), false);
+        //NormalMove(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), false);
         
         Debug.DrawRay(transform.position, transform.up * -1);
 
@@ -29,7 +29,7 @@ public class JugadorSanti : Personaje
             }
         }
     }
-
+    /*
     public override void NormalMove(float horizontal, float vertical, bool enElAire)
     {
         if (horizontal != 0)
@@ -41,7 +41,7 @@ public class JugadorSanti : Personaje
 
         rig.velocity = new Vector3(horizontal * Aceleracion.Evaluate(porCualPuntoDeAceleracionVa) * MaxVelocidadHorizontal, rig.velocity.y, 0);
     }
-
+    */
     void Jump()
     {
         rig.AddForce(transform.up * _forcejump);
