@@ -54,7 +54,7 @@ public class Inputs : MonoBehaviour
         {
             cuantoTiempoDesdeQueToqueElPiso = 0;
             tiempoApretandoElBotonDeSalto = 0;
-            jugador.NormalMove(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), false, velocidadAerea, MaxVelocidadHorizontal, Aceleracion);
+            jugador.NormalMove(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), false, velocidadAerea, MaxVelocidadHorizontal, Aceleracion);
         }
 
         if (Input.GetButton("Jump"))
