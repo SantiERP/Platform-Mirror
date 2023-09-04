@@ -18,6 +18,12 @@ public abstract class Espejos : MonoBehaviour
 
     IEnumerator EntradaPersonaje(Vector3 posicionInicial, Rigidbody rig)
     {
+
+        BoxCollider box = rig.GetComponent<BoxCollider>();  
+
+        box.enabled = false;
+
+
         float instanteActual = 0f;
         Vector3 posicionFinal = posicionInicial - transform.up;
 
@@ -32,9 +38,9 @@ public abstract class Espejos : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        rig.constraints = RigidbodyConstraints.FreezePositionZ;
-        
+        rig.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
 
+        box.enabled = true;        
         Skill(rig);
     }
 

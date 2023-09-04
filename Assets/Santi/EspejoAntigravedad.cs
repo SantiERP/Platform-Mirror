@@ -35,7 +35,7 @@ public class EspejoAntigravedad : Espejos
             
     }
     public override void Skill(Rigidbody r)
-    {       
+    {     
         EntityLister.DadoVuelta = !EntityLister.DadoVuelta;
 
 

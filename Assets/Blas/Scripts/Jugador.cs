@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Jugador : Personaje
 {
+    [SerializeField] float porCualPuntoDeAceleracionVa = 0;
 
     void Awake()
     {
@@ -34,7 +35,6 @@ public class Jugador : Personaje
 
     public override void NormalMove(float horizontal, float vertical, bool enElAire, float velocidadAerea, float MaxVelocidadHorizontal, AnimationCurve Aceleracion)
     {
-        float porCualPuntoDeAceleracionVa = 0;
         #region Movimiento Aereo
         if (enElAire)
         {
@@ -48,8 +48,6 @@ public class Jugador : Personaje
         #region Movimiento Terrestre
         else
         {
-            Debug.Log("estoy en el piso");
-
             //Si te estas moviendo horizontalmente, aceleras en cierta direccion
             if (horizontal != 0)
             {
@@ -58,7 +56,6 @@ public class Jugador : Personaje
 
             //Cambias la velocidad en base a cuanto estas moviendote
             porCualPuntoDeAceleracionVa = Mathf.Clamp(porCualPuntoDeAceleracionVa, 0, 1);
-
 
             if(!TocandoPared((int)(horizontal)))
             {
