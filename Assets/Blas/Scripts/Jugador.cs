@@ -40,7 +40,7 @@ public class Jugador : Personaje
         {
             if(!TocandoPared((int)(horizontal)))
             {
-                rig.AddForce(horizontal * Vector3.right * velocidadAerea);
+                rig.AddForce(horizontal * transform.right * velocidadAerea);
             }
         }
         #endregion

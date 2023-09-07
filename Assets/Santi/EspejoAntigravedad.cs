@@ -39,26 +39,17 @@ public class EspejoAntigravedad : Espejos
         EntityLister.DadoVuelta = !EntityLister.DadoVuelta;
 
 
-        Physics.gravity = -Physics.gravity;
+        Physics.gravity = transform.up * Physics.gravity.magnitude;
 
-        if(EntityLister.DadoVuelta)
-        {
-            StartCoroutine(Rotar(new Quaternion (0,0,180,0)));
-            
-        }
-
-        else
-        {
-            StartCoroutine(Rotar(new Quaternion (0,0,0,0)));
-        }
+        StartCoroutine(Rotar((-transform.up)));
     }
 
-    IEnumerator Rotar(Quaternion _rotation)
+    IEnumerator Rotar(Vector3 up)
     {
         timeCount = 0f;
-        Quaternion rotacionInicial = EntityLister.JugadorT.rotation;
+        //Quaternion rotacionInicial = EntityLister.JugadorT.rotation;
 
-        EntityLister.JugadorT.rotation = _rotation;
+        EntityLister.JugadorT.up = up;
 
         yield return null;
         

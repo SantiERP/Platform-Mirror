@@ -27,11 +27,11 @@ public abstract class Espejos : MonoBehaviour
         float instanteActual = 0f;
         Vector3 posicionFinal = posicionInicial - transform.up;
 
-        rig.constraints = RigidbodyConstraints.FreezePosition;
+        rig.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;;
 
         while (instanteActual < 1)
         {
-            rig.transform.position = Vector3.Lerp(posicionInicial, posicionFinal, entradaDePersonaje.Evaluate(instanteActual));
+            rig.transform.position = Vector3.LerpUnclamped(posicionInicial, posicionFinal, entradaDePersonaje.Evaluate(instanteActual));
 
             instanteActual += 0.01f;
 
