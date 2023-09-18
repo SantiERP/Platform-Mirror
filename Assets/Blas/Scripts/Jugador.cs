@@ -53,6 +53,10 @@ public class Jugador : Personaje
             {
                 porCualPuntoDeAceleracionVa += Time.fixedDeltaTime;
             }
+            else
+            {
+                porCualPuntoDeAceleracionVa -= Time.fixedDeltaTime;
+            }
 
             //Cambias la velocidad en base a cuanto estas moviendote
             porCualPuntoDeAceleracionVa = Mathf.Clamp(porCualPuntoDeAceleracionVa, 0, 1);
