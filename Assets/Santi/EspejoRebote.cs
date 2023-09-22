@@ -12,7 +12,6 @@ public class EspejoRebote : Espejos
 
        r.AddForce(-Physics.gravity, ForceMode.Acceleration);
 
-       Destroy(r);
        Debug.DrawRay(transform.position, r.velocity, Color.blue);
     }
 }
