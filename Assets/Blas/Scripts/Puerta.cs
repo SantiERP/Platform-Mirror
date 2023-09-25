@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Puerta : MonoBehaviour
 {
-    [SerializeField] PressableButon ActivationButton;
+    [SerializeField] Interruptor ActivationButton;
     [SerializeField] Vector3 WhereDoIMoveTo;
     Vector3 desiredPosition;
     Vector3 normalPosition;

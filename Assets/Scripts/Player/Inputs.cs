@@ -15,7 +15,7 @@ public class Inputs : MonoBehaviour
     [SerializeField] float MaxVelocidadHorizontal;
     [SerializeField] AnimationCurve Aceleracion;
     [SerializeField] float tiempoCoyote;
-    float cuantoTiempoDesdeQueToqueElPiso = 0;
+    [SerializeField] float cuantoTiempoDesdeQueToqueElPiso = 0;
 
     [SerializeField] float fuerzaDeSalto;
 
