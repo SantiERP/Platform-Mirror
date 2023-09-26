@@ -28,6 +28,7 @@ public class Puerta : MonoBehaviour
     {
         desiredPosition = WhereDoIMoveTo + normalPosition;
     }
+
     void WhatToDont()
     {
         desiredPosition = normalPosition;
