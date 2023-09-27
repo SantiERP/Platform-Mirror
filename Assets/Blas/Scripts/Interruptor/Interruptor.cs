@@ -21,14 +21,23 @@ public class Interruptor : MonoBehaviour
     }
 
     // Update is called once per frame
-    void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider other)
     {
-        ButtonAction();
+        Debug.Log("Entra");
+
+        if (other.TryGetComponent<Rebotable>(out Rebotable rebotable))
+        {
+            Debug.Log("Rebotable");
+            ButtonAction();
+        }
     }
 
-    void OnCollisionExit(Collision collision)
+    public void OnTriggerExit(Collider other)
     {
-        ButtonAntiAction();
+        if (other.TryGetComponent<Rebotable>(out Rebotable rebotable))
+        {
+            ButtonAntiAction();
+        }
     }
 
     public virtual void NormalAction()

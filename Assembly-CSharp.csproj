@@ -56,17 +56,14 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Blas\Scripts\Interruptor\PressableButton.cs" />
     <Compile Include="Assets\Blas\Scripts\Puerta.cs" />
     <Compile Include="Assets\Blas\Scripts\Rebotable.cs" />
     <Compile Include="Assets\Santi\Button.cs" />
     <Compile Include="Assets\Santi\JugadorSanti.cs" />
     <Compile Include="Assets\Blas\Scripts\CameraFollow.cs" />
     <Compile Include="Assets\Santi\EspejoAntigravedad.cs" />
-<<<<<<< Updated upstream
     <Compile Include="Assets\Blas\Scripts\Interruptor\Interruptor.cs" />
-=======
-    <Compile Include="Assets\Blas\Scripts\PressableButon.cs" />
->>>>>>> Stashed changes
     <Compile Include="Assets\Blas\Scripts\PuntosCamaras.cs" />
     <Compile Include="Assets\Blas\Scripts\EventManager.cs" />
     <Compile Include="Assets\Blas\Scripts\Jugador.cs" />
@@ -76,10 +73,6 @@
     <Compile Include="Assets\Santi\EspejoBurst.cs" />
     <Compile Include="Assets\Scripts\Player\Inputs.cs" />
     <Compile Include="Assets\Santi\EspejoRebote.cs" />
-<<<<<<< Updated upstream
-    <Compile Include="Assets\Blas\Scripts\Interruptor\PressableButton.cs" />
-=======
->>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

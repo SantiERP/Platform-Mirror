@@ -21,7 +21,7 @@ public class Puerta : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.01f);
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.05f);
     }
 
     void WhatToDo()

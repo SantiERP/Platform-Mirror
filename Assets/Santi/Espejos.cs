@@ -18,7 +18,8 @@ public abstract class Espejos : MonoBehaviour
 
     IEnumerator EntradaPersonaje(Vector3 posicionInicial, Rigidbody rig)
     {
-
+        Vector3 dir = rig.velocity;
+        Debug.Log($"<color=red>{dir}</color>");
         BoxCollider box = rig.GetComponent<BoxCollider>();  
 
         box.enabled = false;
@@ -42,6 +43,17 @@ public abstract class Espejos : MonoBehaviour
 
         box.enabled = true;        
         Skill(rig);
+        Throw(dir, rig);
     }
 
+    void Throw(Vector3 dir, Rigidbody r)
+    {
+        r.velocity = Vector3.Reflect(dir, transform.up);//Normalizar el vector
+        //r.velocity *= 10;
+        //r.velocity += transform.right;
+
+        //r.AddForce(-Physics.gravity);
+        Debug.Log($"<color=blue>{r.velocity}</color>");
+        //Debug.DrawRay(r.transform.position, Vector3.Reflect(r.velocity + Physics.gravity * Time.fixedDeltaTime, transform.up), Color.red);
+    }
 }
