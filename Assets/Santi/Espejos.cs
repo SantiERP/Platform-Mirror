@@ -39,7 +39,15 @@ public abstract class Espejos : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        rig.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        if(rig.GetComponent<Jugador>())
+        {
+            rig.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+        }
+        
+        else
+        {
+            rig.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+        }
 
         box.enabled = true;        
         Skill(rig);

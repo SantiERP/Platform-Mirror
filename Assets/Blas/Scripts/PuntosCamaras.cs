@@ -16,8 +16,6 @@ public class PuntosCamaras : MonoBehaviour
 
     IEnumerator ActualSetting()
     {
-        
-
         Camera MainCamera = Camera.main;
         WaitForSeconds Espera = new WaitForSeconds(esperaEntreMomentos);
         float relacionDeTiempo = 1/tiempoDeTrancision;
