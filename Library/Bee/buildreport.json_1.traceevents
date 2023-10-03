@@ -1,0 +1,525 @@
+{ "pid": 0, "tid": -1, "ph": "M", "name": "process_name", "args": { "name": "BeeDriver" } },
+{ "pid": 0, "tid": -1, "ph": "M", "name": "process_sort_index", "args": { "sort_index": "-2" } },
+{ "pid": 0, "tid": 1, "ph": "M", "name": "thread_name", "args": { "name": "" } },
+{ "pid": 0, "tid": 1, "ts": 1696346491474035, "dur": 3205277, "ph": "X", "name": "Build Player", "args": {} },
+{ "pid": 0, "tid": 1, "ts": 1696346491474354, "dur": 15862, "ph": "X", "name": "WriteBuildProgramData", "args": {} },
+{ "pid": 0, "tid": 1, "ts": 1696346491490219, "dur": 48463, "ph": "X", "name": "Run Backend", "args": {} },
+{ "pid": 0, "tid": 1, "ts": 1696346491538684, "dur": 945490, "ph": "X", "name": "BuildProgram", "args": {} },
+{ "pid": 0, "tid": 1, "ts": 1696346492484177, "dur": 2182459, "ph": "X", "name": "Run Backend", "args": {} },
+{ "pid": 0, "tid": 1, "ts": 1696346494666638, "dur": 12674, "ph": "X", "name": "Finish", "args": {} },
+{ "pid": 0, "tid": 1, "ts": 1696346494679925, "dur": 12, "ph": "X", "name": "", "args": {} },
+{ "pid": 35942, "tid": -1, "ph": "M", "name": "process_name", "args": { "name": "netcorerun.dll" } },
+{ "pid": 35942, "tid": -1, "ph": "M", "name": "process_sort_index", "args": { "sort_index": "-1" } },
+{ "pid": 35942, "tid": 1, "ph": "M", "name": "thread_name", "args": { "name": "" } },
+{ "pid": 35942, "tid": 1, "ts": 1696346492245185, "dur": 213384, "ph": "X", "name": "BuildProgram", "args": {} },
+{ "pid": 35942, "tid": 1, "ts": 1696346492246591, "dur": 50961, "ph": "X", "name": "BuildProgramContextConstructor", "args": {} },
+{ "pid": 35942, "tid": 1, "ts": 1696346492440261, "dur": 5038, "ph": "X", "name": "OutputData.Write", "args": {} },
+{ "pid": 35942, "tid": 1, "ts": 1696346492445303, "dur": 13247, "ph": "X", "name": "Backend.Write", "args": {} },
+{ "pid": 35942, "tid": 1, "ts": 1696346492446137, "dur": 11368, "ph": "X", "name": "JsonToString", "args": {} },
+{ "pid": 35942, "tid": 1, "ts": 1696346492463851, "dur": 1416, "ph": "X", "name": "", "args": {} },
+{ "pid": 35942, "tid": 1, "ts": 1696346492462902, "dur": 2402, "ph": "X", "name": "Write chrome-trace events", "args": {} },
+{ "pid": 0, "tid": 1, "ts": 1696346494680139, "dur": 489, "ph": "X", "name": "buildprogram0.traceevents", "args": {} },
+{ "cat":"", "pid":12345, "tid":0, "ts":0, "ph":"M", "name":"process_name", "args": { "name":"bee_backend" } }
+,{ "pid":12345, "tid":0, "ts":1696346492535188, "dur":1965, "ph":"X", "name": "DriverInitData",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346492537165, "dur":40, "ph":"X", "name": "Tundra",  "args": { "detail":"RemoveStaleOutputs" }}
+,{ "pid":12345, "tid":0, "ts":1696346492537216, "dur":16, "ph":"X", "name": "Tundra",  "args": { "detail":"PrepareNodes" }}
+,{ "pid":12345, "tid":0, "ts":1696346492537232, "dur":336, "ph":"X", "name": "Tundra",  "args": { "detail":"BuildQueueInit" }}
+,{ "pid":12345, "tid":0, "ts":1696346492537596, "dur":809, "ph":"X", "name": "EnqueueRequestedNodes",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346492538406, "dur":1, "ph":"X", "name": "SortWorkingStack",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494641872, "dur":249, "ph":"X", "name": "JoinBuildThread",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642121, "dur":60, "ph":"X", "name": "ThreadStateDestroy",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642181, "dur":3, "ph":"X", "name": "JoinBuildThread",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642184, "dur":9, "ph":"X", "name": "ThreadStateDestroy",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642193, "dur":2, "ph":"X", "name": "JoinBuildThread",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642195, "dur":9, "ph":"X", "name": "ThreadStateDestroy",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642204, "dur":2, "ph":"X", "name": "JoinBuildThread",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642206, "dur":7, "ph":"X", "name": "ThreadStateDestroy",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642213, "dur":2, "ph":"X", "name": "JoinBuildThread",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642215, "dur":7, "ph":"X", "name": "ThreadStateDestroy",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642222, "dur":2, "ph":"X", "name": "JoinBuildThread",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642224, "dur":8, "ph":"X", "name": "ThreadStateDestroy",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642232, "dur":2, "ph":"X", "name": "JoinBuildThread",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642234, "dur":6, "ph":"X", "name": "ThreadStateDestroy",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642240, "dur":2, "ph":"X", "name": "JoinBuildThread",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642242, "dur":7, "ph":"X", "name": "ThreadStateDestroy",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642249, "dur":0, "ph":"X", "name": "SharedResourceDestroy",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642270, "dur":3, "ph":"X", "name": "BuildQueueDestroyTail",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494642303, "dur":2834, "ph":"X", "name": "Tundra",  "args": { "detail":"Write AllBuiltNodes" }}
+,{ "pid":12345, "tid":1, "ts":1696346492538064, "dur":356, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346492538421, "dur":5237, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346492543663, "dur":181, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx" }}
+,{ "pid":12345, "tid":1, "ts":1696346492543848, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346492546431, "dur":66344, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.5/DefaultWsdlHelpGenerator.aspx" }}
+,{ "pid":12345, "tid":1, "ts":1696346492612821, "dur":30825, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan.exe" }}
+,{ "pid":12345, "tid":1, "ts":1696346492643651, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346492643659, "dur":2520, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan.exe" }}
+,{ "pid":12345, "tid":1, "ts":1696346492646248, "dur":25484, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.WindModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492671739, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346492672245, "dur":1705, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.WindModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492674027, "dur":33794, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.VRModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492707831, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346492708030, "dur":1938, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.VRModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492710041, "dur":69078, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.VideoModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492779127, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346492779140, "dur":4928, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.VideoModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492784131, "dur":32753, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492816892, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346492816905, "dur":4528, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityWebRequestAssetBundleModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492821514, "dur":111202, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityAnalyticsModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492932723, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346492932735, "dur":4046, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityAnalyticsModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492936850, "dur":30809, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TLSModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492967667, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346492967679, "dur":13272, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TLSModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346492981007, "dur":60335, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493041350, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346493041365, "dur":2309, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TextCoreFontEngineModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493043744, "dur":63945, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.SubstanceModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493107697, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346493107708, "dur":2362, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.SubstanceModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493110148, "dur":43283, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ScreenCaptureModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493153439, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346493153451, "dur":1887, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ScreenCaptureModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493155423, "dur":116779, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ParticleSystemModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493272210, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346493272224, "dur":1977, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ParticleSystemModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493274272, "dur":69103, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.DSPGraphModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493343405, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346493343416, "dur":2184, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.DSPGraphModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493345710, "dur":43327, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ClusterInputModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493389044, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346493389057, "dur":4184, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ClusterInputModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493393342, "dur":205264, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AndroidJNIModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493598614, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346493598628, "dur":3462, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AndroidJNIModule.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493602158, "dur":59856, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Scheduler.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493662021, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346493662035, "dur":1445, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Scheduler.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493663548, "dur":1880, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Environments.Internal.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493665436, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346493665449, "dur":1766, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Environments.Internal.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493667282, "dur":39654, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Environments.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493706947, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346493706963, "dur":2779, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Environments.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493709855, "dur":174573, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Xml.Linq.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493884439, "dur":5, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346493884459, "dur":9619, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Xml.Linq.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346493894148, "dur":153105, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.IO.Compression.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346494047261, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346494047298, "dur":2199, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.IO.Compression.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346494049556, "dur":252247, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.ComponentModel.Composition.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346494301851, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":1, "ts":1696346494302029, "dur":2726, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.ComponentModel.Composition.dll" }}
+,{ "pid":12345, "tid":1, "ts":1696346494304823, "dur":337036, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492538011, "dur":400, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492538413, "dur":5240, "ph":"X", "name": "CheckDagSignatures",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492543663, "dur":1, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"WriteText Library/Bee/artifacts/WinPlayerBuildProgram/Data/app.info" }}
+,{ "pid":12345, "tid":2, "ts":1696346492543669, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492544608, "dur":892, "ph":"X", "name": "WriteText",  "args": { "detail":"Library/Bee/artifacts/WinPlayerBuildProgram/Data/app.info" }}
+,{ "pid":12345, "tid":2, "ts":1696346492545508, "dur":76, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/app.info" }}
+,{ "pid":12345, "tid":2, "ts":1696346492545587, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492545910, "dur":4013, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/app.info" }}
+,{ "pid":12345, "tid":2, "ts":1696346492549928, "dur":30194, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.0/web.config" }}
+,{ "pid":12345, "tid":2, "ts":1696346492580127, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492580136, "dur":1286, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.0/web.config" }}
+,{ "pid":12345, "tid":2, "ts":1696346492581461, "dur":11104, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/2.0/web.config" }}
+,{ "pid":12345, "tid":2, "ts":1696346492592571, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492592583, "dur":1861, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/2.0/web.config" }}
+,{ "pid":12345, "tid":2, "ts":1696346492594537, "dur":164, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/config" }}
+,{ "pid":12345, "tid":2, "ts":1696346492594706, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492594718, "dur":42497, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/config" }}
+,{ "pid":12345, "tid":2, "ts":1696346492637273, "dur":82907, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.XRModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346492720196, "dur":5, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492720220, "dur":2917, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.XRModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346492723209, "dur":58939, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.VFXModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346492782156, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492782206, "dur":1737, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.VFXModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346492784028, "dur":35457, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346492819497, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492819515, "dur":22910, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityWebRequestAudioModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346492842502, "dur":40675, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346492883186, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346492883204, "dur":2840, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityAnalyticsCommonModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346492886105, "dur":205344, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UIElementsModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493091457, "dur":5, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346493091473, "dur":3811, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UIElementsModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493095355, "dur":41572, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.SpriteShapeModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493136937, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346493136952, "dur":2333, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.SpriteShapeModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493139490, "dur":54544, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.PhysicsModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493194040, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346493194052, "dur":2204, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.PhysicsModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493196337, "dur":57509, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.InputLegacyModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493253859, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346493253872, "dur":1496, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.InputLegacyModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493255433, "dur":87686, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.GIModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493343128, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346493343141, "dur":3192, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.GIModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493346407, "dur":36158, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ClothModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493382574, "dur":5, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346493382590, "dur":6869, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ClothModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493389523, "dur":68493, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AnimationModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493458024, "dur":124, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346493458159, "dur":2163, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AnimationModule.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493460437, "dur":223987, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.VisualScripting.Flow.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493684432, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346493684446, "dur":3346, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.VisualScripting.Flow.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493687945, "dur":2990, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Device.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493690940, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346493690950, "dur":2104, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Device.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493693113, "dur":61110, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Analytics.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493754233, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346493754245, "dur":1689, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Analytics.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493756005, "dur":210939, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Runtime.Serialization.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493966954, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346493966970, "dur":2343, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Runtime.Serialization.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346493969384, "dur":348739, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346494318130, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":2, "ts":1696346494318142, "dur":4060, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.dll" }}
+,{ "pid":12345, "tid":2, "ts":1696346494322346, "dur":319542, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346492538049, "dur":367, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346492538416, "dur":5241, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346492543663, "dur":49209, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.5/machine.config" }}
+,{ "pid":12345, "tid":3, "ts":1696346492592875, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346492592894, "dur":1770, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.5/machine.config" }}
+,{ "pid":12345, "tid":3, "ts":1696346492594710, "dur":119, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/browscap.ini" }}
+,{ "pid":12345, "tid":3, "ts":1696346492594832, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346492594837, "dur":179678, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/browscap.ini" }}
+,{ "pid":12345, "tid":3, "ts":1696346492774576, "dur":177729, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityWebRequestModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346492952312, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346492952325, "dur":1631, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityWebRequestModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346492954020, "dur":84123, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TextRenderingModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493038255, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493038267, "dur":2430, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TextRenderingModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493040779, "dur":68847, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TerrainModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493109633, "dur":15, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493109660, "dur":1971, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TerrainModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493111685, "dur":26090, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493137784, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493137807, "dur":1517, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493139400, "dur":40753, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ProfilerModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493180160, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493180171, "dur":2631, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ProfilerModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493182869, "dur":30094, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.InputModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493212973, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493212987, "dur":2970, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.InputModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493216049, "dur":160509, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.IMGUIModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493376565, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493376581, "dur":2302, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.IMGUIModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493379078, "dur":49527, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AssetBundleModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493428612, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493428628, "dur":6929, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AssetBundleModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493435621, "dur":73164, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AIModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493508793, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493508805, "dur":1584, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AIModule.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493510465, "dur":109625, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Timeline.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493620096, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493620109, "dur":2007, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Timeline.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493622178, "dur":1928, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Networking.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493624114, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493624125, "dur":1492, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Networking.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493625676, "dur":107586, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Internal.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493733271, "dur":7, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493733294, "dur":3736, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Internal.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493737101, "dur":176811, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.ServiceModel.Internals.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493913919, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493913931, "dur":1635, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.ServiceModel.Internals.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493915626, "dur":49741, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.EnterpriseServices.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493965374, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346493965386, "dur":1893, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.EnterpriseServices.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346493967357, "dur":256276, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Drawing.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346494223642, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346494223653, "dur":2275, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Drawing.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346494226001, "dur":411654, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/mscorlib.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346494637662, "dur":5, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":3, "ts":1696346494637772, "dur":4002, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/mscorlib.dll" }}
+,{ "pid":12345, "tid":3, "ts":1696346494641822, "dur":2, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"Player" }}
+,{ "pid":12345, "tid":3, "ts":1696346494641825, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1696346492538097, "dur":328, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1696346492538425, "dur":5230, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1696346492543663, "dur":185, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser" }}
+,{ "pid":12345, "tid":4, "ts":1696346492543850, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1696346492554781, "dur":18558, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.5/Browsers/Compat.browser" }}
+,{ "pid":12345, "tid":4, "ts":1696346492573384, "dur":190, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser" }}
+,{ "pid":12345, "tid":4, "ts":1696346492573578, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1696346492574304, "dur":9184, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/2.0/Browsers/Compat.browser" }}
+,{ "pid":12345, "tid":4, "ts":1696346492583526, "dur":19494, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/2.0/machine.config" }}
+,{ "pid":12345, "tid":4, "ts":1696346492603024, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1696346492603034, "dur":1433, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/2.0/machine.config" }}
+,{ "pid":12345, "tid":4, "ts":1696346492604506, "dur":1089148, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/UnityPlayer.dll" }}
+,{ "pid":12345, "tid":4, "ts":1696346493693660, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1696346493693668, "dur":42575, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/UnityPlayer.dll" }}
+,{ "pid":12345, "tid":4, "ts":1696346493736304, "dur":383590, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Xml.dll" }}
+,{ "pid":12345, "tid":4, "ts":1696346494119900, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1696346494119911, "dur":6304, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Xml.dll" }}
+,{ "pid":12345, "tid":4, "ts":1696346494126278, "dur":104689, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/netstandard.dll" }}
+,{ "pid":12345, "tid":4, "ts":1696346494230978, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1696346494230990, "dur":2069, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/netstandard.dll" }}
+,{ "pid":12345, "tid":4, "ts":1696346494233120, "dur":272243, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Mono.Security.dll" }}
+,{ "pid":12345, "tid":4, "ts":1696346494505370, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":4, "ts":1696346494505388, "dur":2013, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Mono.Security.dll" }}
+,{ "pid":12345, "tid":4, "ts":1696346494507481, "dur":134386, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492538125, "dur":303, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492538429, "dur":5227, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492543663, "dur":178, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.5/settings.map" }}
+,{ "pid":12345, "tid":5, "ts":1696346492543844, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492546260, "dur":5565, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.5/settings.map" }}
+,{ "pid":12345, "tid":5, "ts":1696346492551878, "dur":170, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.0/settings.map" }}
+,{ "pid":12345, "tid":5, "ts":1696346492552052, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492552157, "dur":21176, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.0/settings.map" }}
+,{ "pid":12345, "tid":5, "ts":1696346492573382, "dur":204, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx" }}
+,{ "pid":12345, "tid":5, "ts":1696346492573590, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492573601, "dur":39351, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.0/DefaultWsdlHelpGenerator.aspx" }}
+,{ "pid":12345, "tid":5, "ts":1696346492613003, "dur":159, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Resources/unity default resources" }}
+,{ "pid":12345, "tid":5, "ts":1696346492613166, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492613643, "dur":124816, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Resources/unity default resources" }}
+,{ "pid":12345, "tid":5, "ts":1696346492738555, "dur":30237, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.VehiclesModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346492768799, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492768812, "dur":2375, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.VehiclesModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346492771257, "dur":41137, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346492812406, "dur":5, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492812426, "dur":3829, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityWebRequestTextureModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346492816335, "dur":36251, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityConnectModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346492852594, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492852607, "dur":1778, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityConnectModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346492854455, "dur":25381, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UmbraModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346492879843, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492879854, "dur":1647, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UmbraModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346492881568, "dur":66440, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UIElementsNativeModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346492948016, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346492948030, "dur":2544, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UIElementsNativeModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346492951656, "dur":63847, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TilemapModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493015513, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346493015525, "dur":1563, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TilemapModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493017167, "dur":31417, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TerrainPhysicsModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493048592, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346493048605, "dur":2287, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TerrainPhysicsModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493050973, "dur":55445, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.StreamingModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493106428, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346493106482, "dur":1966, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.StreamingModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493108500, "dur":54766, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.SharedInternalsModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493163274, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346493163286, "dur":2264, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.SharedInternalsModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493165708, "dur":56451, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.LocalizationModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493222168, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346493222184, "dur":2188, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.LocalizationModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493224434, "dur":54997, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ImageConversionModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493279441, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346493279457, "dur":3683, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ImageConversionModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493283212, "dur":54519, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493337741, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346493337756, "dur":6118, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493343937, "dur":45826, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ClusterRendererModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493389768, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346493389779, "dur":47940, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ClusterRendererModule.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493437796, "dur":95043, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.VisualScripting.State.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493532847, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346493532859, "dur":1756, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.VisualScripting.State.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493534691, "dur":345314, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.TextMeshPro.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493880014, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346493880027, "dur":5070, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.TextMeshPro.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346493885160, "dur":133976, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Net.Http.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346494019142, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346494019153, "dur":5917, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Net.Http.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346494025181, "dur":226637, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Configuration.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346494251826, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346494251840, "dur":1786, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Configuration.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346494253694, "dur":79086, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Assembly-CSharp.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346494332788, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":5, "ts":1696346494332804, "dur":1660, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Assembly-CSharp.dll" }}
+,{ "pid":12345, "tid":5, "ts":1696346494334544, "dur":307341, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346492538158, "dur":276, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346492538434, "dur":5220, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346492543663, "dur":62361, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/mconfig/config.xml" }}
+,{ "pid":12345, "tid":6, "ts":1696346492606029, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346492606324, "dur":890, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/mconfig/config.xml" }}
+,{ "pid":12345, "tid":6, "ts":1696346492607246, "dur":433158, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/UnityCrashHandler64.exe" }}
+,{ "pid":12345, "tid":6, "ts":1696346493040412, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493040425, "dur":2433, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/UnityCrashHandler64.exe" }}
+,{ "pid":12345, "tid":6, "ts":1696346493042913, "dur":59285, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.SubsystemsModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493102207, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493102226, "dur":1821, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.SubsystemsModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493104109, "dur":42555, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.SpriteMaskModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493146674, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493146729, "dur":2368, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.SpriteMaskModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493149173, "dur":31136, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.PerformanceReportingModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493180314, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493180325, "dur":2034, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.PerformanceReportingModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493182422, "dur":40287, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.JSONSerializeModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493222717, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493222731, "dur":2801, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.JSONSerializeModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493225605, "dur":27251, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.HotReloadModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493252935, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493252949, "dur":1811, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.HotReloadModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493254829, "dur":29477, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.GridModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493284313, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493284329, "dur":2215, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.GridModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493286605, "dur":36777, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.DirectorModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493323389, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493323402, "dur":3464, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.DirectorModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493326948, "dur":33604, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.CrashReportingModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493360562, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493360579, "dur":1853, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.CrashReportingModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493362501, "dur":70500, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AudioModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493433013, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493433028, "dur":2827, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AudioModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493435918, "dur":35962, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AccessibilityModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493471887, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493471900, "dur":1526, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.AccessibilityModule.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493473498, "dur":140776, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.VisualScripting.Core.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493614281, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493614293, "dur":2392, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.VisualScripting.Core.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493616764, "dur":56622, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Registration.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493673396, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493673408, "dur":3112, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Registration.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493676590, "dur":61056, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493737653, "dur":8, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346493737700, "dur":1899, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346493739825, "dur":273123, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Security.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346494012956, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346494012968, "dur":3109, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Security.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346494016138, "dur":59764, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Data.DataSetExtensions.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346494075910, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346494075923, "dur":2411, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Data.DataSetExtensions.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346494078413, "dur":214920, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Newtonsoft.Json.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346494293340, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346494293351, "dur":7696, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Newtonsoft.Json.dll" }}
+,{ "pid":12345, "tid":6, "ts":1696346494301111, "dur":56, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/globalgamemanagers.assets" }}
+,{ "pid":12345, "tid":6, "ts":1696346494301170, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":6, "ts":1696346494301178, "dur":2086, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/globalgamemanagers.assets" }}
+,{ "pid":12345, "tid":6, "ts":1696346494303318, "dur":338537, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346492538190, "dur":248, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346492538438, "dur":5221, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346492543662, "dur":180, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser" }}
+,{ "pid":12345, "tid":7, "ts":1696346492543845, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346492546766, "dur":5065, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.0/Browsers/Compat.browser" }}
+,{ "pid":12345, "tid":7, "ts":1696346492551884, "dur":40984, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.0/machine.config" }}
+,{ "pid":12345, "tid":7, "ts":1696346492592871, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346492592880, "dur":1778, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.0/machine.config" }}
+,{ "pid":12345, "tid":7, "ts":1696346492594751, "dur":82144, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346492676902, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346492677326, "dur":2589, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/EmbedRuntime/MonoPosixHelper.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346492680005, "dur":65032, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.VirtualTexturingModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346492745044, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346492745057, "dur":1539, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.VirtualTexturingModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346492746661, "dur":55109, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346492801777, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346492801788, "dur":1691, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityWebRequestWWWModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346492803551, "dur":38611, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityTestProtocolModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346492842169, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346492842214, "dur":3841, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityTestProtocolModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346492846244, "dur":106537, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UNETModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346492952788, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346492952799, "dur":2647, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UNETModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346492955507, "dur":186485, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346493142006, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346493142028, "dur":3982, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.TextCoreTextEngineModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346493146097, "dur":190960, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.Physics2DModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346493337065, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346493337077, "dur":2256, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.Physics2DModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346493339583, "dur":392060, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.CoreModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346493731653, "dur":8, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346493731680, "dur":4639, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.CoreModule.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346493736377, "dur":146643, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Transactions.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346493883029, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346493883044, "dur":4890, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Transactions.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346493888024, "dur":85229, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.IO.Compression.FileSystem.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346493973260, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346493973272, "dur":2337, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.IO.Compression.FileSystem.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346493975688, "dur":281513, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Data.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346494257209, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346494257221, "dur":5500, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Data.dll" }}
+,{ "pid":12345, "tid":7, "ts":1696346494262800, "dur":363, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/StreamingAssets/UnityServicesProjectConfiguration.json" }}
+,{ "pid":12345, "tid":7, "ts":1696346494263171, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346494273167, "dur":3279, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/StreamingAssets/UnityServicesProjectConfiguration.json" }}
+,{ "pid":12345, "tid":7, "ts":1696346494276516, "dur":80, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Resources/unity_builtin_extra" }}
+,{ "pid":12345, "tid":7, "ts":1696346494276600, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346494276666, "dur":8020, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Resources/unity_builtin_extra" }}
+,{ "pid":12345, "tid":7, "ts":1696346494284752, "dur":1435, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/sharedassets0.assets" }}
+,{ "pid":12345, "tid":7, "ts":1696346494286201, "dur":5, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346494286228, "dur":2347, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/sharedassets0.assets" }}
+,{ "pid":12345, "tid":7, "ts":1696346494288659, "dur":314, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/ScriptingAssemblies.json" }}
+,{ "pid":12345, "tid":7, "ts":1696346494288979, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346494288991, "dur":3033, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/ScriptingAssemblies.json" }}
+,{ "pid":12345, "tid":7, "ts":1696346494292111, "dur":1685, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/RuntimeInitializeOnLoads.json" }}
+,{ "pid":12345, "tid":7, "ts":1696346494293804, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346494293816, "dur":1780, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/RuntimeInitializeOnLoads.json" }}
+,{ "pid":12345, "tid":7, "ts":1696346494295691, "dur":63, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/resources.assets" }}
+,{ "pid":12345, "tid":7, "ts":1696346494295757, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346494295769, "dur":1976, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/resources.assets" }}
+,{ "pid":12345, "tid":7, "ts":1696346494297808, "dur":56, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/level0" }}
+,{ "pid":12345, "tid":7, "ts":1696346494297867, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346494297873, "dur":2670, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/level0" }}
+,{ "pid":12345, "tid":7, "ts":1696346494300607, "dur":55, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/globalgamemanagers.assets.resS" }}
+,{ "pid":12345, "tid":7, "ts":1696346494300665, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":7, "ts":1696346494300674, "dur":2619, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/globalgamemanagers.assets.resS" }}
+,{ "pid":12345, "tid":7, "ts":1696346494303346, "dur":338516, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346492538229, "dur":212, "ph":"X", "name": "FirstLock",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346492538441, "dur":5215, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346492543663, "dur":36459, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.5/web.config" }}
+,{ "pid":12345, "tid":8, "ts":1696346492580128, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346492580151, "dur":1265, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/4.5/web.config" }}
+,{ "pid":12345, "tid":8, "ts":1696346492581462, "dur":1916, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/2.0/settings.map" }}
+,{ "pid":12345, "tid":8, "ts":1696346492583385, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346492583466, "dur":2752, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/2.0/settings.map" }}
+,{ "pid":12345, "tid":8, "ts":1696346492586285, "dur":167, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" }}
+,{ "pid":12345, "tid":8, "ts":1696346492586457, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346492586470, "dur":10254, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/etc/mono/2.0/DefaultWsdlHelpGenerator.aspx" }}
+,{ "pid":12345, "tid":8, "ts":1696346492596788, "dur":207502, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346492804299, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346492804520, "dur":10220, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/MonoBleedingEdge/EmbedRuntime/mono-2.0-bdwgc.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346492814798, "dur":40921, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityCurlModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346492855727, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346492855740, "dur":1924, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UnityCurlModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346492857739, "dur":44471, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UIModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346492902233, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346492902245, "dur":2102, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UIModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346492904498, "dur":251673, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UI.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493156181, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346493156193, "dur":3117, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.UI.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493159369, "dur":109237, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.NVIDIAModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493268614, "dur":4, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346493268631, "dur":2516, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.NVIDIAModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493271221, "dur":105873, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.GameCenterModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493377103, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346493377116, "dur":12156, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.GameCenterModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493389331, "dur":89553, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ARModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493478893, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346493478906, "dur":1836, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/UnityEngine.ARModule.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493480809, "dur":90719, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.VisualScripting.Antlr3.Runtime.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493571536, "dur":2, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346493571548, "dur":11481, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.VisualScripting.Antlr3.Runtime.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493583114, "dur":1925, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Threading.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493585047, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346493585061, "dur":1565, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Threading.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493586691, "dur":104221, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Telemetry.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493690921, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346493690934, "dur":2089, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Telemetry.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493693100, "dur":118996, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Configuration.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493812103, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346493812116, "dur":1348, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/Unity.Services.Core.Configuration.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346493813520, "dur":198256, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Numerics.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346494011782, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346494011793, "dur":4634, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Numerics.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346494016522, "dur":263687, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Core.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346494280215, "dur":3, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346494280227, "dur":3051, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/Managed/System.Core.dll" }}
+,{ "pid":12345, "tid":8, "ts":1696346494283348, "dur":59, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/sharedassets0.assets.resS" }}
+,{ "pid":12345, "tid":8, "ts":1696346494283410, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346494283419, "dur":10981, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/sharedassets0.assets.resS" }}
+,{ "pid":12345, "tid":8, "ts":1696346494294468, "dur":216, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/resources.assets.resS" }}
+,{ "pid":12345, "tid":8, "ts":1696346494294688, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346494294697, "dur":2778, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/resources.assets.resS" }}
+,{ "pid":12345, "tid":8, "ts":1696346494297614, "dur":90, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/level0.resS" }}
+,{ "pid":12345, "tid":8, "ts":1696346494297709, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346494297722, "dur":3443, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/level0.resS" }}
+,{ "pid":12345, "tid":8, "ts":1696346494301234, "dur":60, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/globalgamemanagers" }}
+,{ "pid":12345, "tid":8, "ts":1696346494301298, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346494301305, "dur":1901, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/globalgamemanagers" }}
+,{ "pid":12345, "tid":8, "ts":1696346494303271, "dur":191, "ph":"X", "name": "CheckInputSignature",  "args": { "detail":"CopyFiles C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/boot.config" }}
+,{ "pid":12345, "tid":8, "ts":1696346494303466, "dur":1, "ph":"X", "name": "StoreTimestampsOfNonGeneratedInputFiles",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":8, "ts":1696346494303475, "dur":1868, "ph":"X", "name": "CopyFiles",  "args": { "detail":"C:/Users/blasr/Desktop/Build Parcial/Proyecto Morgan_Data/boot.config" }}
+,{ "pid":12345, "tid":8, "ts":1696346494305415, "dur":336456, "ph":"X", "name": "WaitingForWork", "cname":"thread_state_sleeping",  "args": { "detail":"" }}
+,{ "pid":12345, "tid":0, "ts":1696346494648602, "dur":2395, "ph":"X", "name": "ProfilerWriteOutput" }
+,{ "pid": 0, "tid": 1, "ts": 1696346494680713, "dur": 1275, "ph": "X", "name": "backend_profiler1.traceevents", "args": {} },
+{ "pid": 0, "tid": 1, "ts": 1696346494679911, "dur": 2115, "ph": "X", "name": "Write chrome-trace events", "args": {} },
