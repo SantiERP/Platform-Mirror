@@ -18,15 +18,19 @@ public class PasarASiguienteNivel : MonoBehaviour
              volver = CameraManager.instance.BeforePosition;
              actual = ir;
         }
+
     void OnTriggerEnter(Collider collider)
     {
         Personaje personaje;
+
         if(collider.TryGetComponent<Personaje>(out personaje))        
         {
+            SaveManager.Save();
             actual();
 
             if(actual == ir)
             {
+                
                 actual = volver;
             }
             else

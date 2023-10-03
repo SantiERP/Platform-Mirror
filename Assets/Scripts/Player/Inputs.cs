@@ -6,7 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(Jugador))]
 public class Inputs : MonoBehaviour
 {
-
     Jugador jugador;
 
     Rigidbody rig;
@@ -67,6 +66,14 @@ public class Inputs : MonoBehaviour
             }
 
             cuantoTiempoDesdeQueToqueElPiso = tiempoCoyote;
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetButtonDown("Restart"))
+        {
+            SceneManagement.ReloadScene();
         }
     }
 }

@@ -7,7 +7,8 @@ public class EventManager
     public enum EventsType
     {
         Event_PlayerDead,
-        Event_EndOfLevel
+        Event_EndOfLevel,
+        Event_Restart
     }
 
     public delegate void EventReceiver(object[] parameters);
@@ -16,6 +17,8 @@ public class EventManager
 
     //Para guardar el ultimo dato enviado
     static Dictionary<EventsType, object[]> _lastEventValue;
+
+    EventReceiver restart;
 
     public static void SubscribeToEvent(EventsType eventType, EventReceiver listener)
     {

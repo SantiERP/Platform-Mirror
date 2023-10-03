@@ -5,13 +5,28 @@ using UnityEngine;
 
 public class Jugador : Personaje
 {
+    public static Jugador entity;
+
     [SerializeField] float porCualPuntoDeAceleracionVa = 0;
 
     void Awake()
     {
+        Debug.Log("Awake");
+
+        entity = this;
+
         EntityLister.JugadorT = transform;
 
         EventManager.SubscribeToEvent(EventManager.EventsType.Event_PlayerDead, Muerte);
+
+        EventManager.SubscribeToEvent(EventManager.EventsType.Event_Restart, LoadLastPos);
+
+        SaveManager.Load();
+    }
+
+    void LoadLastPos(object[] parameters)
+    {
+        this.transform.position = SaveManager.Data.lastPos;
     }
 
 

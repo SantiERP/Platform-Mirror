@@ -6,15 +6,11 @@ public class CameraManager : MonoBehaviour
 {
     public static CameraManager instance;
     [SerializeField] PuntosCamaras[] puntosCamaras;
-    int posActual = 0;
+    public int posActual = 0;
 
     void Awake()
     {
-        if(instance == null)
-        {
-            instance = this;
-        }
-
+        instance = this;
         puntosCamaras[0].SetCamera();
     }
 
@@ -28,5 +24,13 @@ public class CameraManager : MonoBehaviour
     {
         posActual--;
         puntosCamaras[posActual].SetCamera();
+    }
+
+    public void Load(int punto, Vector3 pos)
+    {
+        puntosCamaras[0].StopAllCoroutines();
+
+        posActual = punto;
+        transform.position = pos;
     }
 }
