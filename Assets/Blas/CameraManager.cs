@@ -28,7 +28,7 @@ public class CameraManager : MonoBehaviour
 
     public void Load(int punto, Vector3 pos)
     {
-        puntosCamaras[0].StopAllCoroutines();
+//        puntosCamaras[0].StopAllCoroutines();
 
         posActual = punto;
         transform.position = pos;
