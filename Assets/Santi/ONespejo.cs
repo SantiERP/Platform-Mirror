@@ -9,8 +9,13 @@ public class ONespejo : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
-        espejo.gameObject.SetActive(false);
-        cubo.SetActive(true);
-        Destroy(gameObject);
+        Personaje personaje = other.GetComponent<Personaje>();
+        if (personaje)
+        {
+            if(espejo) espejo.gameObject.SetActive(false);
+
+            cubo.SetActive(true);
+            Destroy(this.gameObject);
+        }
     }
 }
