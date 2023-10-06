@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(Rigidbody))]
-public class Interruptor : MonoBehaviour
+public abstract class Interruptor : MonoBehaviour
 {
     public delegate void Action();
     public Action ButtonAction;
@@ -28,7 +28,7 @@ public class Interruptor : MonoBehaviour
         if (other.TryGetComponent<Rebotable>(out Rebotable rebotable))
         {
             Debug.Log("Rebotable");
-            ButtonAction();
+            NormalAction();
         }
     }
 
@@ -36,17 +36,13 @@ public class Interruptor : MonoBehaviour
     {
         if (other.TryGetComponent<Rebotable>(out Rebotable rebotable))
         {
-            ButtonAntiAction();
+            AntiAction();
         }
     }
 
-    public virtual void NormalAction()
-    {
-    }
+    public abstract void NormalAction();
 
-    public virtual void AntiAction()
-    {
-    }
+    public abstract void AntiAction();
 
 
 }
