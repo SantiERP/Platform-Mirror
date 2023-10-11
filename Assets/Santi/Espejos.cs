@@ -39,7 +39,7 @@ public abstract class Espejos : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
         }
 
-        if(rig.GetComponent<Jugador>())
+        if(rig.GetComponent<ModelPlayer>())
         {
             rig.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
         }

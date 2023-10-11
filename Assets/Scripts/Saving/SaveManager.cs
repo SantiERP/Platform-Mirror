@@ -15,7 +15,7 @@ public static class SaveManager
 
         Debug.Log("Loading");
 
-        Jugador.entity.transform.position = Data.lastPos + Vector3.right * 0.5f;
+        ModelPlayer.entity.transform.position = Data.lastPos + Vector3.right * 0.5f;
         Physics.gravity = Data.gravity;
         CameraManager.instance.Load(Data.cameraPoint, Data.cameraPos);
     }
@@ -27,7 +27,7 @@ public static class SaveManager
             Data = new SaveData();
         }
         
-        Data.lastPos = Jugador.entity.transform.position;
+        Data.lastPos = ModelPlayer.entity.transform.position;
         
         Debug.Log(Data.lastPos);
         Data.gravity = Physics.gravity;
