@@ -56,30 +56,33 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Blas\Scripts\Interruptor\PressableButton.cs" />
-    <Compile Include="Assets\Blas\Scripts\Puerta.cs" />
-    <Compile Include="Assets\Blas\Scripts\Rebotable.cs" />
-    <Compile Include="Assets\Blas\PasarASiguienteNivel.cs" />
-    <Compile Include="Assets\Santi\Button.cs" />
-    <Compile Include="Assets\Santi\JugadorSanti.cs" />
-    <Compile Include="Assets\Blas\Scripts\CameraFollow.cs" />
-    <Compile Include="Assets\Santi\EspejoAntigravedad.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Observer Event Manager\PressableButton.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Observer Event Manager\Door.cs" />
+    <Compile Include="Assets\Scripts\parent classes\Bouncing.cs" />
+    <Compile Include="Assets\Scripts\Camera effects\PasarASiguienteNivel.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Observer Event Manager\Button.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Pool Y Factory\Pool.cs" />
+    <Compile Include="Assets\Scripts\Mirrors\AntigravityMirror.cs" />
     <Compile Include="Assets\Scripts\Saving\SaveData.cs" />
-    <Compile Include="Assets\Blas\Scripts\Interruptor\Interruptor.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Observer Event Manager\Interruptor.cs" />
     <Compile Include="Assets\Scripts\Saving\SaveManager.cs" />
-    <Compile Include="Assets\Blas\Scripts\PuntosCamaras.cs" />
-    <Compile Include="Assets\Blas\Scripts\EventManager.cs" />
-    <Compile Include="Assets\Blas\Scripts\ModelPlayer.cs" />
-    <Compile Include="Assets\Santi\Espejos.cs" />
-    <Compile Include="Assets\Blas\Scripts\Personaje.cs" />
-    <Compile Include="Assets\Santi\VisualPlayer.cs" />
+    <Compile Include="Assets\Scripts\Camera effects\PuntosCamaras.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Observer Event Manager\EventManager.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Pool Y Factory\BulletFactory.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\MVC\ModelPlayer.cs" />
+    <Compile Include="Assets\Scripts\Mirrors\Mirrors.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Pool Y Factory\InstantiateBullet.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\MVC\Player.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\MVC\VisualPlayer.cs" />
     <Compile Include="Assets\Scripts\SceneManager.cs" />
-    <Compile Include="Assets\Blas\Scripts\EntityLister.cs" />
-    <Compile Include="Assets\Santi\ONespejo.cs" />
-    <Compile Include="Assets\Santi\EspejoBurst.cs" />
-    <Compile Include="Assets\Scripts\Player\ControllerPlayer.cs" />
-    <Compile Include="Assets\Santi\EspejoRebote.cs" />
-    <Compile Include="Assets\Blas\CameraManager.cs" />
+    <Compile Include="Assets\Scripts\EntityLister.cs" />
+    <Compile Include="Assets\Scripts\ONespejo.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\MVC\ControllerPlayer.cs" />
+    <Compile Include="Assets\Scripts\Mirrors\BounceMirror.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Pool Y Factory\TurretShot.cs" />
+    <Compile Include="Assets\Scripts\Interface\IController.cs" />
+    <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Pool Y Factory\Bullet.cs" />
+    <Compile Include="Assets\Scripts\Camera effects\CameraManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
