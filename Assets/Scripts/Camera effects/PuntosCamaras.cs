@@ -21,13 +21,16 @@ public class PuntosCamaras : MonoBehaviour
         float relacionDeTiempo = 1/tiempoDeTrancision;
         
         Vector3 posInicial = MainCamera.transform.position;
+        Vector3 posFinal = transform.position;
+        posFinal.z = -4;
+
         float tamañoInicial = MainCamera.orthographicSize;
 
         for(float i = 0; i < tiempoDeTrancision; i += esperaEntreMomentos)
         {
             float puntoEnLaCurva = Curva.Evaluate(i * relacionDeTiempo);
 
-            MainCamera.transform.position = Vector3.Lerp(posInicial , transform.position , puntoEnLaCurva);
+            MainCamera.transform.position = Vector3.Lerp(posInicial , posFinal, puntoEnLaCurva);
             MainCamera.orthographicSize = Mathf.Lerp(tamañoInicial , tamaño , puntoEnLaCurva);
 
             yield return Espera;
@@ -37,5 +40,6 @@ public class PuntosCamaras : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(transform.position + Vector3.forward * 10, Vector3.forward * 20 + Vector3.up * tamaño*2 + Vector3.right * Camera.main.aspect * tamaño*2);
+        Debug.Log("Drawing Gizmo");
     }
 }
