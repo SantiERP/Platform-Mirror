@@ -35,6 +35,74 @@
     <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
+<<<<<<< Updated upstream
+=======
+  <PropertyGroup>
+    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <UnityProjectGenerator>Package</UnityProjectGenerator>
+    <UnityProjectGeneratorVersion>2.0.16</UnityProjectGeneratorVersion>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
+    <UnityVersion>2021.3.12f1</UnityVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Assets\Scripts\Observer Event Manager\PressableButton.cs" />
+    <Compile Include="Assets\Scripts\Observer Event Manager\Door.cs" />
+    <Compile Include="Assets\Scripts\parent classes\Bouncing.cs" />
+    <Compile Include="Assets\Scripts\Camera effects\PasarASiguienteNivel.cs" />
+    <Compile Include="Assets\Scripts\Observer Event Manager\Button.cs" />
+    <Compile Include="Assets\Scripts\Pool Y Factory\Pool.cs" />
+    <Compile Include="Assets\Scripts\Mirrors\AntigravityMirror.cs" />
+    <Compile Include="Assets\Scripts\Saving\SaveData.cs" />
+    <Compile Include="Assets\Scripts\Observer Event Manager\Interruptor.cs" />
+    <Compile Include="Assets\Scripts\Saving\SaveManager.cs" />
+    <Compile Include="Assets\Scripts\Camera effects\PuntosCamaras.cs" />
+    <Compile Include="Assets\Scripts\Observer Event Manager\EventManager.cs" />
+    <Compile Include="Assets\Scripts\Pool Y Factory\BulletFactory.cs" />
+    <Compile Include="Assets\Scripts\Player\ModelPlayer.cs" />
+    <Compile Include="Assets\Scripts\Mirrors\Mirrors.cs" />
+    <Compile Include="Assets\Scripts\Turret\InstantiateBullet.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\VisualPlayer.cs" />
+    <Compile Include="Assets\Scripts\SceneManager.cs" />
+    <Compile Include="Assets\Scripts\EntityLister.cs" />
+    <Compile Include="Assets\Scripts\ONespejo.cs" />
+    <Compile Include="Assets\Scripts\Player\ControllerPlayer.cs" />
+    <Compile Include="Assets\Scripts\Mirrors\BounceMirror.cs" />
+    <Compile Include="Assets\Scripts\Turret\TurretShot.cs" />
+    <Compile Include="Assets\Scripts\Interface\IController.cs" />
+    <Compile Include="Assets\Scripts\Bullet.cs" />
+    <Compile Include="Assets\Scripts\Camera effects\CameraManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\QueFaltaAlMovimiento.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\Ideas.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+  </ItemGroup>
+>>>>>>> Stashed changes
   <ItemGroup>
      <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Observer Event Manager\PressableButton.cs" />
      <Compile Include="Assets\Scripts\PARCIAL 1 MODELOS Y ALGORITMOS\Observer Event Manager\Door.cs" />
