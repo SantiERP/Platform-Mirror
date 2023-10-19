@@ -14,7 +14,7 @@ public class ControllerPlayer : IController
 
     public void FixedUpdateInput()
     {
-        jugador.NormalMove(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        jugador.NormalMove(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         if (Input.GetButton("Jump"))
         {
