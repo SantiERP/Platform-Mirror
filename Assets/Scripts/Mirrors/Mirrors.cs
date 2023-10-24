@@ -56,12 +56,9 @@ public abstract class Mirrors : MonoBehaviour
 
     void Throw(Vector3 dir, Rigidbody r)
     {
-        r.velocity = Vector3.Reflect(dir + transform.up * 1.5f, transform.up);//Normalizar el vector
-        //r.velocity *= 10;
-        //r.velocity += transform.right;
+        r.velocity = Vector3.Reflect(dir + transform.up * 1.5f, transform.up);
+        //Normalizar el vector
 
-        //r.AddForce(-Physics.gravity);
         Debug.Log($"<color=blue>{dir}</color>");
-        //Debug.DrawRay(r.transform.position, Vector3.Reflect(r.velocity + Physics.gravity * Time.fixedDeltaTime, transform.up), Color.red);
     }
 }
