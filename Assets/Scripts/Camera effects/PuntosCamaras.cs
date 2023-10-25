@@ -22,7 +22,7 @@ public class PuntosCamaras : MonoBehaviour
         
         Vector3 posInicial = MainCamera.transform.position;
         Vector3 posFinal = transform.position;
-        posFinal.z = -4;
+        posFinal.z = -11;
 
         float tamañoInicial = MainCamera.orthographicSize;
 
