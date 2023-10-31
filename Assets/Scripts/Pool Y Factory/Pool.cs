@@ -5,38 +5,38 @@ using System;
 
 public class Pool<T>
 {
-    //Guardamos COMO se crea la bullet en este caso (T)
+    //We save How the bullet is created in this case (T)
     Func<T> _factoryMethod; 
 
-    //Vamos a guardar en esta lista todos los objetos disponibles para su uso
+    //We are going to save on this list all possible objects for it큦 use
     List<T> _currentStock;
 
-    //Guardo COMO se prende o apaga la bala una vez se la pase al Factory o el Factory me la devuelva
+    //We save HOW it turns on or off the Bullet once it큦 passed to the Factory or if the Favtory returns it
     Action<T> _turnOnCallback;
     Action<T> _turnOffCallback;
 
     public Pool(Func<T> factoryMethod, Action<T> turnOnCallback, Action<T> turnOffCallback, int initialAmount)
     {
-        //Inicializamos la Lista
+        //We initialize the List
         _currentStock = new List<T>();
 
-        //Guardamos el metodo de creacion del objeto
+        //We save the Object큦 creation method
         _factoryMethod = factoryMethod;
 
-        //Guardamos lo que nos paso el Factory
+        //We save what the Factory returned
         _turnOnCallback = turnOnCallback;
         _turnOffCallback = turnOffCallback;
 
-        //Guardamos en nuestra lista de objetos a usar la cantidad inicial que nos pasa el Factory
+        //We save in our objects to use list the intitial amount that the Factory returns
         for (int i = 0; i < initialAmount; i++)
         {
-            //Ejecuto y guardo la bala resultante del metodo
+            //I execute and save the Bullet
             T newObj = _factoryMethod(); 
 
-            //La apago
+            //I Turn it off
             _turnOffCallback(newObj);
 
-            //La dejo disponible para usar
+            //I make it available for use
             _currentStock.Add(newObj);
         }
     }
@@ -45,29 +45,27 @@ public class Pool<T>
     {
         T result;
 
-        //Si mi lista no tiene objetos para prender
+        //If my List has no objects to turn on
         if (_currentStock.Count == 0)
         {
-            //Debug.Log("No tiene objetos para prender");
-            result = _factoryMethod(); //Creo uno nuevo (va a ser ese el que le voy a dar al cliente)
+            result = _factoryMethod(); //I make a new one (Im going to return that one)
         }
         else
         {
-            //Debug.Log("instancia el objeto");
-            result = _currentStock[0]; //Tomo el primero
-            _currentStock.RemoveAt(0); //Lo remuevo porque va a estar en uso
+            result = _currentStock[0]; //I took the first one
+            _currentStock.RemoveAt(0); //I remove it, because it큦 going to be in use
         }
-        //Debug.Log("prendete");
-        _turnOnCallback(result); //Prendo el objeto
 
-        return result; //Se la devuelvo al cliente
+        _turnOnCallback(result); //I turn the object on
+
+        return result; //I return it to the client
     }
 
     public void ReturnObject(T obj)
     {
-        _turnOffCallback(obj); //Apagamos el objeto
+        _turnOffCallback(obj); //We turn off the object
 
-        _currentStock.Add(obj); //Lo devolvemos a la lista de objetos preparados
+        _currentStock.Add(obj); //We return it to the prepared object list
     }
     
 

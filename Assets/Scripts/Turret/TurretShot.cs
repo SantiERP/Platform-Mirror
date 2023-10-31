@@ -1,18 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TurretShot : MonoBehaviour
 {
-    [SerializeField] float _coldown;
+    [SerializeField] float _cooldown;
     [SerializeField] float _distanceRay;
 
     [SerializeField] LayerMask _layerMask;
     float timer;
     Bullet b;
+
     private void Awake()
     {
-        timer = _coldown;
+        timer = _cooldown;
     }
     void Update()
     {
@@ -22,7 +21,7 @@ public class TurretShot : MonoBehaviour
         {
             b = BulletFactory.Instance.GetObjectFromPool();
             b.transform.position = transform.position;
-            timer = _coldown;
+            timer = _cooldown;
         }
         timer -= Time.deltaTime;
 

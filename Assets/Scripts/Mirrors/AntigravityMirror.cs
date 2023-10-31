@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class AntigravityMirror : Mirrors
 {
-    [SerializeField] bool _empujearriba;
+    [SerializeField] bool _upPush;
     Rigidbody rb;
-    [Header("Fuerza de empuje")]
-    [SerializeField,Range(0,100)] float _fuerzadeempuje;
+    [Header("Push Force")]
+    [SerializeField,Range(0,100)] float _pushForce;
     [SerializeField] ForceMode _forceMode;
 
     [SerializeField] float speed;
@@ -19,22 +19,13 @@ public class AntigravityMirror : Mirrors
 
         Physics.gravity = transform.up * Physics.gravity.magnitude;
 
-        StartCoroutine(Rotar((-transform.up)));
+        StartCoroutine(Rotate((-transform.up)));
     }
 
-    IEnumerator Rotar(Vector3 up)
+    IEnumerator Rotate(Vector3 up)
     {
-        //Quaternion rotacionInicial = EntityLister.JugadorT.rotation;
-
-        EntityLister.JugadorT.up = up;
+        EntityLister.PlayerT.up = up;
 
         yield return null;
-        
-        // while(timeCount < 1)
-        // {
-        //     EntityLister.JugadorT.rotation = Quaternion.Slerp(rotacionInicial, _rotation, timeCount);
-        //     timeCount += 0.1f;
-        //     yield return new WaitForSeconds(0.1f);
-        // }
     }
 }

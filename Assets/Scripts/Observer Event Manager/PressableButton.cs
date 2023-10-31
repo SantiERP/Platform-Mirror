@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PressableButton : Interruptor
@@ -37,13 +35,11 @@ public class PressableButton : Interruptor
 
     public override void NormalAction()
     {
-        Debug.Log("Accion");
         desiredPosition = normalPosition - transform.up * 0.8f;
     }
 
     public override void AntiAction()
     {
-        Debug.Log("AntiAccion");
         desiredPosition = normalPosition;
     }
 

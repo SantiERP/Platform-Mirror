@@ -1,41 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PasarASiguienteNivel : MonoBehaviour
 {
         delegate void Actividad();
 
-        Actividad ir;
-        Actividad volver;
+        Actividad _go;
+        Actividad _goBack;
 
-        Actividad actual;
+        Actividad _actual;
 
         void Start()
         {
-             ir = CameraManager.instance.NextPosition;
-             volver = CameraManager.instance.BeforePosition;
-             actual = ir;
+             _go = CameraManager.Instance.NextPosition;
+             _goBack = CameraManager.Instance.BeforePosition;
+             _actual = _go;
         }
 
     void OnTriggerEnter(Collider collider)
     {
-        Player personaje;
+        Player character;
 
-        if(collider.TryGetComponent<Player>(out personaje))        
+        if(collider.TryGetComponent<Player>(out character))        
         {
             SaveManager.Save();
-            actual();
+            _actual();
 
-            if(actual == ir)
+            if(_actual == _go)
             {
                 
-                actual = volver;
+                _actual = _goBack;
             }
             else
             {
-                actual = ir;
+                _actual = _go;
             }
         }
     }

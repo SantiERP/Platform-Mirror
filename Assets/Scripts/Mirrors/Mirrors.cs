@@ -1,10 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Mirrors : MonoBehaviour 
 {
-    [SerializeField] AnimationCurve entradaDePersonaje;
+    [SerializeField] AnimationCurve characterEntrance;
 
     public abstract void Skill( Rigidbody rig);
 
@@ -12,11 +11,11 @@ public abstract class Mirrors : MonoBehaviour
     {
         if (other.TryGetComponent<Bouncing>(out Bouncing rebotable))
         {
-            StartCoroutine(EntradaPersonaje(rebotable.transform.position, rebotable.rig));
+            StartCoroutine(CharacterEntrance(rebotable.transform.position, rebotable.rig));
         }
     }
 
-    IEnumerator EntradaPersonaje(Vector3 posicionInicial, Rigidbody rig)
+    IEnumerator CharacterEntrance(Vector3 intialPos, Rigidbody rig)
     {
         Vector3 dir = rig.velocity;
         Debug.Log($"<color=red>{dir}</color>");
@@ -25,18 +24,20 @@ public abstract class Mirrors : MonoBehaviour
         box.enabled = false;
 
 
-        float instanteActual = 0f;
-        Vector3 posicionFinal = posicionInicial - transform.up;
+        float actualInstant = 0f;
+        Vector3 finalPos = intialPos - transform.up;
 
-        rig.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;;
+        rig.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 
-        while (instanteActual < 1)
+        WaitForSeconds wait = new WaitForSeconds(0.01f);
+
+        while (actualInstant < 1)
         {
-            rig.transform.position = Vector3.LerpUnclamped(posicionInicial, posicionFinal, entradaDePersonaje.Evaluate(instanteActual));
+            rig.transform.position = Vector3.LerpUnclamped(intialPos, finalPos, characterEntrance.Evaluate(actualInstant));
 
-            instanteActual += 0.01f;
+            actualInstant += 0.01f;
 
-            yield return new WaitForSeconds(0.01f);
+            yield return wait;
         }
 
         if(rig.GetComponent<ModelPlayer>())
@@ -57,7 +58,7 @@ public abstract class Mirrors : MonoBehaviour
     void Throw(Vector3 dir, Rigidbody r)
     {
         r.velocity = Vector3.Reflect(dir + transform.up * 1.5f, transform.up);
-        //Normalizar el vector
+        //Normalize the vector
 
         Debug.Log($"<color=blue>{dir}</color>");
     }

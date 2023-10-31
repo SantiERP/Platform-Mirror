@@ -27,7 +27,7 @@ public class Door : MonoBehaviour
     void WhatToDo()
     {
         desiredPosition = WhereDoIMoveTo + normalPosition;
-        Debug.Log("moviendome");
+        Debug.Log("Moving");
     }
 
     void WhatToDont()

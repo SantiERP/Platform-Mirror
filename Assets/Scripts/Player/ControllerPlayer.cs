@@ -4,21 +4,21 @@ public class ControllerPlayer : IController
 {
     VisualPlayer _visual;
 
-    ModelPlayer jugador;
+    ModelPlayer _player;
 
     public ControllerPlayer(VisualPlayer visual, ModelPlayer jugador)
     {
         _visual = visual;
-        this.jugador = jugador;
+        this._player = jugador;
     }
 
     public void FixedUpdateInput()
     {
-        jugador.NormalMove(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        _player.NormalMove(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
         if (Input.GetButton("Jump"))
         {
-            jugador.Salto();
+            _player.Jump();
         }
         if (Input.GetButtonDown("Jump"))
         {

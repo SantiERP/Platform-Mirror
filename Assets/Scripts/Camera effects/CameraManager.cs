@@ -1,36 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    public static CameraManager instance;
-    [SerializeField] PuntosCamaras[] puntosCamaras;
-    public int posActual = 0;
+    public static CameraManager Instance;
+    [SerializeField] PuntosCamaras[] _camerasPoints;
+    public int actualPos = 0;
 
     void Awake()
     {
-        instance = this;
-        puntosCamaras[0].SetCamera();
+        Instance = this;
+        _camerasPoints[0].SetCamera();
     }
 
     public void NextPosition()
     {
-        posActual++;
-        puntosCamaras[posActual].SetCamera();
+        actualPos++;
+        _camerasPoints[actualPos].SetCamera();
     }
 
     public void BeforePosition()
     {
-        posActual--;
-        puntosCamaras[posActual].SetCamera();
+        actualPos--;
+        _camerasPoints[actualPos].SetCamera();
     }
 
     public void Load(int punto, Vector3 pos)
     {
-//        puntosCamaras[0].StopAllCoroutines();
-
-        posActual = punto;
+        actualPos = punto;
         transform.position = pos;
     }
 }

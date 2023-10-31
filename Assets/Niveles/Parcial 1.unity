@@ -1570,6 +1570,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1887631839}
     m_Modifications:
     - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
+      propertyPath: _size
+      value: 15.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: "tama\xF1o"
       value: 15.9
       objectReference: {fileID: 0}
@@ -2410,6 +2414,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 112722188}
     m_Modifications:
     - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
+      propertyPath: _size
+      value: 9.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: "tama\xF1o"
       value: 9
       objectReference: {fileID: 0}
@@ -2431,11 +2439,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.699997
+      value: -30.99
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.90320635
+      value: -1.71
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2592,6 +2600,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1887631839}
     m_Modifications:
     - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
+      propertyPath: _size
+      value: 12.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: "tama\xF1o"
       value: 12.1
       objectReference: {fileID: 0}
@@ -2609,11 +2621,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.9076347
+      value: -1.41
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 12.566391
+      value: 12.14
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2770,6 +2782,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1034385078}
     m_Modifications:
     - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
+      propertyPath: _size
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: "tama\xF1o"
       value: 12
       objectReference: {fileID: 0}
@@ -2791,11 +2807,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -40.319992
+      value: -40.49
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.96420336
+      value: 2.11
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8586,6 +8602,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1034385078}
     m_Modifications:
     - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
+      propertyPath: _size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: "tama\xF1o"
       value: 11.64
       objectReference: {fileID: 0}
@@ -8607,7 +8627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.6
+      value: 2.07
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10500,14 +10520,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e52c8fa872cd8a945969fd77c1c047e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puntosCamaras:
+  _camerasPoints:
   - {fileID: 454151316}
   - {fileID: 680911980}
   - {fileID: 1602684907}
   - {fileID: 659820231}
   - {fileID: 719372211}
   - {fileID: 941048894}
-  posActual: 0
+  actualPos: 0
 --- !u!1001 &1536512249
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11060,20 +11080,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc0133ebfc52894e8d4f08730fef640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  porCualPuntoDeAceleracionVa: 0
-  MaxVelocidadHorizontal: 8
-  Aceleracion:
+  _onWhichAccelerationPointItsIn: 0
+  _maxHorizontalSpeed: 8
+  _acceleration:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -0.3207547
-      outSlope: -0.3207547
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33125
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
@@ -11086,11 +11106,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  tiempoCoyote: 0
-  cuantoTiempoDesdeQueToqueElPiso: 0
-  fuerzaDeSalto: 35
-  velocidadAerea: 6
-  CurvaDeImportanciaDeApretarElBotonDeSalto:
+  _coyoteTime: 0.1
+  _howLongSinceITouchedTheFloor: 0
+  _jumpStrength: 0
+  _airVelocity: 6
+  _importanceCurveOfPressingJumpButton:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -11122,6 +11142,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 437292110}
     m_Modifications:
     - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
+      propertyPath: _size
+      value: 10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1054965826954323688, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: "tama\xF1o"
       value: 11.4
       objectReference: {fileID: 0}
@@ -11139,11 +11163,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.840866
+      value: 11.65
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.8700006
+      value: -3.11
       objectReference: {fileID: 0}
     - target: {fileID: 1054965826954323695, guid: 757099c630b250243ab116655c227d55, type: 3}
       propertyPath: m_LocalPosition.z

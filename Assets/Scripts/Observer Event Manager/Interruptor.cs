@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
@@ -10,10 +8,6 @@ public abstract class Interruptor : MonoBehaviour
     public Action ButtonAction;
     public Action ButtonAntiAction;
 
-
-
-
-    // Start is called before the first frame update
     void Awake()
     {
         ButtonAction += NormalAction;
@@ -25,6 +19,4 @@ public abstract class Interruptor : MonoBehaviour
     public abstract void NormalAction();
 
     public abstract void AntiAction();
-
-
 }

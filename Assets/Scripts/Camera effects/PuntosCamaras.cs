@@ -1,13 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PuntosCamaras : MonoBehaviour
 {
-    [SerializeField] float tamaño;
-    [SerializeField][Range (0.1f , 10)] float tiempoDeTrancision;
-    [SerializeField] float esperaEntreMomentos = 0.01f;
-    [SerializeField] AnimationCurve Curva;
+    [SerializeField] float _size;
+    [SerializeField][Range (0.1f , 10)] float _TRANSITION_TIME = 1.2f;
+    [SerializeField] float _waitBetweeMoments = 0.01f;
+    [SerializeField] AnimationCurve _curve;
 
     public void SetCamera()
     {
@@ -17,29 +16,30 @@ public class PuntosCamaras : MonoBehaviour
     IEnumerator ActualSetting()
     {
         Camera MainCamera = Camera.main;
-        WaitForSeconds Espera = new WaitForSeconds(esperaEntreMomentos);
-        float relacionDeTiempo = 1/tiempoDeTrancision;
+        WaitForSeconds wait = new WaitForSeconds(_waitBetweeMoments);
+
+        float timeRalation = 1/_TRANSITION_TIME;
         
-        Vector3 posInicial = MainCamera.transform.position;
-        Vector3 posFinal = transform.position;
-        posFinal.z = -11;
+        Vector3 initialPos = MainCamera.transform.position;
+        Vector3 finalPos = transform.position;
+        finalPos.z = -11;
 
-        float tamañoInicial = MainCamera.orthographicSize;
+        float initialSize = MainCamera.orthographicSize;
 
-        for(float i = 0; i < tiempoDeTrancision; i += esperaEntreMomentos)
+        for(float i = 0; i < _TRANSITION_TIME; i += _waitBetweeMoments)
         {
-            float puntoEnLaCurva = Curva.Evaluate(i * relacionDeTiempo);
+            float pointInTheCurve = _curve.Evaluate(i * timeRalation);
 
-            MainCamera.transform.position = Vector3.Lerp(posInicial , posFinal, puntoEnLaCurva);
-            MainCamera.orthographicSize = Mathf.Lerp(tamañoInicial , tamaño , puntoEnLaCurva);
+            MainCamera.transform.position = Vector3.Lerp(initialPos , finalPos, pointInTheCurve);
+            MainCamera.orthographicSize = Mathf.Lerp(initialSize , _size , pointInTheCurve);
 
-            yield return Espera;
+            yield return wait;
         }
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(transform.position + Vector3.forward * 10, Vector3.forward * 20 + Vector3.up * tamaño*2 + Vector3.right * Camera.main.aspect * tamaño*2);
-        Debug.Log("Drawing Gizmo");
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireCube(transform.position + Vector3.forward * 10, Vector3.forward * 20 + Vector3.up * _size*2 + Vector3.right * Camera.main.aspect * _size*2);
     }
 }

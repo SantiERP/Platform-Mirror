@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public static class SaveManager
@@ -17,7 +15,7 @@ public static class SaveManager
 
         ModelPlayer.entity.transform.position = Data.lastPos + Vector3.right * 0.5f;
         Physics.gravity = Data.gravity;
-        CameraManager.instance.Load(Data.cameraPoint, Data.cameraPos);
+        CameraManager.Instance.Load(Data.cameraPoint, Data.cameraPos);
     }
 
     public static void Save()
@@ -34,7 +32,7 @@ public static class SaveManager
 
         Data.level = 1;
 
-        Data.cameraPos = CameraManager.instance.transform.position;
-        Data.cameraPoint = CameraManager.instance.posActual;
+        Data.cameraPos = CameraManager.Instance.transform.position;
+        Data.cameraPoint = CameraManager.Instance.actualPos;
     }
 }

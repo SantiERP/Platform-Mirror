@@ -1,15 +1,15 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ONespejo : MonoBehaviour
 {
     [SerializeField] List<GameObject> Objects;
-    // Start is called before the first frame update
+
     private void OnTriggerEnter(Collider other)
     {
-        Player personaje = other.GetComponent<Player>();
-        if (personaje)
+        Player _character = other.GetComponent<Player>();
+        if (_character)
         {
             foreach(GameObject i in Objects)
             {

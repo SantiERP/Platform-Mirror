@@ -5,20 +5,20 @@ public class ModelPlayer : Player
 {
     public static ModelPlayer entity;
 
-    [SerializeField] float porCualPuntoDeAceleracionVa = 0;
+    [SerializeField] float _onWhichAccelerationPointItsIn = 0;
 
     [Header("Stats Movimiento")]
-    [SerializeField] float MaxVelocidadHorizontal;
-    [SerializeField] AnimationCurve Aceleracion;
-    [SerializeField] float tiempoCoyote;
-    [SerializeField] float cuantoTiempoDesdeQueToqueElPiso = 0;
+    [SerializeField] float _maxHorizontalSpeed;
+    [SerializeField] AnimationCurve _acceleration;
+    [SerializeField] float _coyoteTime = 0.1f;
+    [SerializeField] float _howLongSinceITouchedTheFloor = 0;
 
-    [SerializeField] float fuerzaDeSalto;
+    [SerializeField] float _jumpStrength = 35;
 
     [Header("Stats Movimiento Aereo")]
-    [SerializeField] float velocidadAerea;
-    [SerializeField] AnimationCurve CurvaDeImportanciaDeApretarElBotonDeSalto;
-    float tiempoApretandoElBotonDeSalto = 0;
+    [SerializeField] float _airVelocity = 6;
+    [SerializeField] AnimationCurve _importanceCurveOfPressingJumpButton;
+    float _timePressingJumpButton = 0;
 
     IController _controller;
     VisualPlayer _visual;
@@ -32,7 +32,7 @@ public class ModelPlayer : Player
 
         entity = this;
 
-        EntityLister.JugadorT = transform;
+        EntityLister.PlayerT = transform;
 
         EventManager.SubscribeToEvent(EventManager.EventsType.Event_PlayerDead, delegate { SceneManagement.ReloadScene();});
 
@@ -58,7 +58,7 @@ public class ModelPlayer : Player
     }
  
     
-    public bool TocandoElPiso()
+    public bool TouchingTheFloor()
     {
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
@@ -66,7 +66,7 @@ public class ModelPlayer : Player
         return Physics.Raycast(transform.position + Vector3.right * 0.48f, -transform.up, 0.6F, layerMask) || Physics.Raycast(transform.position - Vector3.right * 0.48f, -transform.up, 0.6F, layerMask, QueryTriggerInteraction.Ignore);
     }
 
-    public bool TocandoPared(int direccion)
+    public bool TouchingTheWall(int direccion)
     {
         int layerMask = 1 << 6;
         layerMask = ~layerMask;
@@ -78,63 +78,64 @@ public class ModelPlayer : Player
 
     public override void NormalMove(float horizontal, float vertical)
     {
-        #region Movimiento Aereo
-        if (!TocandoElPiso())
+        #region Aerial Movement
+        if (!TouchingTheFloor())
         {
-            cuantoTiempoDesdeQueToqueElPiso += Time.fixedDeltaTime;
+            _howLongSinceITouchedTheFloor += Time.fixedDeltaTime;
 
-            //Si estuve la cantidad de tiempo necesaria flotando, me empieza a afectar la gravedad
-            if (cuantoTiempoDesdeQueToqueElPiso > tiempoCoyote)
+            //if I was floating for long enought, gravity starts to afect me
+            if (_howLongSinceITouchedTheFloor > _coyoteTime)
             {
                 rig.AddForce(Physics.gravity, ForceMode.Acceleration);
             }
-            if (!TocandoPared((int)(horizontal)))
+            if (!TouchingTheWall((int)(horizontal)))
             {
-                rig.AddForce(horizontal * transform.right * velocidadAerea);
+                rig.AddForce(horizontal * transform.right * _airVelocity);
             }
         }
         #endregion
 
-        #region Movimiento Terrestre
+        #region Terrestial Movement
+
         else
         {
-            cuantoTiempoDesdeQueToqueElPiso = 0;
-            tiempoApretandoElBotonDeSalto = 0;
+            _howLongSinceITouchedTheFloor = 0;
+            _timePressingJumpButton = 0;
 
             //Si te estas moviendo horizontalmente, aceleras en cierta direccion
             if (horizontal != 0)
             {
-                porCualPuntoDeAceleracionVa += Time.fixedDeltaTime;
+                _onWhichAccelerationPointItsIn += Time.fixedDeltaTime;
             }
             else
             {
-                porCualPuntoDeAceleracionVa -= Time.fixedDeltaTime;
+                _onWhichAccelerationPointItsIn -= Time.fixedDeltaTime;
             }
 
-            //Cambias la velocidad en base a cuanto estas moviendote
-            porCualPuntoDeAceleracionVa = Mathf.Clamp(porCualPuntoDeAceleracionVa, 0, 1);
+            //You Change the Velovity based on how much you are moving
+            _onWhichAccelerationPointItsIn = Mathf.Clamp(_onWhichAccelerationPointItsIn, 0, 1);
 
-            if(!TocandoPared((int)(horizontal)))
+            if(!TouchingTheWall((int)(horizontal)))
             {
-                rig.velocity = new Vector3(horizontal * Aceleracion.Evaluate(porCualPuntoDeAceleracionVa) * MaxVelocidadHorizontal, rig.velocity.y, 0);
+                rig.velocity = new Vector3(horizontal * _acceleration.Evaluate(_onWhichAccelerationPointItsIn) * _maxHorizontalSpeed, rig.velocity.y, 0);
             }
         }
         #endregion
     }
 
-    public void Salto()
+    public void Jump()
     {
-        tiempoApretandoElBotonDeSalto += Time.fixedDeltaTime;
+        _timePressingJumpButton += Time.fixedDeltaTime;
 
-        if (tiempoApretandoElBotonDeSalto < 0.5f)
+        if (_timePressingJumpButton < 0.5f)
         {
-            rig.AddForce(transform.up * fuerzaDeSalto * CurvaDeImportanciaDeApretarElBotonDeSalto.Evaluate(tiempoApretandoElBotonDeSalto) * Time.fixedDeltaTime, ForceMode.Impulse);
+            rig.AddForce(transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
         }
 
-        cuantoTiempoDesdeQueToqueElPiso = tiempoCoyote;
+        _howLongSinceITouchedTheFloor = _coyoteTime;
     }
 
-    void FinalizarNivel()
+    void FinalizeLevel()
     {
         EventManager.TriggerEvent(EventManager.EventsType.Event_EndOfLevel, new object[1]);
     }

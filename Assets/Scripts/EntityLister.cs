@@ -4,13 +4,13 @@ using UnityEngine;
 
 public static class EntityLister
 {
-    static Transform TransformJugador;
+    static Transform TransformPlayer;
     static bool dadoVuelta;
 
-    public static Transform JugadorT
+    public static Transform PlayerT
     {
-        get{return TransformJugador;}
-        set{TransformJugador = value;}
+        get{return TransformPlayer;}
+        set{TransformPlayer = value;}
     }
 
     public static bool DadoVuelta
