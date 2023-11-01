@@ -6,7 +6,6 @@ public class VisualPlayer : MonoBehaviour
 
     public void PlayJumpParticles()
     {   
-        _particleSystem.transform.position = new Vector3(transform.position.x, transform.position.y-1);
         _particleSystem.Play();
     }
 }

@@ -19,9 +19,11 @@ public class ControllerPlayer : IController
         if (Input.GetButton("Jump"))
         {
             _player.Jump();
+            Debug.Log("Salta");
         }
         if (Input.GetButtonDown("Jump"))
         {
+            if(_player.TouchingTheFloor())
             _visual.PlayJumpParticles();
         }
     }
