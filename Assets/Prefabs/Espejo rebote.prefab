@@ -48,36 +48,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f550e5163b436e4596ee8d0b6e08354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entradaDePersonaje:
+  characterEntrance:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 5.940204
-      outSlope: 5.940204
+      time: -0.00625
+      value: 0.00625
+      inSlope: 6.2419
+      outSlope: 6.2419
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0.24166666
+      inWeight: 0.33333334
+      outWeight: 0.23144266
     - serializedVersion: 3
       time: 0.5
       value: 1
       inSlope: 0
-      outSlope: 0.13529906
-      tangentMode: 1
+      outSlope: 0
+      tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.7416667
+      outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
       value: -1.5
-      inSlope: -11.443959
-      outSlope: -11.443959
+      inSlope: -4.265362
+      outSlope: -4.265362
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.049999952
-      outWeight: 0
+      inWeight: 0.52806854
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
