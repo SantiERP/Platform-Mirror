@@ -5,6 +5,8 @@ public class PressableButton : Interruptor
     Vector3 desiredPosition;
     Vector3 normalPosition;
 
+    int amountOfObjectsPressing;
+
     void Start()
     {
         normalPosition = transform.position;
@@ -22,6 +24,7 @@ public class PressableButton : Interruptor
         if (other.TryGetComponent<Bouncing>(out Bouncing rebotable))
         {
             ButtonAction();
+            amountOfObjectsPressing++;
         }
     }
 
@@ -29,7 +32,12 @@ public class PressableButton : Interruptor
     {
         if (other.TryGetComponent<Bouncing>(out Bouncing rebotable))
         {
-            ButtonAntiAction();
+            amountOfObjectsPressing--;
+
+            if (amountOfObjectsPressing <= 0)
+            {
+                ButtonAntiAction(); 
+            }
         }
     }
 
