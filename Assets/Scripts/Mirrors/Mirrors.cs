@@ -18,14 +18,13 @@ public abstract class Mirrors : MonoBehaviour
     IEnumerator CharacterEntrance(Vector3 intialPos, Rigidbody rig)
     {
         Vector3 dir = rig.velocity;
-        Debug.Log($"<color=red>{dir}</color>");
         BoxCollider box = rig.GetComponent<BoxCollider>();  
 
         box.enabled = false;
 
 
         float actualInstant = 0f;
-        Vector3 finalPos = intialPos - transform.up;
+        Vector3 finalPos = intialPos + (Vector3.Reflect(dir + transform.up, transform.up).normalized);
 
         rig.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 
@@ -57,7 +56,7 @@ public abstract class Mirrors : MonoBehaviour
 
     void Throw(Vector3 dir, Rigidbody r)
     {
-        r.velocity = Vector3.Reflect(dir + transform.up * 1.5f, transform.up);
+        r.velocity = Vector3.Reflect(dir - dir.normalized, transform.up);
         //Normalize the vector
 
         Debug.Log($"<color=blue>{dir}</color>");
