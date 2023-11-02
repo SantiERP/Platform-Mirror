@@ -23,7 +23,6 @@ public class ModelPlayer : Player
     IController _controller;
     VisualPlayer _visual;
 
-
     void Awake()
     {
         _controller = new ControllerPlayer(GetComponentInChildren<VisualPlayer>(), this);
@@ -58,11 +57,20 @@ public class ModelPlayer : Player
     }
  
     
+    public bool TouchingTheFloor(out Rigidbody rig)
+    {
+        int layerMask = 4 << 6;
+        layerMask = ~layerMask;
+        RaycastHit hit;
+        Physics.Raycast(transform.position + Vector3.right * 0.48f, -transform.up, out hit, 0.6F, layerMask);
+        rig = hit.rigidbody;
+        return Physics.Raycast(transform.position + Vector3.right * 0.48f, -transform.up, 0.6F, layerMask) || Physics.Raycast(transform.position - Vector3.right * 0.48f, -transform.up, 0.6F, layerMask, QueryTriggerInteraction.Ignore);
+    }
+
     public bool TouchingTheFloor()
     {
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
-
         return Physics.Raycast(transform.position + Vector3.right * 0.48f, -transform.up, 0.6F, layerMask) || Physics.Raycast(transform.position - Vector3.right * 0.48f, -transform.up, 0.6F, layerMask, QueryTriggerInteraction.Ignore);
     }
 
@@ -99,8 +107,11 @@ public class ModelPlayer : Player
 
         else
         {
-            _howLongSinceITouchedTheFloor = 0;
-            _timePressingJumpButton = 0;
+            if (rig.velocity.y <= 0)
+            { 
+                _howLongSinceITouchedTheFloor = 0; 
+                _timePressingJumpButton = 0;
+            }
 
             //Si te estas moviendo horizontalmente, aceleras en cierta direccion
             if (horizontal != 0)
@@ -130,9 +141,19 @@ public class ModelPlayer : Player
         if (_timePressingJumpButton < 0.5f)
         {
             rig.AddForce(transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
+            Rigidbody boxRigidbody;
+            TouchingTheFloor(out boxRigidbody);
+            try
+            {
+                boxRigidbody.AddForce(-transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
+            }
+            catch
+            {
+
+            }
         }
 
-        _howLongSinceITouchedTheFloor = _coyoteTime;
+        //_howLongSinceITouchedTheFloor = _coyoteTime;
     }
 
     void FinalizeLevel()
