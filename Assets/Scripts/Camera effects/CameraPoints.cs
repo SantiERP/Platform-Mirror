@@ -1,19 +1,19 @@
 using System.Collections;
 using UnityEngine;
 
-public class PuntosCamaras : MonoBehaviour
+public class CameraPoints : MonoBehaviour
 {
     [SerializeField] float _size;
     [SerializeField][Range (0.1f , 10)] float _TRANSITION_TIME = 1.2f;
     [SerializeField] float _waitBetweeMoments = 0.01f;
     [SerializeField] AnimationCurve _curve;
 
-    public void SetCamera()
+    public void SetCamera(int dir)
     {
-        StartCoroutine(ActualSetting());
+        StartCoroutine(ActualSetting(dir));
     }
 
-    IEnumerator ActualSetting()
+    IEnumerator ActualSetting(int dir)
     {
         Camera MainCamera = Camera.main;
         WaitForSeconds wait = new WaitForSeconds(_waitBetweeMoments);
@@ -26,7 +26,13 @@ public class PuntosCamaras : MonoBehaviour
 
         float initialSize = MainCamera.orthographicSize;
 
-        for(float i = 0; i < _TRANSITION_TIME; i += _waitBetweeMoments)
+        Transform Player = EntityLister.PlayerT;
+        ModelPlayer Model = Player.GetComponent<ModelPlayer>();
+        Model.enabled = false;
+        Rigidbody rigPlayer = Player.GetComponent<Rigidbody>();
+        rigPlayer.velocity = Vector3.right * dir;
+
+        for (float i = 0; i < _TRANSITION_TIME; i += _waitBetweeMoments)
         {
             float pointInTheCurve = _curve.Evaluate(i * timeRalation);
 
@@ -35,6 +41,8 @@ public class PuntosCamaras : MonoBehaviour
 
             yield return wait;
         }
+
+        Model.enabled = true;
     }
 
     void OnDrawGizmos()

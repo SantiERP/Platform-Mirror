@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PasarASiguienteNivel : MonoBehaviour
+public class PassToNextLevel : MonoBehaviour
 {
         delegate void Actividad();
 
@@ -16,7 +16,7 @@ public class PasarASiguienteNivel : MonoBehaviour
              _actual = _go;
         }
 
-    void OnTriggerEnter(Collider collider)
+    void OnTriggerExit(Collider collider)
     {
         Player character;
 
@@ -27,7 +27,6 @@ public class PasarASiguienteNivel : MonoBehaviour
 
             if(_actual == _go)
             {
-                
                 _actual = _goBack;
             }
             else

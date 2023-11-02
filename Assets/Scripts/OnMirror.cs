@@ -1,8 +1,7 @@
-
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ONespejo : MonoBehaviour
+public class OnMirror : MonoBehaviour
 {
     [SerializeField] List<GameObject> Objects;
 
@@ -13,7 +12,7 @@ public class ONespejo : MonoBehaviour
         {
             foreach(GameObject i in Objects)
             {
-                i.SetActive(!i.active);
+                i.SetActive(!i.activeSelf);
                 }
             Destroy(this.gameObject);
         }
