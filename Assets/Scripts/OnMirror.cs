@@ -13,7 +13,13 @@ public class OnMirror : MonoBehaviour
             foreach(GameObject i in Objects)
             {
                 i.SetActive(!i.activeSelf);
+                
+                if(!i.GetComponent<RectTransform>())
+                {
+                    i.transform.parent = null;
                 }
+            }
+
             Destroy(this.gameObject);
         }
     }

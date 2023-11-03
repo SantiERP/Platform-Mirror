@@ -47,7 +47,7 @@ public class CameraPoints : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.white;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position + Vector3.forward * 10, Vector3.forward * 20 + Vector3.up * _size*2 + Vector3.right * Camera.main.aspect * _size*2);
     }
 }
