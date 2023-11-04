@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class ModelPlayer : Player
+public class ModelPlayer : Player , IMementeable
 {
     public static ModelPlayer entity;
 
@@ -33,17 +33,17 @@ public class ModelPlayer : Player
 
         EntityLister.PlayerT = transform;
 
-        EventManager.SubscribeToEvent(EventManager.EventsType.Event_PlayerDead, delegate { SceneManagement.ReloadScene();});
+        EventManager.SubscribeToEvent(EventManager.EventsType.Event_PlayerDead, delegate { SaveManager.Remember();});
 
         EventManager.SubscribeToEvent(EventManager.EventsType.Event_Restart, LoadLastPos);
-
-        SaveManager.Load();
-
+        
+        SaveManager.AddToSaveManager(this);
+        SaveManager.Save();
     }
 
     void LoadLastPos(object[] parameters)
     {
-        this.transform.position = SaveManager.Data.lastPos;
+
     }
 
     private void Update()
@@ -160,4 +160,26 @@ public class ModelPlayer : Player
     {
         EventManager.TriggerEvent(EventManager.EventsType.Event_EndOfLevel, new object[1]);
     }
+
+    #region Remembering
+    [SerializeField] public object[] _memories { get; set; }
+
+    public void Remember()
+    {
+        if (_memories != null)
+        {
+            transform.position = (Vector3)_memories[0];
+            transform.rotation = (Quaternion)_memories[1];
+            Physics.gravity = (Vector3)_memories[2];
+        }
+    }
+    public void Forget()
+    {
+        _memories = null;
+    }
+    public void Save()
+    {
+        _memories = new object[] { transform.position, transform.rotation , Physics.gravity};
+    }
+    #endregion
 }

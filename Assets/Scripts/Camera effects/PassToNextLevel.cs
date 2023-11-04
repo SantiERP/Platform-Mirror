@@ -9,20 +9,20 @@ public class PassToNextLevel : MonoBehaviour
 
         Actividad _actual;
 
-        void Start()
-        {
-             _go = CameraManager.Instance.NextPosition;
-             _goBack = CameraManager.Instance.BeforePosition;
-             _actual = _go;
-        }
+    void Start()
+    {
+        _go = CameraManager.Instance.NextPosition;
+        _goBack = CameraManager.Instance.BeforePosition;
+        _actual = _go;
+    }
 
     void OnTriggerExit(Collider collider)
     {
         Player character;
+        SaveManager.Save();
 
         if(collider.TryGetComponent<Player>(out character))        
         {
-            SaveManager.Save();
             _actual();
 
             if(_actual == _go)

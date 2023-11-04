@@ -32,7 +32,8 @@ public class ControllerPlayer : IController
     {
         if (Input.GetButtonDown("Restart"))
         {
-            SceneManagement.ReloadScene();
+            SaveManager.Remember();
+            Debug.Log("Remembering");
         }
     }
 }
