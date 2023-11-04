@@ -16,10 +16,6 @@ public class CameraManager : MonoBehaviour, IMementeable
     void Awake()
     {
         Instance = this;
-    }
-
-    void Start()
-    {
         _camerasPoints[0].SetCamera(0);
         SaveManager.AddToSaveManager(this);
     }
