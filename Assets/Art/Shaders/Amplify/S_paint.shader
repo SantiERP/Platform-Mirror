@@ -9,24 +9,26 @@ Shader "S_paint"
 		[ASEBegin]_TextureSample0("Texture Sample 0", 2D) = "bump" {}
 		_Tiling("Tiling", Float) = 15
 		_PosterizeStep("Posterize Step", Float) = 26
-		_Float0("Float 0", Float) = 0.25
-		[ASEEnd]_TextureSample1("Texture Sample 1", 2D) = "white" {}
+		_ScaleNormal("Scale Normal", Float) = 0.25
+		_TextureSample1("Texture Sample 1", 2D) = "white" {}
+		_Color("Color ", Color) = (0.5566038,0.4589356,0.3124332,1)
+		[ASEEnd]_Shadow("Shadow", Float) = 0
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
 
-		_TransmissionShadow( "Transmission Shadow", Range( 0, 1 ) ) = 0.5
-		_TransStrength( "Strength", Range( 0, 50 ) ) = 1
-		_TransNormal( "Normal Distortion", Range( 0, 1 ) ) = 0.5
-		_TransScattering( "Scattering", Range( 1, 50 ) ) = 2
-		_TransDirect( "Direct", Range( 0, 1 ) ) = 0.9
-		_TransAmbient( "Ambient", Range( 0, 1 ) ) = 0.1
-		_TransShadow( "Shadow", Range( 0, 1 ) ) = 0.5
-		_TessPhongStrength( "Phong Tess Strength", Range( 0, 1 ) ) = 0.5
-		_TessValue( "Max Tessellation", Range( 1, 32 ) ) = 16
-		_TessMin( "Tess Min Distance", Float ) = 10
-		_TessMax( "Tess Max Distance", Float ) = 25
-		_TessEdgeLength ( "Edge length", Range( 2, 50 ) ) = 16
-		_TessMaxDisp( "Max Displacement", Float ) = 25
+		//_TransmissionShadow( "Transmission Shadow", Range( 0, 1 ) ) = 0.5
+		//_TransStrength( "Trans Strength", Range( 0, 50 ) ) = 1
+		//_TransNormal( "Trans Normal Distortion", Range( 0, 1 ) ) = 0.5
+		//_TransScattering( "Trans Scattering", Range( 1, 50 ) ) = 2
+		//_TransDirect( "Trans Direct", Range( 0, 1 ) ) = 0.9
+		//_TransAmbient( "Trans Ambient", Range( 0, 1 ) ) = 0.1
+		//_TransShadow( "Trans Shadow", Range( 0, 1 ) ) = 0.5
+		//_TessPhongStrength( "Tess Phong Strength", Range( 0, 1 ) ) = 0.5
+		//_TessValue( "Tess Max Tessellation", Range( 1, 32 ) ) = 16
+		//_TessMin( "Tess Min Distance", Float ) = 10
+		//_TessMax( "Tess Max Distance", Float ) = 25
+		//_TessEdgeLength ( "Tess Edge length", Range( 2, 50 ) ) = 16
+		//_TessMaxDisp( "Tess Max Displacement", Float ) = 25
 
 		[HideInInspector][ToggleOff] _SpecularHighlights("Specular Highlights", Float) = 1.0
 		[HideInInspector][ToggleOff] _EnvironmentReflections("Environment Reflections", Float) = 1.0
@@ -184,6 +186,12 @@ Shader "S_paint"
 
 			HLSLPROGRAM
 
+			#define _NORMAL_DROPOFF_TS 1
+			#pragma multi_compile_instancing
+			#pragma instancing_options renderinglayer
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#pragma multi_compile_fog
+			#define ASE_FOG 1
 			#define ASE_SRP_VERSION 120107
 
 
@@ -269,10 +277,12 @@ Shader "S_paint"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Color;
 			float4 _TextureSample1_ST;
 			float _PosterizeStep;
 			float _Tiling;
-			float _Float0;
+			float _ScaleNormal;
+			float _Shadow;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -536,23 +546,22 @@ Shader "S_paint"
 
 				WorldViewDirection = SafeNormalize( WorldViewDirection );
 
-				float4 color21 = IsGammaSpace() ? float4(0.5566038,0.4589356,0.3124332,1) : float4(0.2702231,0.1779815,0.07954673,1);
 				float2 uv_TextureSample1 = IN.ase_texcoord8.xy * _TextureSample1_ST.xy + _TextureSample1_ST.zw;
 				float4 tex2DNode19 = tex2D( _TextureSample1, uv_TextureSample1 );
 				float2 temp_cast_1 = (_Tiling).xx;
 				float2 texCoord10 = IN.ase_texcoord8.xy * temp_cast_1 + float2( 0,0 );
-				float3 unpack15 = UnpackNormalScale( tex2D( _TextureSample0, texCoord10 ), _Float0 );
-				unpack15.z = lerp( 1, unpack15.z, saturate(_Float0) );
+				float3 unpack15 = UnpackNormalScale( tex2D( _TextureSample0, texCoord10 ), _ScaleNormal );
+				unpack15.z = lerp( 1, unpack15.z, saturate(_ScaleNormal) );
 				float3 tanToWorld0 = float3( WorldTangent.x, WorldBiTangent.x, WorldNormal.x );
 				float3 tanToWorld1 = float3( WorldTangent.y, WorldBiTangent.y, WorldNormal.y );
 				float3 tanToWorld2 = float3( WorldTangent.z, WorldBiTangent.z, WorldNormal.z );
 				float3 tanNormal12 = unpack15;
 				float3 worldNormal12 = float3(dot(tanToWorld0,tanNormal12), dot(tanToWorld1,tanNormal12), dot(tanToWorld2,tanNormal12));
 				float dotResult14 = dot( _MainLightPosition.xyz , worldNormal12 );
-				float4 temp_cast_2 = (dotResult14).xxxx;
+				float4 temp_cast_2 = (( dotResult14 + _Shadow )).xxxx;
 				float div23=256.0/float((int)_PosterizeStep);
 				float4 posterize23 = ( floor( temp_cast_2 * div23 ) / div23 );
-				float4 lerpResult18 = lerp( ( color21 * tex2DNode19 ) , tex2DNode19 , saturate( posterize23 ));
+				float4 lerpResult18 = lerp( ( _Color * tex2DNode19 ) , tex2DNode19 , saturate( posterize23 ));
 				
 
 				float3 BaseColor = lerpResult18.rgb;
@@ -772,6 +781,10 @@ Shader "S_paint"
 
 			HLSLPROGRAM
 
+			#define _NORMAL_DROPOFF_TS 1
+			#pragma multi_compile_instancing
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#define ASE_FOG 1
 			#define ASE_SRP_VERSION 120107
 
 
@@ -816,10 +829,12 @@ Shader "S_paint"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Color;
 			float4 _TextureSample1_ST;
 			float _PosterizeStep;
 			float _Tiling;
-			float _Float0;
+			float _ScaleNormal;
+			float _Shadow;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -1075,6 +1090,10 @@ Shader "S_paint"
 
 			HLSLPROGRAM
 
+			#define _NORMAL_DROPOFF_TS 1
+			#pragma multi_compile_instancing
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#define ASE_FOG 1
 			#define ASE_SRP_VERSION 120107
 
 
@@ -1117,10 +1136,12 @@ Shader "S_paint"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Color;
 			float4 _TextureSample1_ST;
 			float _PosterizeStep;
 			float _Tiling;
-			float _Float0;
+			float _ScaleNormal;
+			float _Shadow;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -1350,6 +1371,9 @@ Shader "S_paint"
 
 			HLSLPROGRAM
 
+			#define _NORMAL_DROPOFF_TS 1
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#define ASE_FOG 1
 			#define ASE_SRP_VERSION 120107
 
 
@@ -1406,10 +1430,12 @@ Shader "S_paint"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Color;
 			float4 _TextureSample1_ST;
 			float _PosterizeStep;
 			float _Tiling;
-			float _Float0;
+			float _ScaleNormal;
+			float _Shadow;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -1627,13 +1653,12 @@ Shader "S_paint"
 					#endif
 				#endif
 
-				float4 color21 = IsGammaSpace() ? float4(0.5566038,0.4589356,0.3124332,1) : float4(0.2702231,0.1779815,0.07954673,1);
 				float2 uv_TextureSample1 = IN.ase_texcoord4.xy * _TextureSample1_ST.xy + _TextureSample1_ST.zw;
 				float4 tex2DNode19 = tex2D( _TextureSample1, uv_TextureSample1 );
 				float2 temp_cast_1 = (_Tiling).xx;
 				float2 texCoord10 = IN.ase_texcoord4.xy * temp_cast_1 + float2( 0,0 );
-				float3 unpack15 = UnpackNormalScale( tex2D( _TextureSample0, texCoord10 ), _Float0 );
-				unpack15.z = lerp( 1, unpack15.z, saturate(_Float0) );
+				float3 unpack15 = UnpackNormalScale( tex2D( _TextureSample0, texCoord10 ), _ScaleNormal );
+				unpack15.z = lerp( 1, unpack15.z, saturate(_ScaleNormal) );
 				float3 ase_worldTangent = IN.ase_texcoord5.xyz;
 				float3 ase_worldNormal = IN.ase_texcoord6.xyz;
 				float3 ase_worldBitangent = IN.ase_texcoord7.xyz;
@@ -1643,10 +1668,10 @@ Shader "S_paint"
 				float3 tanNormal12 = unpack15;
 				float3 worldNormal12 = float3(dot(tanToWorld0,tanNormal12), dot(tanToWorld1,tanNormal12), dot(tanToWorld2,tanNormal12));
 				float dotResult14 = dot( _MainLightPosition.xyz , worldNormal12 );
-				float4 temp_cast_2 = (dotResult14).xxxx;
+				float4 temp_cast_2 = (( dotResult14 + _Shadow )).xxxx;
 				float div23=256.0/float((int)_PosterizeStep);
 				float4 posterize23 = ( floor( temp_cast_2 * div23 ) / div23 );
-				float4 lerpResult18 = lerp( ( color21 * tex2DNode19 ) , tex2DNode19 , saturate( posterize23 ));
+				float4 lerpResult18 = lerp( ( _Color * tex2DNode19 ) , tex2DNode19 , saturate( posterize23 ));
 				
 
 				float3 BaseColor = lerpResult18.rgb;
@@ -1686,6 +1711,9 @@ Shader "S_paint"
 
 			HLSLPROGRAM
 
+			#define _NORMAL_DROPOFF_TS 1
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#define ASE_FOG 1
 			#define ASE_SRP_VERSION 120107
 
 
@@ -1733,10 +1761,12 @@ Shader "S_paint"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Color;
 			float4 _TextureSample1_ST;
 			float _PosterizeStep;
 			float _Tiling;
-			float _Float0;
+			float _ScaleNormal;
+			float _Shadow;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -1941,13 +1971,12 @@ Shader "S_paint"
 					#endif
 				#endif
 
-				float4 color21 = IsGammaSpace() ? float4(0.5566038,0.4589356,0.3124332,1) : float4(0.2702231,0.1779815,0.07954673,1);
 				float2 uv_TextureSample1 = IN.ase_texcoord2.xy * _TextureSample1_ST.xy + _TextureSample1_ST.zw;
 				float4 tex2DNode19 = tex2D( _TextureSample1, uv_TextureSample1 );
 				float2 temp_cast_1 = (_Tiling).xx;
 				float2 texCoord10 = IN.ase_texcoord2.xy * temp_cast_1 + float2( 0,0 );
-				float3 unpack15 = UnpackNormalScale( tex2D( _TextureSample0, texCoord10 ), _Float0 );
-				unpack15.z = lerp( 1, unpack15.z, saturate(_Float0) );
+				float3 unpack15 = UnpackNormalScale( tex2D( _TextureSample0, texCoord10 ), _ScaleNormal );
+				unpack15.z = lerp( 1, unpack15.z, saturate(_ScaleNormal) );
 				float3 ase_worldTangent = IN.ase_texcoord3.xyz;
 				float3 ase_worldNormal = IN.ase_texcoord4.xyz;
 				float3 ase_worldBitangent = IN.ase_texcoord5.xyz;
@@ -1957,10 +1986,10 @@ Shader "S_paint"
 				float3 tanNormal12 = unpack15;
 				float3 worldNormal12 = float3(dot(tanToWorld0,tanNormal12), dot(tanToWorld1,tanNormal12), dot(tanToWorld2,tanNormal12));
 				float dotResult14 = dot( _MainLightPosition.xyz , worldNormal12 );
-				float4 temp_cast_2 = (dotResult14).xxxx;
+				float4 temp_cast_2 = (( dotResult14 + _Shadow )).xxxx;
 				float div23=256.0/float((int)_PosterizeStep);
 				float4 posterize23 = ( floor( temp_cast_2 * div23 ) / div23 );
-				float4 lerpResult18 = lerp( ( color21 * tex2DNode19 ) , tex2DNode19 , saturate( posterize23 ));
+				float4 lerpResult18 = lerp( ( _Color * tex2DNode19 ) , tex2DNode19 , saturate( posterize23 ));
 				
 
 				float3 BaseColor = lerpResult18.rgb;
@@ -1992,6 +2021,10 @@ Shader "S_paint"
 
 			HLSLPROGRAM
 
+			#define _NORMAL_DROPOFF_TS 1
+			#pragma multi_compile_instancing
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#define ASE_FOG 1
 			#define ASE_SRP_VERSION 120107
 
 
@@ -2037,10 +2070,12 @@ Shader "S_paint"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Color;
 			float4 _TextureSample1_ST;
 			float _PosterizeStep;
 			float _Tiling;
-			float _Float0;
+			float _ScaleNormal;
+			float _Shadow;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -2305,6 +2340,12 @@ Shader "S_paint"
 
 			HLSLPROGRAM
 
+			#define _NORMAL_DROPOFF_TS 1
+			#pragma multi_compile_instancing
+			#pragma instancing_options renderinglayer
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#pragma multi_compile_fog
+			#define ASE_FOG 1
 			#define ASE_SRP_VERSION 120107
 
 
@@ -2386,10 +2427,12 @@ Shader "S_paint"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Color;
 			float4 _TextureSample1_ST;
 			float _PosterizeStep;
 			float _Tiling;
-			float _Float0;
+			float _ScaleNormal;
+			float _Shadow;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -2646,23 +2689,22 @@ Shader "S_paint"
 
 				WorldViewDirection = SafeNormalize( WorldViewDirection );
 
-				float4 color21 = IsGammaSpace() ? float4(0.5566038,0.4589356,0.3124332,1) : float4(0.2702231,0.1779815,0.07954673,1);
 				float2 uv_TextureSample1 = IN.ase_texcoord8.xy * _TextureSample1_ST.xy + _TextureSample1_ST.zw;
 				float4 tex2DNode19 = tex2D( _TextureSample1, uv_TextureSample1 );
 				float2 temp_cast_1 = (_Tiling).xx;
 				float2 texCoord10 = IN.ase_texcoord8.xy * temp_cast_1 + float2( 0,0 );
-				float3 unpack15 = UnpackNormalScale( tex2D( _TextureSample0, texCoord10 ), _Float0 );
-				unpack15.z = lerp( 1, unpack15.z, saturate(_Float0) );
+				float3 unpack15 = UnpackNormalScale( tex2D( _TextureSample0, texCoord10 ), _ScaleNormal );
+				unpack15.z = lerp( 1, unpack15.z, saturate(_ScaleNormal) );
 				float3 tanToWorld0 = float3( WorldTangent.x, WorldBiTangent.x, WorldNormal.x );
 				float3 tanToWorld1 = float3( WorldTangent.y, WorldBiTangent.y, WorldNormal.y );
 				float3 tanToWorld2 = float3( WorldTangent.z, WorldBiTangent.z, WorldNormal.z );
 				float3 tanNormal12 = unpack15;
 				float3 worldNormal12 = float3(dot(tanToWorld0,tanNormal12), dot(tanToWorld1,tanNormal12), dot(tanToWorld2,tanNormal12));
 				float dotResult14 = dot( _MainLightPosition.xyz , worldNormal12 );
-				float4 temp_cast_2 = (dotResult14).xxxx;
+				float4 temp_cast_2 = (( dotResult14 + _Shadow )).xxxx;
 				float div23=256.0/float((int)_PosterizeStep);
 				float4 posterize23 = ( floor( temp_cast_2 * div23 ) / div23 );
-				float4 lerpResult18 = lerp( ( color21 * tex2DNode19 ) , tex2DNode19 , saturate( posterize23 ));
+				float4 lerpResult18 = lerp( ( _Color * tex2DNode19 ) , tex2DNode19 , saturate( posterize23 ));
 				
 
 				float3 BaseColor = lerpResult18.rgb;
@@ -2786,6 +2828,9 @@ Shader "S_paint"
 
 			HLSLPROGRAM
 
+			#define _NORMAL_DROPOFF_TS 1
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#define ASE_FOG 1
 			#define ASE_SRP_VERSION 120107
 
 
@@ -2826,10 +2871,12 @@ Shader "S_paint"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Color;
 			float4 _TextureSample1_ST;
 			float _PosterizeStep;
 			float _Tiling;
-			float _Float0;
+			float _ScaleNormal;
+			float _Shadow;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -3031,6 +3078,9 @@ Shader "S_paint"
 
 			HLSLPROGRAM
 
+			#define _NORMAL_DROPOFF_TS 1
+			#pragma multi_compile _ LOD_FADE_CROSSFADE
+			#define ASE_FOG 1
 			#define ASE_SRP_VERSION 120107
 
 
@@ -3071,10 +3121,12 @@ Shader "S_paint"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
+			float4 _Color;
 			float4 _TextureSample1_ST;
 			float _PosterizeStep;
 			float _Tiling;
-			float _Float0;
+			float _ScaleNormal;
+			float _Shadow;
 			#ifdef ASE_TRANSMISSION
 				float _TransmissionShadow;
 			#endif
@@ -3291,34 +3343,39 @@ Node;AmplifyShaderEditor.WorldSpaceLightDirHlpNode;13;-1591.885,-116.2943;Inheri
 Node;AmplifyShaderEditor.DotProductOpNode;14;-1289.107,85.34123;Inherit;True;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;16;-1219.68,411.2593;Inherit;False;Property;_PosterizeStep;Posterize Step;2;0;Create;True;0;0;0;False;0;False;26;26;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SaturateNode;17;-611.6838,206.9386;Inherit;True;1;0;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.LerpOp;18;-337.9774,19.16733;Inherit;True;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.SamplerNode;19;-841.8556,-96.66151;Inherit;True;Property;_TextureSample1;Texture Sample 1;4;0;Create;True;0;0;0;False;0;False;-1;c8b1366caa588d543b13752a80b68102;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;19;-841.8556,-96.66151;Inherit;True;Property;_TextureSample1;Texture Sample 1;4;0;Create;True;0;0;0;False;0;False;-1;ba9f9d0359599c541ac231d741cc925b;c8b1366caa588d543b13752a80b68102;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;20;-461.9506,-235.2228;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.ColorNode;21;-766.1876,-319.7332;Inherit;False;Constant;_Color0;Color 0;4;0;Create;True;0;0;0;False;0;False;0.5566038,0.4589356,0.3124332,1;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;22;-2131.438,377.2332;Inherit;False;Property;_Float0;Float 0;3;0;Create;True;0;0;0;False;0;False;0.25;0.25;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.PosterizeNode;23;-958.121,186.1581;Inherit;True;1;2;1;COLOR;0,0,0,0;False;0;INT;0;False;1;COLOR;0
-Node;AmplifyShaderEditor.SamplerNode;25;-138.3194,-293.0798;Inherit;True;Property;_TextureSample2;Texture Sample 2;5;0;Create;True;0;0;0;False;0;False;-1;ba9f9d0359599c541ac231d741cc925b;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;25;-138.3194,-293.0798;Inherit;True;Property;_TextureSample2;Texture Sample 2;6;0;Create;True;0;0;0;False;0;False;-1;ba9f9d0359599c541ac231d741cc925b;ba9f9d0359599c541ac231d741cc925b;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TextureCoordinatesNode;26;-321.8511,-429.2085;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;27;-539.2582,-421.9835;Inherit;False;Constant;_Float1;Float 1;6;0;Create;True;0;0;0;False;0;False;19.05;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;594.3881,-31.74375;Float;False;True;-1;2;UnityEditor.ShaderGraphLitGUI;0;12;S_paint;94348b07e5e8bab40bd6c8a1e3df54cd;True;Forward;0;1;Forward;19;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;False;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;3;True;12;all;0;False;True;1;1;False;;0;False;;1;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=UniversalForward;False;False;0;;0;0;Standard;41;Workflow;1;0;Surface;0;0;  Refraction Model;0;0;  Blend;0;0;Two Sided;1;0;Fragment Normal Space,InvertActionOnDeselection;0;0;Forward Only;0;0;Transmission;0;0;  Transmission Shadow;0.5,False,;0;Translucency;0;0;  Translucency Strength;1,False,;0;  Normal Distortion;0.5,False,;0;  Scattering;2,False,;0;  Direct;0.9,False,;0;  Ambient;0.1,False,;0;  Shadow;0.5,False,;0;Cast Shadows;1;0;  Use Shadow Threshold;0;0;Receive Shadows;1;0;GPU Instancing;1;0;LOD CrossFade;1;0;Built-in Fog;1;0;_FinalColorxAlpha;0;0;Meta Pass;1;0;Override Baked GI;0;0;Extra Pre Pass;0;0;DOTS Instancing;0;0;Tessellation;0;0;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;0;  Tess;16,False,;0;  Min;10,False,;0;  Max;25,False,;0;  Edge Length;16,False,;0;  Max Displacement;25,False,;0;Write Depth;0;0;  Early Z;0;0;Vertex Position,InvertActionOnDeselection;1;0;Debug Display;0;0;Clear Coat;0;0;0;10;False;True;True;True;True;True;True;True;True;True;False;;False;0
-Node;AmplifyShaderEditor.SimpleAddOpNode;24;221.2495,-167.5828;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.SamplerNode;15;-1885.666,165.0389;Inherit;True;Property;_TextureSample0;Texture Sample 0;0;0;Create;True;0;0;0;False;0;False;-1;eb6a155d0ad448a43b4b42c60ef4722f;eb6a155d0ad448a43b4b42c60ef4722f;True;0;False;bump;Auto;True;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SamplerNode;15;-1885.666,165.0389;Inherit;True;Property;_TextureSample0;Texture Sample 0;0;0;Create;True;0;0;0;False;0;False;-1;1b8c1087eebc57445adaa8b84547318b;eb6a155d0ad448a43b4b42c60ef4722f;True;0;True;bump;Auto;True;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.LerpOp;18;-209.9213,46.25614;Inherit;True;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;28;5.511007,-59.41747;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;24;204.0112,-172.508;Inherit;True;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
+Node;AmplifyShaderEditor.RangedFloatNode;22;-2131.438,377.2332;Inherit;False;Property;_ScaleNormal;Scale Normal;3;0;Create;True;0;0;0;False;0;False;0.25;0.25;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.ColorNode;21;-766.1876,-319.7332;Inherit;False;Property;_Color;Color ;5;0;Create;True;0;0;0;False;0;False;0.5566038,0.4589356,0.3124332,1;0.5566038,0.4589356,0.3124332,1;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.PosterizeNode;23;-793.53,238.6364;Inherit;True;1;2;1;COLOR;0,0,0,0;False;0;INT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;29;-1021.155,100.7442;Inherit;True;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;30;-1235.154,313.4602;Inherit;False;Property;_Shadow;Shadow;7;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
 WireConnection;10;0;11;0
 WireConnection;12;0;15;0
 WireConnection;14;0;13;0
 WireConnection;14;1;12;0
 WireConnection;17;0;23;0
+WireConnection;20;0;21;0
+WireConnection;20;1;19;0
+WireConnection;26;1;27;0
+WireConnection;1;0;18;0
+WireConnection;15;1;10;0
+WireConnection;15;5;22;0
 WireConnection;18;0;20;0
 WireConnection;18;1;19;0
 WireConnection;18;2;17;0
-WireConnection;20;0;21;0
-WireConnection;20;1;19;0
-WireConnection;23;1;14;0
-WireConnection;23;0;16;0
-WireConnection;26;1;27;0
-WireConnection;1;0;18;0
 WireConnection;24;0;25;0
-WireConnection;15;1;10;0
-WireConnection;15;5;22;0
+WireConnection;23;1;29;0
+WireConnection;23;0;16;0
+WireConnection;29;0;14;0
+WireConnection;29;1;30;0
 ASEEND*/
-//CHKSM=5BF8556E79EBBD976C22CBAAC82729647EB92236
+//CHKSM=2040DEC5374524D40B1F514FAD5ED5000CEE4187

@@ -794,6 +794,10 @@
       <Project>{1850E49F-4557-0D70-CADA-418E17B3FC90}</Project>
       <Name>Unity.VisualScripting.Flow.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="AmplifyShaderEditor.csproj">
+      <Project>{4CD5CA99-A52A-D45A-70F1-86E9467463D8}</Project>
+      <Name>AmplifyShaderEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{D3F62EF1-01F8-A228-CF82-8DF8F75D55A8}</Project>
       <Name>Unity.VSCode.Editor</Name>
@@ -885,10 +889,6 @@
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
       <Project>{3A33A667-D19F-1190-AD4C-875278312DD9}</Project>
       <Name>Unity.VisualScripting.State</Name>
-    </ProjectReference>
-    <ProjectReference Include="AmplifyShaderEditor.csproj">
-      <Project>{4CD5CA99-A52A-D45A-70F1-86E9467463D8}</Project>
-      <Name>AmplifyShaderEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
