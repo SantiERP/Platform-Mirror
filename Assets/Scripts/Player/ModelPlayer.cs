@@ -62,16 +62,16 @@ public class ModelPlayer : Player , IMementeable
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
         RaycastHit hit;
-        Physics.Raycast(transform.position + Vector3.right * 0.48f, -transform.up, out hit, 0.6F, layerMask);
+        Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, out hit, 0.6F, layerMask);
         rig = hit.rigidbody;
-        return Physics.Raycast(transform.position + Vector3.right * 0.48f, -transform.up, 0.6F, layerMask) || Physics.Raycast(transform.position - Vector3.right * 0.48f, -transform.up, 0.6F, layerMask, QueryTriggerInteraction.Ignore);
+        return Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, 0.6F, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, 0.6F, layerMask, QueryTriggerInteraction.Ignore);
     }
 
     public bool TouchingTheFloor()
     {
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
-        return Physics.Raycast(transform.position + Vector3.right * 0.48f, -transform.up, 0.6F, layerMask) || Physics.Raycast(transform.position - Vector3.right * 0.48f, -transform.up, 0.6F, layerMask, QueryTriggerInteraction.Ignore);
+        return Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, 0.6F, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, 0.6F, layerMask, QueryTriggerInteraction.Ignore);
     }
 
     public bool TouchingTheWall(int direccion)
@@ -80,8 +80,8 @@ public class ModelPlayer : Player , IMementeable
         layerMask = ~layerMask;
 
         direccion = Mathf.Clamp(direccion, -1, 1);
-        Debug.DrawRay(transform.position + Vector3.up * 0.5f, Vector3.right * direccion, Color.yellow);
-        return Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.right * direccion, 0.5F, layerMask) || Physics.Raycast(transform.position - Vector3.up * 0.5f, Vector3.right * direccion, 0.5F, layerMask, QueryTriggerInteraction.Ignore);        
+        Debug.DrawRay(transform.position + transform.up * 0.5f, transform.right * direccion, Color.yellow);
+        return Physics.Raycast(transform.position + transform.up * 0.5f, transform.right * direccion, 0.5F, layerMask) || Physics.Raycast(transform.position - transform.up * 0.5f, transform.right * direccion, 0.5F, layerMask, QueryTriggerInteraction.Ignore);        
     }
 
     public override void NormalMove(float horizontal, float vertical)
