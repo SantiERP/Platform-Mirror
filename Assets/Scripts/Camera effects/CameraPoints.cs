@@ -22,7 +22,8 @@ public class CameraPoints : MonoBehaviour
         
         Vector3 initialPos = MainCamera.transform.position;
         Vector3 finalPos = transform.position;
-        finalPos.z = -38;
+
+        finalPos.z = transform.position.z - (_size * Mathf.Tan(90 - (MainCamera.fieldOfView/2))) - 5;
 
         float initialSize = MainCamera.orthographicSize;
 
