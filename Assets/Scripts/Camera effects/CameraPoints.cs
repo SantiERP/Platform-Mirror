@@ -31,7 +31,7 @@ public class CameraPoints : MonoBehaviour
         ModelPlayer Model = Player.GetComponent<ModelPlayer>();
         Model.enabled = false;
         Rigidbody rigPlayer = Player.GetComponent<Rigidbody>();
-        rigPlayer.velocity = Vector3.right * dir;
+        rigPlayer.velocity = MainCamera.transform.right * dir;
 
         for (float i = 0; i < _TRANSITION_TIME; i += _waitBetweeMoments)
         {
