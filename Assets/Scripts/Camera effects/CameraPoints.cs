@@ -28,7 +28,8 @@ public class CameraPoints : MonoBehaviour
         float initialSize = MainCamera.orthographicSize;
 
         Transform Player = EntityLister.PlayerT;
-        ModelPlayer Model = Player.GetComponent<ModelPlayer>();
+        if (Player) Debug.Log("no nulo");
+        ModelPlayer Model = Player.gameObject.GetComponent<ModelPlayer>();
         Model.enabled = false;
         Rigidbody rigPlayer = Player.GetComponent<Rigidbody>();
         rigPlayer.velocity = MainCamera.transform.right * dir;

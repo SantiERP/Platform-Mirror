@@ -85,6 +85,14 @@
     <Compile Include="Assets\Scripts\Turret\Bullet.cs" />
     <Compile Include="Assets\Scripts\Camera effects\CameraManager.cs" />
     <Compile Include="Assets\Scripts\Box.cs" />
+    <Compile Include="Assets\Scripts\ScreenManager\Scripts\Screens\ScreenGameplay.cs" />
+    <Compile Include="Assets\Scripts\ScreenManager\Scripts\ScreenManager.cs" />
+    <Compile Include="Assets\Scripts\ScreenManager\Scripts\Screens\ScreenPause.cs" />
+    <Compile Include="Assets\Scripts\ScreenManager\Scripts\Debugger.cs" />
+    <Compile Include="Assets\Scripts\ScreenManager\Scripts\Cubito.cs" />
+    <Compile Include="Assets\Scripts\ScreenManager\Scripts\Screens\ScreenOptions.cs" />
+    <Compile Include="Assets\Scripts\ScreenManager\Scripts\IScreen.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

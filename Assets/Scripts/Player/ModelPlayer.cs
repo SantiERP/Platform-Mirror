@@ -31,7 +31,7 @@ public class ModelPlayer : Player , IMementeable
 
         entity = this;
 
-        EntityLister.PlayerT = transform;
+        EntityLister.PlayerT = this.transform;
 
         EventManager.SubscribeToEvent(EventManager.EventsType.Event_PlayerDead, delegate { SaveManager.Remember();});
 
