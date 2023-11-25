@@ -4,6 +4,9 @@ using UnityEngine;
 public class Bouncing : MonoBehaviour
 {
     Rigidbody rb;
+    [SerializeField] Material mat;
+
+    [SerializeField] Color MatColor = Color.white;
 
     public Rigidbody rig
     {
@@ -16,6 +19,24 @@ public class Bouncing : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        if(mat == null)
+        {
+            mat = GetComponent<MeshRenderer>().material;
+        }
+        
+        mat.SetColor("Color" , MatColor);
+    }
+
+    public void Bounce(Vector3 mirrorPos, Vector3 mirrorNormal)
+    {
+        mat.SetVector("_Pos" , mirrorPos);
+        mat.SetVector("_Normal" , mirrorNormal);
+    }
+
+    public void EndBounce()
+    {
+        mat.SetVector("_Pos" , Vector3.up * -1000);
+        mat.SetVector("_Normal" , Vector3.up);
     }
 
 }

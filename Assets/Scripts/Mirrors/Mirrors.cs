@@ -19,6 +19,8 @@ public abstract class Mirrors : MonoBehaviour
     {
         Vector3 dir = rig.velocity;
         BoxCollider box = rig.GetComponent<BoxCollider>();  
+        Bouncing charBouncing = rig.GetComponent<Bouncing>();
+        charBouncing.Bounce(transform.position , transform.up);
 
         box.enabled = false;
 
@@ -48,6 +50,8 @@ public abstract class Mirrors : MonoBehaviour
         {
             rig.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
         }
+
+        charBouncing.EndBounce();
 
         box.enabled = true;        
         Skill(rig);

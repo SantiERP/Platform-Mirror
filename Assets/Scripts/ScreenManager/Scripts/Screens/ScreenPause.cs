@@ -11,7 +11,7 @@ public class ScreenPause : MonoBehaviour, IScreen
     {
         _buttons = GetComponentsInChildren<Button>();
         //ActivateButtons(false);
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     void ActivateButtons(bool enable)
@@ -44,7 +44,7 @@ public class ScreenPause : MonoBehaviour, IScreen
 
     public void Free()
     {
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         Destroy(gameObject);
     }
 }
