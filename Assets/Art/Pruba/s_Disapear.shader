@@ -8,6 +8,7 @@ Shader "s_Disapear"
 	{
 		_Pos("Pos", Vector) = (0,-100,0,0)
 		_Normal("Normal", Vector) = (0,1,0,0)
+		_Color("Color", Color) = (1,1,1,0)
 
 		//_TransmissionShadow( "Transmission Shadow", Range( 0, 1 ) ) = 0.5
 		//_TransStrength( "Trans Strength", Range( 0, 50 ) ) = 1
@@ -249,8 +250,9 @@ Shader "s_Disapear"
 				float _TessEdgeLength;
 				float _TessMaxDisp;
 			#endif
-			uniform float4 Color;
 			UNITY_INSTANCING_BUFFER_START(s_Disapear)
+				UNITY_DEFINE_INSTANCED_PROP(float4, _Color)
+#define _Color_arr s_Disapear
 				UNITY_DEFINE_INSTANCED_PROP(half3, _Pos)
 #define _Pos_arr s_Disapear
 				UNITY_DEFINE_INSTANCED_PROP(float3, _Normal)
@@ -450,11 +452,13 @@ Shader "s_Disapear"
 				float4 ScreenPos = IN.screenPos;
 				#endif
 
+				float4 _Color_Instance = UNITY_ACCESS_INSTANCED_PROP(_Color_arr, _Color);
+				
 				half3 _Pos_Instance = UNITY_ACCESS_INSTANCED_PROP(_Pos_arr, _Pos);
 				float3 _Normal_Instance = UNITY_ACCESS_INSTANCED_PROP(_Normal_arr, _Normal);
 				float dotResult6 = dot( ( worldPos - _Pos_Instance ) , _Normal_Instance );
 				
-				o.Albedo = Color.rgb;
+				o.Albedo = _Color_Instance.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
 				#if defined(_SPECULAR_SETUP)
@@ -703,8 +707,9 @@ Shader "s_Disapear"
 				float _TessEdgeLength;
 				float _TessMaxDisp;
 			#endif
-			uniform float4 Color;
 			UNITY_INSTANCING_BUFFER_START(s_Disapear)
+				UNITY_DEFINE_INSTANCED_PROP(float4, _Color)
+#define _Color_arr s_Disapear
 				UNITY_DEFINE_INSTANCED_PROP(half3, _Pos)
 #define _Pos_arr s_Disapear
 				UNITY_DEFINE_INSTANCED_PROP(float3, _Normal)
@@ -885,11 +890,13 @@ Shader "s_Disapear"
 				#endif
 
 
+				float4 _Color_Instance = UNITY_ACCESS_INSTANCED_PROP(_Color_arr, _Color);
+				
 				half3 _Pos_Instance = UNITY_ACCESS_INSTANCED_PROP(_Pos_arr, _Pos);
 				float3 _Normal_Instance = UNITY_ACCESS_INSTANCED_PROP(_Normal_arr, _Normal);
 				float dotResult6 = dot( ( worldPos - _Pos_Instance ) , _Normal_Instance );
 				
-				o.Albedo = Color.rgb;
+				o.Albedo = _Color_Instance.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
 				#if defined(_SPECULAR_SETUP)
@@ -1079,8 +1086,9 @@ Shader "s_Disapear"
 				float _TessEdgeLength;
 				float _TessMaxDisp;
 			#endif
-			uniform float4 Color;
 			UNITY_INSTANCING_BUFFER_START(s_Disapear)
+				UNITY_DEFINE_INSTANCED_PROP(float4, _Color)
+#define _Color_arr s_Disapear
 				UNITY_DEFINE_INSTANCED_PROP(half3, _Pos)
 #define _Pos_arr s_Disapear
 				UNITY_DEFINE_INSTANCED_PROP(float3, _Normal)
@@ -1262,11 +1270,13 @@ Shader "s_Disapear"
 				float3 worldViewDir = normalize(UnityWorldSpaceViewDir(worldPos));
 				half atten = 1;
 
+				float4 _Color_Instance = UNITY_ACCESS_INSTANCED_PROP(_Color_arr, _Color);
+				
 				half3 _Pos_Instance = UNITY_ACCESS_INSTANCED_PROP(_Pos_arr, _Pos);
 				float3 _Normal_Instance = UNITY_ACCESS_INSTANCED_PROP(_Normal_arr, _Normal);
 				float dotResult6 = dot( ( worldPos - _Pos_Instance ) , _Normal_Instance );
 				
-				o.Albedo = Color.rgb;
+				o.Albedo = _Color_Instance.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
 				#if defined(_SPECULAR_SETUP)
@@ -1439,8 +1449,9 @@ Shader "s_Disapear"
 				float _TessEdgeLength;
 				float _TessMaxDisp;
 			#endif
-			uniform float4 Color;
 			UNITY_INSTANCING_BUFFER_START(s_Disapear)
+				UNITY_DEFINE_INSTANCED_PROP(float4, _Color)
+#define _Color_arr s_Disapear
 				UNITY_DEFINE_INSTANCED_PROP(half3, _Pos)
 #define _Pos_arr s_Disapear
 				UNITY_DEFINE_INSTANCED_PROP(float3, _Normal)
@@ -1600,12 +1611,14 @@ Shader "s_Disapear"
 					SurfaceOutputStandard o = (SurfaceOutputStandard)0;
 				#endif
 
+				float4 _Color_Instance = UNITY_ACCESS_INSTANCED_PROP(_Color_arr, _Color);
+				
 				float3 ase_worldPos = IN.ase_texcoord3.xyz;
 				half3 _Pos_Instance = UNITY_ACCESS_INSTANCED_PROP(_Pos_arr, _Pos);
 				float3 _Normal_Instance = UNITY_ACCESS_INSTANCED_PROP(_Normal_arr, _Normal);
 				float dotResult6 = dot( ( ase_worldPos - _Pos_Instance ) , _Normal_Instance );
 				
-				o.Albedo = Color.rgb;
+				o.Albedo = _Color_Instance.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
 				o.Alpha = 1;
@@ -1912,10 +1925,10 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;21;0,0;Float;False;False;-1
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;22;0,0;Float;False;False;-1;2;ASEMaterialInspector;0;4;New Amplify Shader;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;ShadowCaster;0;5;ShadowCaster;0;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;False;True;3;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=ShadowCaster;False;False;0;;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.OneMinusNode;23;-173.4198,186.128;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;5;-393.5416,-89.89114;Inherit;False;2;0;FLOAT3;0,0,0;False;1;FLOAT3;0,0,0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.Vector3Node;2;-460.1414,62.6088;Inherit;False;InstancedProperty;_Normal;Normal;1;0;Create;True;0;0;0;False;0;False;0,1,0;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
-Node;AmplifyShaderEditor.ColorNode;24;-637.7866,-492.8342;Inherit;False;Global;Color;Color;2;0;Create;True;0;0;0;False;0;False;1,1,1,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.Vector3Node;2;-460.1414,62.6088;Inherit;False;InstancedProperty;_Normal;Normal;1;0;Create;True;0;0;0;False;0;False;0,1,0;0,1,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.WorldPosInputsNode;4;-609.3414,-265.3911;Inherit;False;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
-Node;AmplifyShaderEditor.Vector3Node;1;-604.7,-99.00002;Half;False;InstancedProperty;_Pos;Pos;0;0;Create;True;0;0;0;False;0;False;0,-100,0;0,0,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.Vector3Node;1;-604.7,-99.00002;Half;False;InstancedProperty;_Pos;Pos;0;0;Create;True;0;0;0;False;0;False;0,-100,0;0,-1000,0;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.ColorNode;24;-637.7866,-492.8342;Inherit;False;InstancedProperty;_Color;Color;2;0;Create;True;0;0;0;False;0;False;1,1,1,0;1,1,1,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 WireConnection;6;0;5;0
 WireConnection;6;1;2;0
 WireConnection;18;0;24;0
@@ -1924,4 +1937,4 @@ WireConnection;23;0;6;0
 WireConnection;5;0;4;0
 WireConnection;5;1;1;0
 ASEEND*/
-//CHKSM=9047D882EAF42B528125760A5ECAE32DB7E63A67
+//CHKSM=3A26B9566288EDB450B829F62A13464052C57D28

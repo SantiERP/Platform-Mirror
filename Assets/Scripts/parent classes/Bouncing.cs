@@ -4,7 +4,8 @@ using UnityEngine;
 public class Bouncing : MonoBehaviour
 {
     Rigidbody rb;
-    [SerializeField] Material mat;
+    Material mat;
+    [SerializeField] MeshRenderer renderer;
 
     [SerializeField] Color MatColor = Color.white;
 
@@ -19,11 +20,17 @@ public class Bouncing : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        if(mat == null)
+
+        if(renderer == null)
         {
             mat = GetComponent<MeshRenderer>().material;
         }
-        
+        else
+        {
+            mat = renderer.material;
+        }
+
+        mat.color = MatColor;
         mat.SetColor("Color" , MatColor);
     }
 

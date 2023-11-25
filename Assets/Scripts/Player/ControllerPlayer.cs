@@ -24,7 +24,7 @@ public class ControllerPlayer : IController
         if (Input.GetButtonDown("Jump"))
         {
             if(_player.TouchingTheFloor())
-            _visual.PlayJumpParticles();
+            _visual.VisualJump();
         }
     }
 

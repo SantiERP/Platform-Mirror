@@ -25,9 +25,8 @@ public class ModelPlayer : Player , IMementeable
 
     void Awake()
     {
-        _controller = new ControllerPlayer(GetComponentInChildren<VisualPlayer>(), this);
-
-        Debug.Log("Awake");
+        _visual = GetComponentInChildren<VisualPlayer>();
+        _controller = new ControllerPlayer(_visual, this);
 
         entity = this;
 
@@ -116,6 +115,7 @@ public class ModelPlayer : Player , IMementeable
             //Si te estas moviendo horizontalmente, aceleras en cierta direccion
             if (horizontal != 0)
             {
+                _visual.VisualMove();
                 _onWhichAccelerationPointItsIn += Time.fixedDeltaTime;
             }
             else
@@ -123,13 +123,13 @@ public class ModelPlayer : Player , IMementeable
                 _onWhichAccelerationPointItsIn -= Time.fixedDeltaTime;
             }
 
-            //You Change the Velovity based on how much you are moving
+            //You Change the Velocity based on how much you are moving
             _onWhichAccelerationPointItsIn = Mathf.Clamp(_onWhichAccelerationPointItsIn, 0, 1);
 
             if(!TouchingTheWall((int)(horizontal)))
             {
                 rig.velocity = new Vector3(horizontal * _acceleration.Evaluate(_onWhichAccelerationPointItsIn) * _maxHorizontalSpeed, rig.velocity.y, 0);
-            }
+            } 
         }
         #endregion
     }

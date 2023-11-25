@@ -13,7 +13,5 @@ public static class SaveManager
         Remember += delegate { m.Remember(); };
         Forget += delegate { m.Forget(); };
         Save += delegate { m.Save(); };
-
-        Debug.Log(m);
     }
 }
