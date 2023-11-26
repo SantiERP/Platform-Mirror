@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class Mirrors : MonoBehaviour 
 {
     [SerializeField] AnimationCurve characterEntrance;
+    [SerializeField] ParticleSystem throwParticles;
 
     public abstract void Skill( Rigidbody rig);
 
@@ -31,6 +32,10 @@ public abstract class Mirrors : MonoBehaviour
         rig.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 
         WaitForSeconds wait = new WaitForSeconds(0.01f);
+        
+        ParticleSystem particle = Instantiate(throwParticles);
+        particle.transform.position = intialPos;
+        particle.transform.up = Vector3.Reflect(dir + transform.up, transform.up);
 
         while (actualInstant < 1)
         {

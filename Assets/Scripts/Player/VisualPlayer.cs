@@ -17,7 +17,7 @@ public class VisualPlayer : MonoBehaviour
 
     public void VisualMove()
     {
-        if (_audioSource.clip == Move && _audioSource.isPlaying)
+        if (_audioSource.clip != Move)
         {
             Debug.Log("Audio Move");
             _audioSource.clip = Move;
