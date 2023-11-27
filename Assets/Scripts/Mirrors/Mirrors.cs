@@ -32,16 +32,22 @@ public abstract class Mirrors : MonoBehaviour
         rig.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 
         WaitForSeconds wait = new WaitForSeconds(0.01f);
-        
-        ParticleSystem particle = Instantiate(throwParticles);
-        particle.transform.position = intialPos;
-        particle.transform.up = Vector3.Reflect(dir + transform.up, transform.up);
+        bool thrownPsrticles = false;
 
         while (actualInstant < 1)
         {
             rig.transform.position = Vector3.LerpUnclamped(intialPos, finalPos, characterEntrance.Evaluate(actualInstant));
 
             actualInstant += 0.01f;
+
+            if(actualInstant >= 0.4f && !thrownPsrticles)
+            {
+                ParticleSystem particle = Instantiate(throwParticles);
+                particle.transform.position = intialPos;
+                particle.transform.forward = Vector3.Reflect(dir + transform.up, transform.up);
+                particle.transform.position -= particle.transform.forward;
+                thrownPsrticles = true;
+            }
 
             yield return wait;
         }
