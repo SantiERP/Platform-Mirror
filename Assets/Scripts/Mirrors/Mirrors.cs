@@ -71,7 +71,7 @@ public abstract class Mirrors : MonoBehaviour
         
         else
         {
-            rig.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+            rig.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
         }
 
         charBouncing.EndBounce();
