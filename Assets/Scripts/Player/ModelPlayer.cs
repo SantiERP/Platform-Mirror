@@ -120,6 +120,7 @@ public class ModelPlayer : Player , IMementeable
             }
             else
             {
+                _visual.VisualStopMove();
                 _onWhichAccelerationPointItsIn -= Time.fixedDeltaTime;
             }
 

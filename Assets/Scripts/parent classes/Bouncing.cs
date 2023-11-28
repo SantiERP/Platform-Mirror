@@ -3,47 +3,47 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bouncing : MonoBehaviour
 {
-    Rigidbody rb;
-    Material mat;
-    [SerializeField] MeshRenderer renderer;
+    Rigidbody _rb;
+    Material _mat;
+    [SerializeField] MeshRenderer _renderer;
 
-    [SerializeField] Color MatColor = Color.white;
+    [SerializeField] Color _matColor = Color.white;
 
     public Rigidbody rig
     {
         get
         {
-            return rb;
+            return _rb;
         }
     }
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
 
-        if(renderer == null)
+        if(_renderer == null)
         {
-            mat = GetComponent<MeshRenderer>().material;
+            _mat = GetComponent<MeshRenderer>().material;
         }
         else
         {
-            mat = renderer.material;
+            _mat = _renderer.material;
         }
 
-        mat.color = MatColor;
-        mat.SetColor("Color" , MatColor);
+        _mat.color = _matColor;
+        _mat.SetColor("Color" , _matColor);
     }
 
     public void Bounce(Vector3 mirrorPos, Vector3 mirrorNormal)
     {
-        mat.SetVector("_Pos" , mirrorPos);
-        mat.SetVector("_Normal" , mirrorNormal);
+        _mat.SetVector("_Pos" , mirrorPos);
+        _mat.SetVector("_Normal" , mirrorNormal);
     }
 
     public void EndBounce()
     {
-        mat.SetVector("_Pos" , Vector3.up * -1000);
-        mat.SetVector("_Normal" , Vector3.up);
+        _mat.SetVector("_Pos" , Vector3.up * -1000);
+        _mat.SetVector("_Normal" , Vector3.up);
     }
 
 }

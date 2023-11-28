@@ -1,21 +1,26 @@
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PressableButton : Interruptor
 {
-    Vector3 desiredPosition;
-    Vector3 normalPosition;
+    Vector3 _desiredPosition;
+    Vector3 _normalPosition;
 
-    int amountOfObjectsPressing;
+    int _amountOfObjectsPressing;
+
+    AudioSource _audioSource;
 
     void Start()
     {
-        normalPosition = transform.position;
-        desiredPosition = normalPosition;
+        _normalPosition = transform.position;
+        _desiredPosition = _normalPosition;
+
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.01f);
+        transform.position = Vector3.Lerp(transform.position, _desiredPosition, 0.01f);
     }
 
 
@@ -24,7 +29,12 @@ public class PressableButton : Interruptor
         if (other.TryGetComponent<Bouncing>(out Bouncing rebotable))
         {
             ButtonAction();
-            amountOfObjectsPressing++;
+            _amountOfObjectsPressing++;
+
+            if(_amountOfObjectsPressing == 1)
+            {
+                _audioSource.Play();
+            }
         }
     }
 
@@ -32,9 +42,9 @@ public class PressableButton : Interruptor
     {
         if (other.TryGetComponent<Bouncing>(out Bouncing rebotable))
         {
-            amountOfObjectsPressing--;
+            _amountOfObjectsPressing--;
 
-            if (amountOfObjectsPressing <= 0)
+            if (_amountOfObjectsPressing <= 0)
             {
                 ButtonAntiAction(); 
             }
@@ -43,12 +53,12 @@ public class PressableButton : Interruptor
 
     public override void NormalAction()
     {
-        desiredPosition = normalPosition - transform.up * 0.8f;
+        _desiredPosition = _normalPosition - transform.up * 0.8f;
     }
 
     public override void AntiAction()
     {
-        desiredPosition = normalPosition;
+        _desiredPosition = _normalPosition;
     }
 
 }

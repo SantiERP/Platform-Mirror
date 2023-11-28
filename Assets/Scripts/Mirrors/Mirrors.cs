@@ -3,8 +3,9 @@ using UnityEngine;
 
 public abstract class Mirrors : MonoBehaviour 
 {
-    [SerializeField] AnimationCurve characterEntrance;
-    [SerializeField] ParticleSystem throwParticles;
+    [SerializeField] AnimationCurve _characterEntrance;
+    [SerializeField] ParticleSystem _throwParticles;
+    [SerializeField] AudioSource _audioSource;
 
     public abstract void Skill( Rigidbody rig);
 
@@ -18,13 +19,24 @@ public abstract class Mirrors : MonoBehaviour
 
     IEnumerator CharacterEntrance(Vector3 intialPos, Rigidbody rig)
     {
+        AudioSource newAudio = null;
+        if (_audioSource.isPlaying)
+        {
+            newAudio = gameObject.AddComponent<AudioSource>();
+            newAudio.clip = _audioSource.clip;
+            newAudio.Play();
+        }
+        else
+        {
+            _audioSource.Play();
+        }
+
         Vector3 dir = rig.velocity;
         BoxCollider box = rig.GetComponent<BoxCollider>();  
         Bouncing charBouncing = rig.GetComponent<Bouncing>();
         charBouncing.Bounce(transform.position , transform.up);
 
         box.enabled = false;
-
 
         float actualInstant = 0f;
         Vector3 finalPos = intialPos + (Vector3.Reflect(dir + transform.up, transform.up).normalized);
@@ -36,13 +48,13 @@ public abstract class Mirrors : MonoBehaviour
 
         while (actualInstant < 1)
         {
-            rig.transform.position = Vector3.LerpUnclamped(intialPos, finalPos, characterEntrance.Evaluate(actualInstant));
+            rig.transform.position = Vector3.LerpUnclamped(intialPos, finalPos, _characterEntrance.Evaluate(actualInstant));
 
             actualInstant += 0.01f;
 
             if(actualInstant >= 0.4f && !thrownPsrticles)
             {
-                ParticleSystem particle = Instantiate(throwParticles);
+                ParticleSystem particle = Instantiate(_throwParticles);
                 particle.transform.position = intialPos;
                 particle.transform.forward = Vector3.Reflect(dir + transform.up, transform.up);
                 particle.transform.position -= particle.transform.forward;
@@ -63,6 +75,11 @@ public abstract class Mirrors : MonoBehaviour
         }
 
         charBouncing.EndBounce();
+
+        if(newAudio != null)
+        {
+            Destroy(newAudio);
+        }
 
         box.enabled = true;        
         Skill(rig);
