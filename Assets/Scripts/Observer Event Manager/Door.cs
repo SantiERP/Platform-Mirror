@@ -9,6 +9,8 @@ public class Door : MonoBehaviour
     Vector3 desiredPosition;
     Vector3 normalPosition;
 
+    [SerializeField] AudioSource _audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,7 @@ public class Door : MonoBehaviour
 
     void WhatToDo()
     {
+        _audioSource.Play();
         desiredPosition = WhereDoIMoveTo + normalPosition;
         Debug.Log("Moving");
     }
