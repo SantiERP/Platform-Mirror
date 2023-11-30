@@ -2,64 +2,70 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScreenManager : MonoBehaviour
+public static class ScreenManager
 {
-    public static ScreenManager Instance { get; private set; }
+    //When I tested the game for the first time, each time I loaded a new scene, everything lasted almost a full second to load, including the AR part that I wanted to be seamless
+    //So, I used this programming pattern that helps everytinh load faster.
 
-    Stack<IScreen> _screenStack;
-
-    private void Awake()
+    //I use enums for increasing readability
+    public enum Screen
     {
-        Instance = this;
-
-        _screenStack = new Stack<IScreen>();
+        Menu,
+        Play,
+        Store
     }
 
-    public void Push(IScreen newScreen)
+    //I save the actual "Scene" (wich in the pattern are called screens)
+    static Screen actualScreen = Screen.Menu;
+    
+    //I use a Disctionary to save everything in a list of gameObjects with a reference to qhere they are.
+    static Dictionary<Screen, List<IScreenObject>> objectsToBeTurnedOn = new Dictionary<Screen, List<IScreenObject>>();
+
+    public static void ChangeScene(Screen newScreen)
     {
-        //Si tengo una pantalla previa
-        if (_screenStack.Count > 0)
+        Debug.Log($"Going from <color=red>{actualScreen}</color> to <color=red>{newScreen}</color>");
+        //I turn off the old scene
+        foreach (var i in objectsToBeTurnedOn[actualScreen])
         {
-            //La desactivo
-            _screenStack.Peek()
-                        .Deactivate();
+            i.OnScreenEnd();
         }
 
-        //Agrego la nueva pantalla
-        _screenStack.Push(newScreen);
-
-        //La activo
-        newScreen.Activate();
-    }
-
-    //Sobrecarga que pide el nombre del GameObject en la carpeta Resources
-    public void Push(string resourceName)
-    {
-        //Tomamos el Gameobject de esa carpeta, lo instanciamos
-        var go = Instantiate(Resources.Load<GameObject>(resourceName));
-
-        //Si tiene el componente de IScreen
-        if (go.TryGetComponent(out IScreen newScreen))
+        //I turn on the new scene
+        foreach (var i in objectsToBeTurnedOn[newScreen])
         {
-            //La pusheamos
-            Push(newScreen);
+            i.OnScreenStart();
         }
+
+        //I save the new scene as the actual scene
+        actualScreen = newScreen;
     }
 
-    public void Pop()
+    public static void AddObjectToScreen(IScreenObject objectToAdd, Screen screen)
     {
-        //Si la pantalla que quiero sacar es la del Gameplay, no hago nada
-        //if (_screenStack.Count <= 1) return;
+        //If there isnt a scene saved where there should be, I make a new one
+        if(!objectsToBeTurnedOn.ContainsKey(screen))
+        {
+            objectsToBeTurnedOn[screen] = new List<IScreenObject>();
+        }
 
-        //Sino, saco la ultima pantalla y la "libero"
-        _screenStack.Pop()
-                    .Free();
+        //I add the objects I want where I want them
+        objectsToBeTurnedOn[screen].Add(objectToAdd);
+    }
 
-        //Si no tengo ninguna pantalla retorno
-        if (_screenStack.Count == 0) return;
-
-        //Sino, obtengo la ultima disponible y la activo
-        _screenStack.Peek()
-                    .Activate();
+    public static void TurnOffAllExceptFor(Screen screenToBeOn)
+    {
+        //I willl cycle through the whole dictionary checking some things
+        foreach (var i in objectsToBeTurnedOn.Keys)
+        {
+            //If the Screen doesn´t exist or is the screen I want on, I wont turn it off. Else I will.
+            if(objectsToBeTurnedOn.ContainsKey(i) && i != screenToBeOn)
+            {
+                foreach (var g in objectsToBeTurnedOn[i])
+                {
+                    g.OnScreenEnd();
+                }
+            }
+        }
+        
     }
 }

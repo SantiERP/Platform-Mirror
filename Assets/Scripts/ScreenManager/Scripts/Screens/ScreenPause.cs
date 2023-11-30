@@ -24,12 +24,12 @@ public class ScreenPause : MonoBehaviour, IScreen
 
     public void BTN_Options()
     {
-        ScreenManager.Instance.Push("Canvas Options");
+        ScreenManagerDefault.Instance.Push("Canvas Options");
     }
 
     public void BTN_Back()
     {
-        ScreenManager.Instance.Pop();
+        ScreenManagerDefault.Instance.Pop();
     }
 
     public void Activate()

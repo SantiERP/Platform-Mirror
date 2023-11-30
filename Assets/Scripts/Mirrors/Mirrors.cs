@@ -8,6 +8,7 @@ public abstract class Mirrors : MonoBehaviour
     [SerializeField] AudioSource _audioSource;
 
     public abstract void Skill( Rigidbody rig);
+    public static float timeSpeed = 0.01f;
 
     public void OnTriggerEnter(Collider other)
     {
@@ -15,8 +16,9 @@ public abstract class Mirrors : MonoBehaviour
         {
             StartCoroutine(CharacterEntrance(rebotable.transform.position, rebotable.rig));
         }
-    }
 
+    }
+    
     IEnumerator CharacterEntrance(Vector3 intialPos, Rigidbody rig)
     {
         AudioSource newAudio = null;
@@ -49,8 +51,7 @@ public abstract class Mirrors : MonoBehaviour
         while (actualInstant < 1)
         {
             rig.transform.position = Vector3.LerpUnclamped(intialPos, finalPos, _characterEntrance.Evaluate(actualInstant));
-
-            actualInstant += 0.01f;
+            actualInstant += timeSpeed;
 
             if(actualInstant >= 0.4f && !thrownPsrticles)
             {

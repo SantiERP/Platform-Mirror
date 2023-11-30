@@ -44,7 +44,6 @@ public class ModelPlayer : Player , IMementeable
     {
 
     }
-
     private void Update()
     {
         _controller.UpdateInput();
@@ -155,6 +154,11 @@ public class ModelPlayer : Player , IMementeable
         }
 
         //_howLongSinceITouchedTheFloor = _coyoteTime;
+    }
+
+    public void Pause()
+    {
+        Debug.Log("efnis");
     }
 
     void FinalizeLevel()

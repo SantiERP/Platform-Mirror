@@ -24,7 +24,7 @@ public class ScreenOptions : MonoBehaviour, IScreen
 
     public void BTN_Back()
     {
-        ScreenManager.Instance.Pop();
+        ScreenManagerDefault.Instance.Pop();
     }
 
     public void Activate()
