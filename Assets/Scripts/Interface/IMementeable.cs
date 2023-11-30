@@ -4,5 +4,5 @@ public interface IMementeable
     public void Forget();
     public void Save();
 
-    object[] _memories { get; set; }
+    object[] Memories { get; set; }
 }

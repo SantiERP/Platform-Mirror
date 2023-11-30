@@ -2,11 +2,11 @@ using UnityEngine;
 
 public abstract class InstantiateBullet : MonoBehaviour
 {
-    Bullet b;
+    Bullet _bullet;
 
     public virtual void Shot(Vector3 v)
     {
-        b = BulletFactory.Instance.GetObjectFromPool();
-        b.transform.position = v;
+        _bullet = BulletFactory.Instance.GetObjectFromPool();
+        _bullet.transform.position = v;
     }
 }

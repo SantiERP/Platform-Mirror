@@ -8,10 +8,10 @@ public static class SaveManager
     public static Action Remember;
     public static Action Forget;
 
-    public static void AddToSaveManager(IMementeable m)
+    public static void AddToSaveManager(IMementeable memento)
     {
-        Remember += delegate { m.Remember(); };
-        Forget += delegate { m.Forget(); };
-        Save += delegate { m.Save(); };
+        Remember += delegate { memento.Remember(); };
+        Forget += delegate { memento.Forget(); };
+        Save += delegate { memento.Save(); };
     }
 }

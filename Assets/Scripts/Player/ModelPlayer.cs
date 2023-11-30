@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ModelPlayer : Player , IMementeable
 {
-    public static ModelPlayer entity;
+    public static ModelPlayer Entity;
 
     [SerializeField] float _onWhichAccelerationPointItsIn = 0;
 
@@ -28,14 +28,14 @@ public class ModelPlayer : Player , IMementeable
         _visual = GetComponentInChildren<VisualPlayer>();
         _controller = new ControllerPlayer(_visual, this);
 
-        entity = this;
+        Entity = this;
 
         EntityLister.PlayerT = this.transform;
 
         EventManager.SubscribeToEvent(EventManager.EventsType.Event_PlayerDead, delegate { SaveManager.Remember();});
 
         EventManager.SubscribeToEvent(EventManager.EventsType.Event_Restart, LoadLastPos);
-        
+
         SaveManager.AddToSaveManager(this);
         SaveManager.Save();
     }
@@ -92,11 +92,11 @@ public class ModelPlayer : Player , IMementeable
             //if I was floating for long enought, gravity starts to afect me
             if (_howLongSinceITouchedTheFloor > _coyoteTime)
             {
-                rig.AddForce(Physics.gravity, ForceMode.Acceleration);
+                Rig.AddForce(Physics.gravity, ForceMode.Acceleration);
             }
             if (!TouchingTheWall((int)(horizontal)))
             {
-                rig.AddForce(horizontal * transform.right * _airVelocity);
+                Rig.AddForce(horizontal * transform.right * _airVelocity);
             }
         }
         #endregion
@@ -105,13 +105,12 @@ public class ModelPlayer : Player , IMementeable
 
         else
         {
-            if (rig.velocity.y <= 0)
+            if (Rig.velocity.y <= 0)
             { 
                 _howLongSinceITouchedTheFloor = 0; 
                 _timePressingJumpButton = 0;
             }
 
-            //Si te estas moviendo horizontalmente, aceleras en cierta direccion
             if (horizontal != 0)
             {
                 _visual.VisualMove();
@@ -123,12 +122,11 @@ public class ModelPlayer : Player , IMementeable
                 _onWhichAccelerationPointItsIn -= Time.fixedDeltaTime;
             }
 
-            //You Change the Velocity based on how much you are moving
             _onWhichAccelerationPointItsIn = Mathf.Clamp(_onWhichAccelerationPointItsIn, 0, 1);
 
             if(!TouchingTheWall((int)(horizontal)))
             {
-                rig.velocity = new Vector3(horizontal * _acceleration.Evaluate(_onWhichAccelerationPointItsIn) * _maxHorizontalSpeed, rig.velocity.y, 0);
+                Rig.velocity = new Vector3(horizontal * _acceleration.Evaluate(_onWhichAccelerationPointItsIn) * _maxHorizontalSpeed, Rig.velocity.y, 0);
             } 
         }
         #endregion
@@ -140,7 +138,7 @@ public class ModelPlayer : Player , IMementeable
 
         if (_timePressingJumpButton < 0.5f)
         {
-            rig.AddForce(transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
+            Rig.AddForce(transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
             Rigidbody boxRigidbody;
             TouchingTheFloor(out boxRigidbody);
             try
@@ -153,38 +151,27 @@ public class ModelPlayer : Player , IMementeable
             }
         }
 
-        //_howLongSinceITouchedTheFloor = _coyoteTime;
-    }
-
-    public void Pause()
-    {
-        Debug.Log("efnis");
-    }
-
-    void FinalizeLevel()
-    {
-        EventManager.TriggerEvent(EventManager.EventsType.Event_EndOfLevel, new object[1]);
     }
 
     #region Remembering
-    [SerializeField] public object[] _memories { get; set; }
+    [SerializeField] public object[] Memories { get; set; }
 
     public void Remember()
     {
-        if (_memories != null)
+        if (Memories != null)
         {
-            transform.position = (Vector3)_memories[0];
-            transform.rotation = (Quaternion)_memories[1];
-            Physics.gravity = (Vector3)_memories[2];
+            transform.position = (Vector3)Memories[0];
+            transform.rotation = (Quaternion)Memories[1];
+            Physics.gravity = (Vector3)Memories[2];
         }
     }
     public void Forget()
     {
-        _memories = null;
+        Memories = null;
     }
     public void Save()
     {
-        _memories = new object[] { transform.position, transform.rotation , Physics.gravity};
+        Memories = new object[] { transform.position, transform.rotation , Physics.gravity};
     }
     #endregion
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Box : MonoBehaviour , IMementeable
 {
-    public object[] _memories { get; set; }
+    public object[] Memories { get; set; }
     void Awake()
     {
         SaveManager.AddToSaveManager(this);
@@ -10,18 +10,18 @@ public class Box : MonoBehaviour , IMementeable
 
     public void Remember()
     {
-        if (_memories != null)
+        if (Memories != null)
         { 
-            transform.position = (Vector3)_memories[0];
-            transform.rotation = (Quaternion)_memories[1];
+            transform.position = (Vector3)Memories[0];
+            transform.rotation = (Quaternion)Memories[1];
         }
     }
     public void Forget()
     {
-        _memories = null;
+        Memories = null;
     }
     public void Save()
     {
-        _memories = new object[] {transform.position , transform.rotation};
+        Memories = new object[] {transform.position , transform.rotation};
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class CameraPoints : MonoBehaviour
 {
     [SerializeField] float _size;
-    [SerializeField][Range (0.1f , 10)] float _TRANSITION_TIME = 1.2f;
+    static float _transitionTime = 1.2f;
     [SerializeField] float _waitBetweeMoments = 0.01f;
     [SerializeField] AnimationCurve _curve;
 
@@ -18,7 +18,7 @@ public class CameraPoints : MonoBehaviour
         Camera MainCamera = Camera.main;
         WaitForSeconds wait = new WaitForSeconds(_waitBetweeMoments);
 
-        float timeRalation = 1/_TRANSITION_TIME;
+        float timeRalation = 1/_transitionTime;
         
         Vector3 initialPos = MainCamera.transform.position;
         Vector3 finalPos = transform.position;
@@ -34,7 +34,7 @@ public class CameraPoints : MonoBehaviour
         Rigidbody rigPlayer = Player.GetComponent<Rigidbody>();
         rigPlayer.velocity = MainCamera.transform.right * dir;
 
-        for (float i = 0; i < _TRANSITION_TIME; i += _waitBetweeMoments)
+        for (float i = 0; i < _transitionTime; i += _waitBetweeMoments)
         {
             float pointInTheCurve = _curve.Evaluate(i * timeRalation);
 

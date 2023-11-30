@@ -4,18 +4,18 @@ using UnityEngine;
 
 public static class EntityLister
 {
-    static Transform TransformPlayer;
-    static bool dadoVuelta;
+    static Transform _playerT;
+    static bool _dadoVuelta;
 
     public static Transform PlayerT
     {
-        get{return TransformPlayer;}
-        set{TransformPlayer = value;}
+        get{return _playerT;}
+        set{_playerT = value;}
     }
 
     public static bool DadoVuelta
     {
-        get{return dadoVuelta;}
-        set{dadoVuelta = value;}
+        get{return _dadoVuelta;}
+        set{_dadoVuelta = value;}
     }
 }

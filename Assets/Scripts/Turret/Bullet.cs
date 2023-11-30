@@ -26,24 +26,26 @@ public class Bullet : MonoBehaviour
         _lifeTime = _maxLifeTime;
     }
 
-    public static void TurnOn(Bullet b)
+    public static void TurnOn(Bullet _b)
     {
-        b.Reset();
-        b.gameObject.SetActive(true);
+        _b.Reset();
+        _b.gameObject.SetActive(true);
     }
 
-    public static void TurnOff(Bullet b)
+    public static void TurnOff(Bullet _b)
     {
-        b.gameObject.SetActive(false);
+        _b.gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-       if(other.TryGetComponent<ModelPlayer>(out ModelPlayer player))
-       {
+        if (other.TryGetComponent<ModelPlayer>(out ModelPlayer player))
+        {
+            Debug.Log(player);
+            Debug.Log("le di");
             EventManager.TriggerEvent(EventManager.EventsType.Event_PlayerDead);
-       }else BulletFactory.Instance.ReturnToPool(this);
+        }
+        else { BulletFactory.Instance.ReturnToPool(this); Debug.Log("No le di"); }
 
     }
-
 }

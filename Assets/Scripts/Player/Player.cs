@@ -9,6 +9,6 @@ public class Player : Bouncing
 
     public void Throw(Vector3 direction)
     {
-        rig.velocity += direction * 2;
+        Rig.velocity += direction * 2;
     }
 }

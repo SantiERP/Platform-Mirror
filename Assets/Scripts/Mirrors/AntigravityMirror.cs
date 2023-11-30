@@ -5,14 +5,14 @@ using UnityEngine;
 public class AntigravityMirror : Mirrors
 {
     [SerializeField] bool _upPush;
-    Rigidbody rb;
+    Rigidbody _rb;
     [Header("Push Force")]
     [SerializeField,Range(0,100)] float _pushForce;
     [SerializeField] ForceMode _forceMode;
 
-    [SerializeField] float speed;
+    [SerializeField] float _speed;
 
-    public override void Skill(Rigidbody r)
+    public override void Skill()
     {     
         EntityLister.DadoVuelta = !EntityLister.DadoVuelta;
 

@@ -9,9 +9,9 @@ public class CameraManager : MonoBehaviour, IMementeable
 
     public static CameraManager Instance;
     [SerializeField] CameraPoints[] _camerasPoints;
-    public int actualPos = 0;
+    public int ActualPos = 0;
 
-    public object[] _memories { get; set; }
+    public object[] Memories { get; set; }
 
     void Awake()
     {
@@ -22,45 +22,45 @@ public class CameraManager : MonoBehaviour, IMementeable
     {
         _camerasPoints[0].SetCamera(0);
 
-        _memories[0] = 0;
+        Memories[0] = 0;
     }
 
     #region Camera Movement
     public void NextPosition()
     {
-        actualPos++;
-        _camerasPoints[actualPos].SetCamera(1);
+        ActualPos++;
+        _camerasPoints[ActualPos].SetCamera(1);
     }
 
     public void BeforePosition()
     {
-        actualPos--;
-        _camerasPoints[actualPos].SetCamera(-1);
+        ActualPos--;
+        _camerasPoints[ActualPos].SetCamera(-1);
     }
     #endregion
 
     #region Reload
     public void Load(int punto, Vector3 pos)
     {
-        actualPos = punto;
+        ActualPos = punto;
         transform.position = pos;
     }
 
     public void Remember()
     {
-        if (_memories != null)
+        if (Memories != null)
         {
-            _camerasPoints[(int)_memories[(int)infoPos.lastPos]].SetCamera(0);
-            actualPos = (int)_memories[(int)infoPos.lastPos];
+            _camerasPoints[(int)Memories[(int)infoPos.lastPos]].SetCamera(0);
+            ActualPos = (int)Memories[(int)infoPos.lastPos];
         }
     }
     public void Forget()
     {
-        _memories = null;
+        Memories = null;
     }
     public void Save()
     {
-        _memories = new object[] { actualPos + 1};
+        Memories = new object[] { ActualPos + 1};
     }
     #endregion
 }

@@ -9,7 +9,7 @@ public class Bouncing : MonoBehaviour
 
     [SerializeField] Color _matColor = Color.white;
 
-    public Rigidbody rig
+    public Rigidbody Rig
     {
         get
         {

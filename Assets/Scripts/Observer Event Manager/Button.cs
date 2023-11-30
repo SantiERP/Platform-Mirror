@@ -3,18 +3,17 @@ using UnityEngine;
 
 public class ButtonPress : MonoBehaviour
 {
-    public delegate void delegatebutton();
+    public delegate void Delegatebutton();
 
     [SerializeField] float _speedDown;
     float _modPosEnd;
 
-    Vector3 posin, posend;
+    Vector3 _posend;
 
     private void Start()
     {
         _modPosEnd=transform.position.y-0.3f;
-        posin = transform.position;
-        posend = Vector3.up * _modPosEnd*-1f;
+        _posend = Vector3.up * _modPosEnd*-1f;
     }
     private void OnTriggerStay(Collider other)
     {
@@ -23,11 +22,11 @@ public class ButtonPress : MonoBehaviour
             StartCoroutine("Button Down");
         }        
     }
-    IEnumerator buttondown()
+    IEnumerator Buttondown()
     {
         while(transform.position.y!=_modPosEnd) 
         {
-            transform.position += posend * _speedDown * Time.deltaTime;
+            transform.position += _posend * _speedDown * Time.deltaTime;
         }
 
         yield return null;

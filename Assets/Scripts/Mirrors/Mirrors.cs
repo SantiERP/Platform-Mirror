@@ -7,14 +7,14 @@ public abstract class Mirrors : MonoBehaviour
     [SerializeField] ParticleSystem _throwParticles;
     [SerializeField] AudioSource _audioSource;
 
-    public abstract void Skill( Rigidbody rig);
-    public static float timeSpeed = 0.01f;
+    public abstract void Skill();
+    public static float TimeSpeed = 0.01f;
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Bouncing>(out Bouncing rebotable))
+        if (other.TryGetComponent<Bouncing>(out Bouncing bounceable))
         {
-            StartCoroutine(CharacterEntrance(rebotable.transform.position, rebotable.rig));
+            StartCoroutine(CharacterEntrance(bounceable.transform.position, bounceable.Rig));
         }
 
     }
@@ -51,7 +51,7 @@ public abstract class Mirrors : MonoBehaviour
         while (actualInstant < 1)
         {
             rig.transform.position = Vector3.LerpUnclamped(intialPos, finalPos, _characterEntrance.Evaluate(actualInstant));
-            actualInstant += timeSpeed;
+            actualInstant += TimeSpeed;
 
             if(actualInstant >= 0.4f && !thrownPsrticles)
             {
@@ -83,7 +83,7 @@ public abstract class Mirrors : MonoBehaviour
         }
 
         box.enabled = true;        
-        Skill(rig);
+        Skill();
         Throw(dir, rig);
     }
 

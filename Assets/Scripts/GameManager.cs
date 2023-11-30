@@ -8,24 +8,8 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Transform _game;
-    public static GameManager Instance { get; set; }
 
-    public bool pause;
-
-    public delegate void Pause();
-    public Pause _pause; 
-
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(Instance);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
+    public bool Pause;
 
     // Update is called once per frame
     private void Start()
@@ -35,15 +19,15 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !pause)
+        if (Input.GetKeyDown(KeyCode.Escape) && !Pause)
         {
             var screenPause = Instantiate(Resources.Load<ScreenPause>("Canvas Pause"));
             ScreenManagerDefault.Instance.Push(screenPause);
-            pause = true;
+            Pause = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && pause)
+        else if (Input.GetKeyDown(KeyCode.Escape) && Pause)
         {
-            pause = false;
+            Pause = false;
             ScreenManagerDefault.Instance.Pop();
         }
     }

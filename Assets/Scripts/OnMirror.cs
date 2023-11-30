@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class OnMirror : MonoBehaviour
 {
-    [SerializeField] List<GameObject> Objects;
+    [SerializeField] List<GameObject> _objects;
 
     private void OnTriggerEnter(Collider other)
     {
         Player _character = other.GetComponent<Player>();
         if (_character)
         {
-            foreach(GameObject i in Objects)
+            foreach(GameObject i in _objects)
             {
                 i.SetActive(!i.activeSelf);
                 

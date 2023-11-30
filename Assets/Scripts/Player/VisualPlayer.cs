@@ -6,8 +6,9 @@ public class VisualPlayer : MonoBehaviour
 
     [Header ("Audio")]
     [SerializeField] AudioSource _audioSource;
-    [SerializeField] AudioClip Jump;
-    [SerializeField] AudioClip Move;
+    [SerializeField] AudioClip _jump;
+    [SerializeField] AudioClip _move;
+
     public void VisualJump()
     {
         if(_audioSource.isPlaying)
@@ -15,7 +16,7 @@ public class VisualPlayer : MonoBehaviour
             _audioSource.Stop();
         }
 
-        _audioSource.clip = Jump;
+        _audioSource.clip = _jump;
         _audioSource.Play();
         _particleSystem.Play();
     }
@@ -25,7 +26,7 @@ public class VisualPlayer : MonoBehaviour
         if (!_audioSource.isPlaying)
         {
             Debug.Log("Audio Move");
-            _audioSource.clip = Move;
+            _audioSource.clip = _move;
             _audioSource.Play();
             
         }
@@ -33,7 +34,7 @@ public class VisualPlayer : MonoBehaviour
 
     public void VisualStopMove()
     {
-        if(_audioSource.clip == Move && _audioSource.isPlaying)
+        if(_audioSource.clip == _move && _audioSource.isPlaying)
         {
             _audioSource.Stop();
         }

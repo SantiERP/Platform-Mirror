@@ -2,10 +2,10 @@ using UnityEngine;
 
 public struct SaveData
 {
-    public Vector3 lastPos;
-    public Vector3 cameraPos;
-    public int cameraPoint;
+    public Vector3 LastPos;
+    public Vector3 CameraPos;
+    public int CameraPoint;
 
-    public int level;
-    public Vector3 gravity;
+    public int Level;
+    public Vector3 Gravity;
 }

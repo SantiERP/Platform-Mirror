@@ -4,43 +4,43 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] Interruptor ActivationButton;
-    [SerializeField] Vector3 WhereDoIMoveTo;
-    Vector3 desiredPosition;
-    Vector3 normalPosition;
+    [SerializeField] Interruptor _activationButton;
+    [SerializeField] Vector3 _whereDoIMoveTo;
+    Vector3 _desiredPosition;
+    Vector3 _normalPosition;
 
     [SerializeField] AudioSource _audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
-        normalPosition = transform.position;
-        desiredPosition = normalPosition;
-        ActivationButton.ButtonAction += WhatToDo;
-        ActivationButton.ButtonAntiAction += WhatToDont;
+        _normalPosition = transform.position;
+        _desiredPosition = _normalPosition;
+        _activationButton.ButtonAction += WhatToDo;
+        _activationButton.ButtonAntiAction += WhatToDont;
     }
 
     // Update is called once per frame
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, 0.05f);
+        transform.position = Vector3.Lerp(transform.position, _desiredPosition, 0.05f);
     }
 
     void WhatToDo()
     {
         _audioSource.Play();
-        desiredPosition = WhereDoIMoveTo + normalPosition;
+        _desiredPosition = _whereDoIMoveTo + _normalPosition;
         Debug.Log("Moving");
     }
 
     void WhatToDont()
     {
-        desiredPosition = normalPosition;
+        _desiredPosition = _normalPosition;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position , transform.position + WhereDoIMoveTo);
+        Gizmos.DrawLine(transform.position , transform.position + _whereDoIMoveTo);
     }
 }

@@ -26,7 +26,7 @@ public class PressableButton : Interruptor
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Bouncing>(out Bouncing rebotable))
+        if (other.TryGetComponent<Bouncing>(out Bouncing bounceable))
         {
             ButtonAction();
             _amountOfObjectsPressing++;
@@ -40,7 +40,7 @@ public class PressableButton : Interruptor
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent<Bouncing>(out Bouncing rebotable))
+        if (other.TryGetComponent<Bouncing>(out Bouncing bounceable))
         {
             _amountOfObjectsPressing--;
 

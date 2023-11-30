@@ -14,8 +14,6 @@ public abstract class Interruptor : MonoBehaviour
         ButtonAntiAction += AntiAction;
     }
 
-    // Update is called once per frame
-
     public abstract void NormalAction();
 
     public abstract void AntiAction();

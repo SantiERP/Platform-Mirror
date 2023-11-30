@@ -6,24 +6,24 @@ public class TurretShot : MonoBehaviour
     [SerializeField] float _distanceRay;
 
     [SerializeField] LayerMask _layerMask;
-    float timer;
-    Bullet b;
+    float _timer;
+    Bullet _bullet;
 
     private void Awake()
     {
-        timer = _cooldown;
+        _timer = _cooldown;
     }
     void Update()
     {
         if (!Physics.Raycast(transform.position, transform.right * -1, _distanceRay, _layerMask)) { Debug.Log("Linea de fuego"); return; }
 
-        if (timer < 0)
+        if (_timer < 0)
         {
-            b = BulletFactory.Instance.GetObjectFromPool();
-            b.transform.position = transform.position;
-            timer = _cooldown;
+            _bullet = BulletFactory.Instance.GetObjectFromPool();
+            _bullet.transform.position = transform.position;
+            _timer = _cooldown;
         }
-        timer -= Time.deltaTime;
+        _timer -= Time.deltaTime;
 
     }
 
