@@ -1,33 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] Transform _game;
 
-    public bool Pause;
 
-    // Update is called once per frame
     private void Start()
     {
         ScreenManagerDefault.Instance.Push(new ScreenGameplay(_game));
+        SaveManager.Save();
+
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !Pause)
+        if (Input.GetKeyDown(KeyCode.Escape) && ScreenManagerDefault.Instance.ScreenCount == 1)
         {
             var screenPause = Instantiate(Resources.Load<ScreenPause>("Canvas Pause"));
             ScreenManagerDefault.Instance.Push(screenPause);
-            Pause = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && Pause)
+        else if (Input.GetKeyDown(KeyCode.Escape) && ScreenManagerDefault.Instance.ScreenCount>1)
         {
-            Pause = false;
             ScreenManagerDefault.Instance.Pop();
         }
     }

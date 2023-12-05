@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +8,7 @@ public class ScreenPause : MonoBehaviour, IScreen
     private void Awake()
     {
         _buttons = GetComponentsInChildren<Button>();
-        //ActivateButtons(false);
-        //Time.timeScale = 0;
+        ActivateButtons(false);
     }
 
     void ActivateButtons(bool enable)
@@ -49,7 +46,6 @@ public class ScreenPause : MonoBehaviour, IScreen
 
     public void Free()
     {
-        //Time.timeScale = 1;
         Destroy(gameObject);
     }
 }

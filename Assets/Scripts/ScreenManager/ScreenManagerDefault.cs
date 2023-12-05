@@ -7,7 +7,7 @@ public class ScreenManagerDefault : MonoBehaviour
     public static ScreenManagerDefault Instance { get; private set; }
 
     Stack<IScreen> _screenStack;
-
+    public int ScreenCount { get => _screenStack.Count ;}
     private void Awake()
     {
         Instance = this;

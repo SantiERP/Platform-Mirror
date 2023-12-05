@@ -24,7 +24,7 @@ public class ScreenGameplay : IScreen
 
         foreach (var pair in _beforeActivation)
         {
-            pair.Key.enabled = pair.Value;
+            if(pair.Key !=null)pair.Key.enabled = pair.Value;
         }
         foreach (var rig in _root.GetComponentsInChildren<Rigidbody>())
         {

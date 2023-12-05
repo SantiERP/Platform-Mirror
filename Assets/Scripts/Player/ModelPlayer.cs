@@ -37,7 +37,7 @@ public class ModelPlayer : Player , IMementeable
         EventManager.SubscribeToEvent(EventManager.EventsType.Event_Restart, LoadLastPos);
 
         SaveManager.AddToSaveManager(this);
-        SaveManager.Save();
+        //SaveManager.Save();
     }
 
     void LoadLastPos(object[] parameters)

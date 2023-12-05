@@ -12,8 +12,7 @@ public class ScreenVolumeSetting : MonoBehaviour, IScreen
     private void Awake()
     {
         _buttons = GetComponentsInChildren<Button>();
-        //ActivateButtons(false);
-        //Time.timeScale = 0;
+        ActivateButtons(false);
     }
 
     void ActivateButtons(bool enable)
