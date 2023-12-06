@@ -9,6 +9,19 @@ public class VisualPlayer : MonoBehaviour
     [SerializeField] AudioClip _jump;
     [SerializeField] AudioClip _move;
 
+    public delegate void Action();
+
+    public Action Jump;
+    public static VisualPlayer Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+    private void Start()
+    {
+        Jump = VisualJump;
+    }
     public void VisualJump()
     {
         if(_audioSource.isPlaying)
@@ -20,7 +33,10 @@ public class VisualPlayer : MonoBehaviour
         _audioSource.Play();
         _particleSystem.Play();
     }
+    public void TinyJump()
+    {
 
+    } 
     public void VisualMove()
     {
         if (!_audioSource.isPlaying)

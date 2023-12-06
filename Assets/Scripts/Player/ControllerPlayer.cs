@@ -24,7 +24,7 @@ public class ControllerPlayer : IController
         if (Input.GetButtonDown("Jump"))
         {
             if(_player.TouchingTheFloor())
-            _visual.VisualJump();
+            _visual.Jump();
         }
     }
 
@@ -34,6 +34,10 @@ public class ControllerPlayer : IController
         {
             SaveManager.Remember();
             Debug.Log("Remembering");
+        }
+        if (Input.GetButtonUp("Jump"))
+        {
+            _player.StopJumping();
         }
     }
 }

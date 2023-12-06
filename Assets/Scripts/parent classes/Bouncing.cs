@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bouncing : MonoBehaviour
 {
+    public bool Small;
     Rigidbody _rb;
     Material _mat;
     [SerializeField] MeshRenderer _renderer;

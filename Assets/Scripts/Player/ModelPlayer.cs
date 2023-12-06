@@ -13,7 +13,11 @@ public class ModelPlayer : Player , IMementeable
     [SerializeField] float _coyoteTime = 0.1f;
     [SerializeField] float _howLongSinceITouchedTheFloor = 0;
 
-    [SerializeField] float _jumpStrength = 35;
+    float _jumpStrength;
+    [SerializeField] float _normalJumpStrength = 40;
+
+    public float JumpStrenght { get => _jumpStrength; set { Debug.Log(value); _jumpStrength = value; } }
+    public float NormalJump { get => _normalJumpStrength; }
 
     [Header("Stats Movimiento Aereo")]
     [SerializeField] float _airVelocity = 6;
@@ -37,7 +41,7 @@ public class ModelPlayer : Player , IMementeable
         EventManager.SubscribeToEvent(EventManager.EventsType.Event_Restart, LoadLastPos);
 
         SaveManager.AddToSaveManager(this);
-        //SaveManager.Save();
+        _jumpStrength = _normalJumpStrength;
     }
 
     void LoadLastPos(object[] parameters)
@@ -60,16 +64,16 @@ public class ModelPlayer : Player , IMementeable
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
         RaycastHit hit;
-        Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, out hit, 0.6F, layerMask);
+        Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, out hit, 0.6F * transform.localScale.y, layerMask);
         rig = hit.rigidbody;
-        return Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, 0.6F, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, 0.6F, layerMask, QueryTriggerInteraction.Ignore);
+        return Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, 0.6F*transform.localScale.y, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, 0.6F * transform.localScale.y, layerMask, QueryTriggerInteraction.Ignore);
     }
 
     public bool TouchingTheFloor()
     {
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
-        return Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, 0.6F, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, 0.6F, layerMask, QueryTriggerInteraction.Ignore);
+        return Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, 0.6F * transform.localScale.y, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, 0.6F * transform.localScale.y, layerMask, QueryTriggerInteraction.Ignore);
     }
 
     public bool TouchingTheWall(int direccion)
@@ -152,7 +156,10 @@ public class ModelPlayer : Player , IMementeable
         }
 
     }
-
+    public void StopJumping()
+    {
+        _timePressingJumpButton = 1;
+    }
     #region Remembering
     [SerializeField] public object[] Memories { get; set; }
 

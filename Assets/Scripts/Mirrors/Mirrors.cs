@@ -7,19 +7,18 @@ public abstract class Mirrors : MonoBehaviour
     [SerializeField] ParticleSystem _throwParticles;
     [SerializeField] AudioSource _audioSource;
 
-    public abstract void Skill();
+    public abstract void Skill(Bouncing b);
     public static float TimeSpeed = 0.01f;
-
+    
     public void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<Bouncing>(out Bouncing bounceable))
         {
-            StartCoroutine(CharacterEntrance(bounceable.transform.position, bounceable.Rig));
+            StartCoroutine(CharacterEntrance(bounceable.transform.position, bounceable.Rig, bounceable));
         }
-
     }
     
-    IEnumerator CharacterEntrance(Vector3 intialPos, Rigidbody rig)
+    IEnumerator CharacterEntrance(Vector3 intialPos, Rigidbody rig, Bouncing b)
     {
         AudioSource newAudio = null;
         if (_audioSource.isPlaying)
@@ -82,8 +81,8 @@ public abstract class Mirrors : MonoBehaviour
             Destroy(newAudio);
         }
 
-        box.enabled = true;        
-        Skill();
+        box.enabled = true;
+        Skill(b);
         Throw(dir, rig);
     }
 
