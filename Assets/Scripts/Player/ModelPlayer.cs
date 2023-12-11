@@ -18,7 +18,8 @@ public class ModelPlayer : Player , IMementeable
 
     public float JumpStrenght { get => _jumpStrength; set { Debug.Log(value); _jumpStrength = value; } }
     public float NormalJump { get => _normalJumpStrength; }
-
+    [SerializeField] float _gravityMultiplier;
+    public float GravityMultiplier { get => _gravityMultiplier; set { _gravityMultiplier = value; } }
     [Header("Stats Movimiento Aereo")]
     [SerializeField] float _airVelocity = 6;
     [SerializeField] AnimationCurve _importanceCurveOfPressingJumpButton;
@@ -96,7 +97,7 @@ public class ModelPlayer : Player , IMementeable
             //if I was floating for long enought, gravity starts to afect me
             if (_howLongSinceITouchedTheFloor > _coyoteTime)
             {
-                Rig.AddForce(Physics.gravity, ForceMode.Acceleration);
+                Rig.AddForce(Physics.gravity * _gravityMultiplier, ForceMode.Acceleration);
             }
             if (!TouchingTheWall((int)(horizontal)))
             {

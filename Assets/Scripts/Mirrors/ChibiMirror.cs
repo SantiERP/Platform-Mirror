@@ -16,6 +16,7 @@ public class ChibiMirror : Mirrors
             { 
                 model.JumpStrenght = model.NormalJump;
                 visualPlayer.Jump = delegate { visualPlayer.VisualJump(); };
+                model.GravityMultiplier = 1;
             }
         }
         else
@@ -24,6 +25,7 @@ public class ChibiMirror : Mirrors
             if (model) 
             { 
                 model.JumpStrenght = 0;
+                model.GravityMultiplier = 0.5f;
                 visualPlayer.Jump = delegate { visualPlayer.TinyJump(); };
             }
         }

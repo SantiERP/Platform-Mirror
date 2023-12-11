@@ -19,13 +19,13 @@ public class Door : MonoBehaviour
         _desiredPosition = _normalPosition;
         _activationButton.ButtonAction += WhatToDo;
         _activationButton.ButtonAntiAction += WhatToDont;
-        _rig = GetComponent<Rigidbody>();
+        //_rig = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
-    private void FixedUpdate()
+    private void Update()
     {
-        _rig.MovePosition(Vector3.Lerp(transform.position, _desiredPosition, _doorVelocity));
+        transform.position=Vector3.Lerp(transform.position, _desiredPosition, _doorVelocity);
 
     }
 
