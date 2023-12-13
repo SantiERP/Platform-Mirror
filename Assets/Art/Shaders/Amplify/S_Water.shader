@@ -6,6 +6,7 @@ Shader "S_Water"
 	{
 		_Amplitude("Amplitude", Float) = 0.5
 		_Scale("Scale", Float) = 12.73
+		_Color0("Color 0", Color) = (0,0.8398378,1,0.4901961)
 
 		//_TransmissionShadow( "Transmission Shadow", Range( 0, 1 ) ) = 0.5
 		//_TransStrength( "Trans Strength", Range( 0, 50 ) ) = 1
@@ -152,6 +153,8 @@ Shader "S_Water"
 			Blend SrcAlpha OneMinusSrcAlpha
 
 			CGPROGRAM
+			#define _ALPHABLEND_ON 1
+			#define UNITY_STANDARD_USE_DITHER_MASK 1
 			#define ASE_NEEDS_FRAG_SHADOWCOORDS
 			#pragma multi_compile_instancing
 			#pragma multi_compile __ LOD_FADE_CROSSFADE
@@ -162,8 +165,6 @@ Shader "S_Water"
 			#pragma hull HullFunction
 			#pragma domain DomainFunction
 			#define ASE_FIXED_TESSELLATION
-			#define _ALPHABLEND_ON 1
-			#define UNITY_STANDARD_USE_DITHER_MASK 1
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -187,6 +188,7 @@ Shader "S_Water"
 			#include "UnityPBSLighting.cginc"
 			#include "AutoLight.cginc"
 
+			#define ASE_NEEDS_FRAG_WORLD_POSITION
 			#define ASE_NEEDS_FRAG_NORMAL
 
 			struct appdata {
@@ -255,6 +257,7 @@ Shader "S_Water"
 			#endif
 			uniform float _Scale;
 			uniform float _Amplitude;
+			uniform float4 _Color0;
 
 
 					float2 voronoihash14( float2 p )
@@ -290,6 +293,72 @@ Shader "S_Water"
 						return F1;
 					}
 			
+					float2 voronoihash54( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi54( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash54( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return (F2 + F1) * 0.5;
+					}
+			
+					float2 voronoihash60( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi60( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash60( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return (F2 + F1) * 0.5;
+					}
+			
 
 			v2f VertexFunction (appdata v  ) {
 				UNITY_SETUP_INSTANCE_ID(v);
@@ -303,7 +372,8 @@ Shader "S_Water"
 				float3 ase_worldPos = mul(unity_ObjectToWorld, float4( (v.vertex).xyz, 1 )).xyz;
 				float mulTime19 = _Time.y * 0.5;
 				float4 appendResult18 = (float4(mulTime19 , 0.0 , 0.0 , 0.0));
-				float2 coords14 = (ase_worldPos*1.0 + appendResult18.xyz).xy * _Scale;
+				float3 temp_output_31_0 = (ase_worldPos*1.0 + appendResult18.xyz);
+				float2 coords14 = temp_output_31_0.xy * _Scale;
 				float2 id14 = 0;
 				float2 uv14 = 0;
 				float voroi14 = voronoi14( coords14, time14, id14, uv14, 0, voronoiSmoothId14 );
@@ -493,9 +563,44 @@ Shader "S_Water"
 				float4 ScreenPos = IN.screenPos;
 				#endif
 
-				float4 color35 = IsGammaSpace() ? float4(0,0.8398378,1,0) : float4(0,0.6735665,1,0);
+				float4 color59 = IsGammaSpace() ? float4(0.4705882,0.4117647,0.1568628,0.7843137) : float4(0.1878208,0.1412633,0.02121901,0.7843137);
+				float time54 = 0.0;
+				float2 voronoiSmoothId54 = 0;
+				float mulTime19 = _Time.y * 0.5;
+				float4 appendResult18 = (float4(mulTime19 , 0.0 , 0.0 , 0.0));
+				float3 temp_output_31_0 = (worldPos*1.0 + appendResult18.xyz);
+				float2 coords54 = temp_output_31_0.xy * 1.84;
+				float2 id54 = 0;
+				float2 uv54 = 0;
+				float fade54 = 0.5;
+				float voroi54 = 0;
+				float rest54 = 0;
+				for( int it54 = 0; it54 <2; it54++ ){
+				voroi54 += fade54 * voronoi54( coords54, time54, id54, uv54, 0,voronoiSmoothId54 );
+				rest54 += fade54;
+				coords54 *= 2;
+				fade54 *= 0.5;
+				}//Voronoi54
+				voroi54 /= rest54;
+				float time60 = 0.0;
+				float2 voronoiSmoothId60 = 0;
+				float mulTime65 = _Time.y * 1.5;
+				float2 coords60 = (worldPos*1.0 + mulTime65).xy * 1.0;
+				float2 id60 = 0;
+				float2 uv60 = 0;
+				float fade60 = 0.5;
+				float voroi60 = 0;
+				float rest60 = 0;
+				for( int it60 = 0; it60 <2; it60++ ){
+				voroi60 += fade60 * voronoi60( coords60, time60, id60, uv60, 0,voronoiSmoothId60 );
+				rest60 += fade60;
+				coords60 *= 2;
+				fade60 *= 0.5;
+				}//Voronoi60
+				voroi60 /= rest60;
+				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
-				o.Albedo = color35.rgb;
+				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
 				#if defined(_SPECULAR_SETUP)
@@ -505,7 +610,7 @@ Shader "S_Water"
 				#endif
 				o.Smoothness = 0;
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( 0.5 - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 				float3 BakedGI = 0;
@@ -655,6 +760,8 @@ Shader "S_Water"
 			Blend SrcAlpha One
 
 			CGPROGRAM
+			#define _ALPHABLEND_ON 1
+			#define UNITY_STANDARD_USE_DITHER_MASK 1
 			#define ASE_NEEDS_FRAG_SHADOWCOORDS
 			#pragma multi_compile_instancing
 			#pragma multi_compile __ LOD_FADE_CROSSFADE
@@ -665,8 +772,6 @@ Shader "S_Water"
 			#pragma hull HullFunction
 			#pragma domain DomainFunction
 			#define ASE_FIXED_TESSELLATION
-			#define _ALPHABLEND_ON 1
-			#define UNITY_STANDARD_USE_DITHER_MASK 1
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -691,6 +796,7 @@ Shader "S_Water"
 			#include "UnityPBSLighting.cginc"
 			#include "AutoLight.cginc"
 
+			#define ASE_NEEDS_FRAG_WORLD_POSITION
 			#define ASE_NEEDS_FRAG_NORMAL
 
 			struct appdata {
@@ -752,6 +858,7 @@ Shader "S_Water"
 			#endif
 			uniform float _Scale;
 			uniform float _Amplitude;
+			uniform float4 _Color0;
 
 
 					float2 voronoihash14( float2 p )
@@ -787,6 +894,72 @@ Shader "S_Water"
 						return F1;
 					}
 			
+					float2 voronoihash54( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi54( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash54( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return (F2 + F1) * 0.5;
+					}
+			
+					float2 voronoihash60( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi60( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash60( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return (F2 + F1) * 0.5;
+					}
+			
 
 			v2f VertexFunction (appdata v  ) {
 				UNITY_SETUP_INSTANCE_ID(v);
@@ -800,7 +973,8 @@ Shader "S_Water"
 				float3 ase_worldPos = mul(unity_ObjectToWorld, float4( (v.vertex).xyz, 1 )).xyz;
 				float mulTime19 = _Time.y * 0.5;
 				float4 appendResult18 = (float4(mulTime19 , 0.0 , 0.0 , 0.0));
-				float2 coords14 = (ase_worldPos*1.0 + appendResult18.xyz).xy * _Scale;
+				float3 temp_output_31_0 = (ase_worldPos*1.0 + appendResult18.xyz);
+				float2 coords14 = temp_output_31_0.xy * _Scale;
 				float2 id14 = 0;
 				float2 uv14 = 0;
 				float voroi14 = voronoi14( coords14, time14, id14, uv14, 0, voronoiSmoothId14 );
@@ -971,9 +1145,44 @@ Shader "S_Water"
 				#endif
 
 
-				float4 color35 = IsGammaSpace() ? float4(0,0.8398378,1,0) : float4(0,0.6735665,1,0);
+				float4 color59 = IsGammaSpace() ? float4(0.4705882,0.4117647,0.1568628,0.7843137) : float4(0.1878208,0.1412633,0.02121901,0.7843137);
+				float time54 = 0.0;
+				float2 voronoiSmoothId54 = 0;
+				float mulTime19 = _Time.y * 0.5;
+				float4 appendResult18 = (float4(mulTime19 , 0.0 , 0.0 , 0.0));
+				float3 temp_output_31_0 = (worldPos*1.0 + appendResult18.xyz);
+				float2 coords54 = temp_output_31_0.xy * 1.84;
+				float2 id54 = 0;
+				float2 uv54 = 0;
+				float fade54 = 0.5;
+				float voroi54 = 0;
+				float rest54 = 0;
+				for( int it54 = 0; it54 <2; it54++ ){
+				voroi54 += fade54 * voronoi54( coords54, time54, id54, uv54, 0,voronoiSmoothId54 );
+				rest54 += fade54;
+				coords54 *= 2;
+				fade54 *= 0.5;
+				}//Voronoi54
+				voroi54 /= rest54;
+				float time60 = 0.0;
+				float2 voronoiSmoothId60 = 0;
+				float mulTime65 = _Time.y * 1.5;
+				float2 coords60 = (worldPos*1.0 + mulTime65).xy * 1.0;
+				float2 id60 = 0;
+				float2 uv60 = 0;
+				float fade60 = 0.5;
+				float voroi60 = 0;
+				float rest60 = 0;
+				for( int it60 = 0; it60 <2; it60++ ){
+				voroi60 += fade60 * voronoi60( coords60, time60, id60, uv60, 0,voronoiSmoothId60 );
+				rest60 += fade60;
+				coords60 *= 2;
+				fade60 *= 0.5;
+				}//Voronoi60
+				voroi60 /= rest60;
+				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
-				o.Albedo = color35.rgb;
+				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
 				#if defined(_SPECULAR_SETUP)
@@ -983,7 +1192,7 @@ Shader "S_Water"
 				#endif
 				o.Smoothness = 0;
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( 0.5 - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float3 Transmission = 1;
 				float3 Translucency = 1;
@@ -1085,6 +1294,8 @@ Shader "S_Water"
 			AlphaToMask Off
 
 			CGPROGRAM
+			#define _ALPHABLEND_ON 1
+			#define UNITY_STANDARD_USE_DITHER_MASK 1
 			#define ASE_NEEDS_FRAG_SHADOWCOORDS
 			#pragma multi_compile_instancing
 			#pragma multi_compile __ LOD_FADE_CROSSFADE
@@ -1095,8 +1306,6 @@ Shader "S_Water"
 			#pragma hull HullFunction
 			#pragma domain DomainFunction
 			#define ASE_FIXED_TESSELLATION
-			#define _ALPHABLEND_ON 1
-			#define UNITY_STANDARD_USE_DITHER_MASK 1
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -1121,6 +1330,7 @@ Shader "S_Water"
 			#include "Lighting.cginc"
 			#include "UnityPBSLighting.cginc"
 
+			#define ASE_NEEDS_FRAG_WORLD_POSITION
 			#define ASE_NEEDS_FRAG_NORMAL
 
 			struct appdata {
@@ -1171,6 +1381,7 @@ Shader "S_Water"
 			#endif
 			uniform float _Scale;
 			uniform float _Amplitude;
+			uniform float4 _Color0;
 
 
 					float2 voronoihash14( float2 p )
@@ -1206,6 +1417,72 @@ Shader "S_Water"
 						return F1;
 					}
 			
+					float2 voronoihash54( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi54( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash54( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return (F2 + F1) * 0.5;
+					}
+			
+					float2 voronoihash60( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi60( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash60( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return (F2 + F1) * 0.5;
+					}
+			
 
 			v2f VertexFunction (appdata v  ) {
 				UNITY_SETUP_INSTANCE_ID(v);
@@ -1219,7 +1496,8 @@ Shader "S_Water"
 				float3 ase_worldPos = mul(unity_ObjectToWorld, float4( (v.vertex).xyz, 1 )).xyz;
 				float mulTime19 = _Time.y * 0.5;
 				float4 appendResult18 = (float4(mulTime19 , 0.0 , 0.0 , 0.0));
-				float2 coords14 = (ase_worldPos*1.0 + appendResult18.xyz).xy * _Scale;
+				float3 temp_output_31_0 = (ase_worldPos*1.0 + appendResult18.xyz);
+				float2 coords14 = temp_output_31_0.xy * _Scale;
 				float2 id14 = 0;
 				float2 uv14 = 0;
 				float voroi14 = voronoi14( coords14, time14, id14, uv14, 0, voronoiSmoothId14 );
@@ -1391,9 +1669,44 @@ Shader "S_Water"
 				float3 worldViewDir = normalize(UnityWorldSpaceViewDir(worldPos));
 				half atten = 1;
 
-				float4 color35 = IsGammaSpace() ? float4(0,0.8398378,1,0) : float4(0,0.6735665,1,0);
+				float4 color59 = IsGammaSpace() ? float4(0.4705882,0.4117647,0.1568628,0.7843137) : float4(0.1878208,0.1412633,0.02121901,0.7843137);
+				float time54 = 0.0;
+				float2 voronoiSmoothId54 = 0;
+				float mulTime19 = _Time.y * 0.5;
+				float4 appendResult18 = (float4(mulTime19 , 0.0 , 0.0 , 0.0));
+				float3 temp_output_31_0 = (worldPos*1.0 + appendResult18.xyz);
+				float2 coords54 = temp_output_31_0.xy * 1.84;
+				float2 id54 = 0;
+				float2 uv54 = 0;
+				float fade54 = 0.5;
+				float voroi54 = 0;
+				float rest54 = 0;
+				for( int it54 = 0; it54 <2; it54++ ){
+				voroi54 += fade54 * voronoi54( coords54, time54, id54, uv54, 0,voronoiSmoothId54 );
+				rest54 += fade54;
+				coords54 *= 2;
+				fade54 *= 0.5;
+				}//Voronoi54
+				voroi54 /= rest54;
+				float time60 = 0.0;
+				float2 voronoiSmoothId60 = 0;
+				float mulTime65 = _Time.y * 1.5;
+				float2 coords60 = (worldPos*1.0 + mulTime65).xy * 1.0;
+				float2 id60 = 0;
+				float2 uv60 = 0;
+				float fade60 = 0.5;
+				float voroi60 = 0;
+				float rest60 = 0;
+				for( int it60 = 0; it60 <2; it60++ ){
+				voroi60 += fade60 * voronoi60( coords60, time60, id60, uv60, 0,voronoiSmoothId60 );
+				rest60 += fade60;
+				coords60 *= 2;
+				fade60 *= 0.5;
+				}//Voronoi60
+				voroi60 /= rest60;
+				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
-				o.Albedo = color35.rgb;
+				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
 				#if defined(_SPECULAR_SETUP)
@@ -1403,7 +1716,7 @@ Shader "S_Water"
 				#endif
 				o.Smoothness = 0;
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( 0.5 - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float3 BakedGI = 0;
 
@@ -1503,6 +1816,8 @@ Shader "S_Water"
 			Cull Off
 
 			CGPROGRAM
+			#define _ALPHABLEND_ON 1
+			#define UNITY_STANDARD_USE_DITHER_MASK 1
 			#define ASE_NEEDS_FRAG_SHADOWCOORDS
 			#pragma multi_compile_instancing
 			#pragma multi_compile __ LOD_FADE_CROSSFADE
@@ -1513,8 +1828,6 @@ Shader "S_Water"
 			#pragma hull HullFunction
 			#pragma domain DomainFunction
 			#define ASE_FIXED_TESSELLATION
-			#define _ALPHABLEND_ON 1
-			#define UNITY_STANDARD_USE_DITHER_MASK 1
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -1560,6 +1873,7 @@ Shader "S_Water"
 					float2 vizUV : TEXCOORD1;
 					float4 lightCoord : TEXCOORD2;
 				#endif
+				float4 ase_texcoord3 : TEXCOORD3;
 				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
@@ -1575,6 +1889,7 @@ Shader "S_Water"
 			#endif
 			uniform float _Scale;
 			uniform float _Amplitude;
+			uniform float4 _Color0;
 
 
 					float2 voronoihash14( float2 p )
@@ -1610,6 +1925,72 @@ Shader "S_Water"
 						return F1;
 					}
 			
+					float2 voronoihash54( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi54( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash54( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return (F2 + F1) * 0.5;
+					}
+			
+					float2 voronoihash60( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi60( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash60( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return (F2 + F1) * 0.5;
+					}
+			
 
 			v2f VertexFunction (appdata v  ) {
 				UNITY_SETUP_INSTANCE_ID(v);
@@ -1623,13 +2004,19 @@ Shader "S_Water"
 				float3 ase_worldPos = mul(unity_ObjectToWorld, float4( (v.vertex).xyz, 1 )).xyz;
 				float mulTime19 = _Time.y * 0.5;
 				float4 appendResult18 = (float4(mulTime19 , 0.0 , 0.0 , 0.0));
-				float2 coords14 = (ase_worldPos*1.0 + appendResult18.xyz).xy * _Scale;
+				float3 temp_output_31_0 = (ase_worldPos*1.0 + appendResult18.xyz);
+				float2 coords14 = temp_output_31_0.xy * _Scale;
 				float2 id14 = 0;
 				float2 uv14 = 0;
 				float voroi14 = voronoi14( coords14, time14, id14, uv14, 0, voronoiSmoothId14 );
 				float4 appendResult8 = (float4(0.0 , ( voroi14 * _Amplitude ) , 0.0 , 0.0));
 				
+				o.ase_texcoord3.xyz = ase_worldPos;
+				
 				o.ase_normal = v.normal;
+				
+				//setting value to unused interpolator channels and avoid initialization warnings
+				o.ase_texcoord3.w = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -1768,12 +2155,48 @@ Shader "S_Water"
 					SurfaceOutputStandard o = (SurfaceOutputStandard)0;
 				#endif
 
-				float4 color35 = IsGammaSpace() ? float4(0,0.8398378,1,0) : float4(0,0.6735665,1,0);
+				float4 color59 = IsGammaSpace() ? float4(0.4705882,0.4117647,0.1568628,0.7843137) : float4(0.1878208,0.1412633,0.02121901,0.7843137);
+				float time54 = 0.0;
+				float2 voronoiSmoothId54 = 0;
+				float3 ase_worldPos = IN.ase_texcoord3.xyz;
+				float mulTime19 = _Time.y * 0.5;
+				float4 appendResult18 = (float4(mulTime19 , 0.0 , 0.0 , 0.0));
+				float3 temp_output_31_0 = (ase_worldPos*1.0 + appendResult18.xyz);
+				float2 coords54 = temp_output_31_0.xy * 1.84;
+				float2 id54 = 0;
+				float2 uv54 = 0;
+				float fade54 = 0.5;
+				float voroi54 = 0;
+				float rest54 = 0;
+				for( int it54 = 0; it54 <2; it54++ ){
+				voroi54 += fade54 * voronoi54( coords54, time54, id54, uv54, 0,voronoiSmoothId54 );
+				rest54 += fade54;
+				coords54 *= 2;
+				fade54 *= 0.5;
+				}//Voronoi54
+				voroi54 /= rest54;
+				float time60 = 0.0;
+				float2 voronoiSmoothId60 = 0;
+				float mulTime65 = _Time.y * 1.5;
+				float2 coords60 = (ase_worldPos*1.0 + mulTime65).xy * 1.0;
+				float2 id60 = 0;
+				float2 uv60 = 0;
+				float fade60 = 0.5;
+				float voroi60 = 0;
+				float rest60 = 0;
+				for( int it60 = 0; it60 <2; it60++ ){
+				voroi60 += fade60 * voronoi60( coords60, time60, id60, uv60, 0,voronoiSmoothId60 );
+				rest60 += fade60;
+				coords60 *= 2;
+				fade60 *= 0.5;
+				}//Voronoi60
+				voroi60 /= rest60;
+				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
-				o.Albedo = color35.rgb;
+				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
-				o.Alpha = saturate( ( 0.5 - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 
 				#ifdef _ALPHATEST_ON
@@ -1808,6 +2231,8 @@ Shader "S_Water"
 			AlphaToMask Off
 
 			CGPROGRAM
+			#define _ALPHABLEND_ON 1
+			#define UNITY_STANDARD_USE_DITHER_MASK 1
 			#define ASE_NEEDS_FRAG_SHADOWCOORDS
 			#pragma multi_compile_instancing
 			#pragma multi_compile __ LOD_FADE_CROSSFADE
@@ -1818,8 +2243,6 @@ Shader "S_Water"
 			#pragma hull HullFunction
 			#pragma domain DomainFunction
 			#define ASE_FIXED_TESSELLATION
-			#define _ALPHABLEND_ON 1
-			#define UNITY_STANDARD_USE_DITHER_MASK 1
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -1860,6 +2283,7 @@ Shader "S_Water"
 
 			struct v2f {
 				V2F_SHADOW_CASTER;
+				float4 ase_texcoord2 : TEXCOORD2;
 				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
@@ -1878,6 +2302,7 @@ Shader "S_Water"
 			#endif
 			uniform float _Scale;
 			uniform float _Amplitude;
+			uniform float4 _Color0;
 
 
 					float2 voronoihash14( float2 p )
@@ -1913,6 +2338,72 @@ Shader "S_Water"
 						return F1;
 					}
 			
+					float2 voronoihash54( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi54( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash54( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return (F2 + F1) * 0.5;
+					}
+			
+					float2 voronoihash60( float2 p )
+					{
+						
+						p = float2( dot( p, float2( 127.1, 311.7 ) ), dot( p, float2( 269.5, 183.3 ) ) );
+						return frac( sin( p ) *43758.5453);
+					}
+			
+					float voronoi60( float2 v, float time, inout float2 id, inout float2 mr, float smoothness, inout float2 smoothId )
+					{
+						float2 n = floor( v );
+						float2 f = frac( v );
+						float F1 = 8.0;
+						float F2 = 8.0; float2 mg = 0;
+						for ( int j = -1; j <= 1; j++ )
+						{
+							for ( int i = -1; i <= 1; i++ )
+						 	{
+						 		float2 g = float2( i, j );
+						 		float2 o = voronoihash60( n + g );
+								o = ( sin( time + o * 6.2831 ) * 0.5 + 0.5 ); float2 r = f - g - o;
+								float d = 0.5 * dot( r, r );
+						 		if( d<F1 ) {
+						 			F2 = F1;
+						 			F1 = d; mg = g; mr = r; id = o;
+						 		} else if( d<F2 ) {
+						 			F2 = d;
+						
+						 		}
+						 	}
+						}
+						return (F2 + F1) * 0.5;
+					}
+			
 
 			v2f VertexFunction (appdata v  ) {
 				UNITY_SETUP_INSTANCE_ID(v);
@@ -1926,13 +2417,19 @@ Shader "S_Water"
 				float3 ase_worldPos = mul(unity_ObjectToWorld, float4( (v.vertex).xyz, 1 )).xyz;
 				float mulTime19 = _Time.y * 0.5;
 				float4 appendResult18 = (float4(mulTime19 , 0.0 , 0.0 , 0.0));
-				float2 coords14 = (ase_worldPos*1.0 + appendResult18.xyz).xy * _Scale;
+				float3 temp_output_31_0 = (ase_worldPos*1.0 + appendResult18.xyz);
+				float2 coords14 = temp_output_31_0.xy * _Scale;
 				float2 id14 = 0;
 				float2 uv14 = 0;
 				float voroi14 = voronoi14( coords14, time14, id14, uv14, 0, voronoiSmoothId14 );
 				float4 appendResult8 = (float4(0.0 , ( voroi14 * _Amplitude ) , 0.0 , 0.0));
 				
+				o.ase_texcoord2.xyz = ase_worldPos;
+				
 				o.ase_normal = v.normal;
+				
+				//setting value to unused interpolator channels and avoid initialization warnings
+				o.ase_texcoord2.w = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -2061,10 +2558,47 @@ Shader "S_Water"
 					SurfaceOutputStandard o = (SurfaceOutputStandard)0;
 				#endif
 
+				float4 color59 = IsGammaSpace() ? float4(0.4705882,0.4117647,0.1568628,0.7843137) : float4(0.1878208,0.1412633,0.02121901,0.7843137);
+				float time54 = 0.0;
+				float2 voronoiSmoothId54 = 0;
+				float3 ase_worldPos = IN.ase_texcoord2.xyz;
+				float mulTime19 = _Time.y * 0.5;
+				float4 appendResult18 = (float4(mulTime19 , 0.0 , 0.0 , 0.0));
+				float3 temp_output_31_0 = (ase_worldPos*1.0 + appendResult18.xyz);
+				float2 coords54 = temp_output_31_0.xy * 1.84;
+				float2 id54 = 0;
+				float2 uv54 = 0;
+				float fade54 = 0.5;
+				float voroi54 = 0;
+				float rest54 = 0;
+				for( int it54 = 0; it54 <2; it54++ ){
+				voroi54 += fade54 * voronoi54( coords54, time54, id54, uv54, 0,voronoiSmoothId54 );
+				rest54 += fade54;
+				coords54 *= 2;
+				fade54 *= 0.5;
+				}//Voronoi54
+				voroi54 /= rest54;
+				float time60 = 0.0;
+				float2 voronoiSmoothId60 = 0;
+				float mulTime65 = _Time.y * 1.5;
+				float2 coords60 = (ase_worldPos*1.0 + mulTime65).xy * 1.0;
+				float2 id60 = 0;
+				float2 uv60 = 0;
+				float fade60 = 0.5;
+				float voroi60 = 0;
+				float rest60 = 0;
+				for( int it60 = 0; it60 <2; it60++ ){
+				voroi60 += fade60 * voronoi60( coords60, time60, id60, uv60, 0,voronoiSmoothId60 );
+				rest60 += fade60;
+				coords60 *= 2;
+				fade60 *= 0.5;
+				}//Voronoi60
+				voroi60 /= rest60;
+				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( 0.5 - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 
@@ -2106,49 +2640,54 @@ Shader "S_Water"
 }
 /*ASEBEGIN
 Version=19103
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;0,0;Float;False;False;-1;2;ASEMaterialInspector;0;1;New Amplify Shader;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;ExtraPrePass;0;0;ExtraPrePass;6;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;False;True;3;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=ForwardBase;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;ASEMaterialInspector;0;1;New Amplify Shader;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;ForwardAdd;0;2;ForwardAdd;0;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;False;True;3;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;True;4;5;False;;1;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;True;1;LightMode=ForwardAdd;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;ASEMaterialInspector;0;1;New Amplify Shader;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;Deferred;0;3;Deferred;0;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;False;True;3;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Deferred;True;2;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;4;0,0;Float;False;False;-1;2;ASEMaterialInspector;0;1;New Amplify Shader;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;Meta;0;4;Meta;0;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;False;True;3;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;5;0,0;Float;False;False;-1;2;ASEMaterialInspector;0;1;New Amplify Shader;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;ShadowCaster;0;5;ShadowCaster;0;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;False;True;3;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=ShadowCaster;False;False;0;;0;0;Standard;0;False;0
-Node;AmplifyShaderEditor.RangedFloatNode;20;-1493.756,157.575;Inherit;False;Constant;_Float1;Float 1;0;0;Create;True;0;0;0;False;0;False;0.5;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;22;-323.4075,344.4108;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;23;-467.4075,502.4108;Inherit;False;Property;_Amplitude;Amplitude;0;0;Create;True;0;0;0;False;0;False;0.5;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;15;-693.5812,286.298;Inherit;False;Property;_Scale;Scale;1;0;Create;True;0;0;0;False;0;False;12.73;12.73;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.DynamicAppendNode;8;-212.7911,166.6911;Inherit;True;FLOAT4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.SimpleTimeNode;19;-1302.756,162.575;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
-Node;AmplifyShaderEditor.ScaleAndOffsetNode;31;-997.6174,24.03078;Inherit;True;3;0;FLOAT3;0,0,0;False;1;FLOAT;1;False;2;FLOAT3;0,0,0;False;1;FLOAT3;0
-Node;AmplifyShaderEditor.DynamicAppendNode;18;-1125.17,147.0184;Inherit;False;FLOAT4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.WorldPosInputsNode;32;-1252.51,0.4200883;Inherit;False;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.VoronoiNode;14;-512.0042,242.6152;Inherit;True;0;0;1;0;1;False;1;False;False;False;4;0;FLOAT2;0,0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;0;False;3;FLOAT;0;FLOAT2;1;FLOAT2;2
-Node;AmplifyShaderEditor.ColorNode;35;-274.8148,-158.5004;Inherit;False;Constant;_Color0;Color 0;2;0;Create;True;0;0;0;False;0;False;0,0.8398378,1,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;36;-182.7306,68.12155;Inherit;False;Constant;_Float0;Float 0;2;0;Create;True;0;0;0;False;0;False;0.5;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.NormalVertexDataNode;39;-251.6692,449.867;Inherit;True;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RangedFloatNode;41;-108.6936,629.8607;Inherit;False;Constant;_Float2;Float 2;2;0;Create;True;0;0;0;False;0;False;-0.9;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;46;9.203247,97.5188;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;302.0717,-34.0613;Float;False;True;-1;2;ASEMaterialInspector;0;4;S_Water;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;ForwardBase;0;1;ForwardBase;18;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;False;True;3;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;True;1;5;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=ForwardBase;False;False;0;;0;0;Standard;40;Workflow,InvertActionOnDeselection;1;0;Surface;1;638380217772393833;  Blend;0;0;  Refraction Model;0;0;  Dither Shadows;1;0;Two Sided;1;638380217638964345;Deferred Pass;1;0;Transmission;0;0;  Transmission Shadow;0.5,False,;0;Translucency;0;0;  Translucency Strength;1,False,;0;  Normal Distortion;0.5,False,;0;  Scattering;2,False,;0;  Direct;0.9,False,;0;  Ambient;0.1,False,;0;  Shadow;0.5,False,;0;Cast Shadows;1;0;  Use Shadow Threshold;0;0;Receive Shadows;1;0;GPU Instancing;1;0;LOD CrossFade;1;0;Built-in Fog;1;0;Ambient Light;1;0;Meta Pass;1;0;Add Pass;1;0;Override Baked GI;0;0;Extra Pre Pass;0;0;Tessellation;1;638380202418093074;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;638380211430213389;  Tess;32,False,;638380207714050521;  Min;10,False,;638380210899614585;  Max;500,False,;638380210959352385;  Edge Length;50,False,;638380211347171669;  Max Displacement;25,False,;0;Fwd Specular Highlights Toggle;0;0;Fwd Reflections Toggle;0;0;Disable Batching;0;0;Vertex Position,InvertActionOnDeselection;1;0;0;6;False;True;True;True;True;True;False;;False;0
-Node;AmplifyShaderEditor.SaturateNode;48;163.7579,176.2532;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.OneMinusNode;49;6.203125,802.8088;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.StepOpNode;40;87.3064,488.8607;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.StepOpNode;50;215.2032,757.6836;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;51;-18.07007,721.7338;Inherit;False;Constant;_Float3;Float 3;2;0;Create;True;0;0;0;False;0;False;0.9;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;52;431.2271,694.1038;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SaturateNode;47;319.7579,561.2533;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;36;-182.7306,68.12155;Inherit;False;Property;_Transparency;Transparency;3;0;Create;True;0;0;0;False;0;False;0.5;0.5;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.VoronoiNode;53;897.4824,614.0953;Inherit;False;0;0;1;0;1;False;1;False;False;False;4;0;FLOAT2;0,0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;0;False;3;FLOAT;0;FLOAT2;1;FLOAT2;2
+Node;AmplifyShaderEditor.RangedFloatNode;55;-215.1641,-414.3093;Inherit;False;Constant;_Float0;Float 0;4;0;Create;True;0;0;0;False;0;False;1.84;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;57;61.9521,-182.0667;Inherit;False;Constant;_Float4;Float 4;4;0;Create;True;0;0;0;False;0;False;0.01;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.LerpOp;58;150.4372,-74.29766;Inherit;False;3;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;2;FLOAT;0;False;1;COLOR;0
+Node;AmplifyShaderEditor.ColorNode;59;-160.4386,-125.5008;Inherit;False;Constant;_Color1;Color 1;4;0;Create;True;0;0;0;False;0;False;0.4705882,0.4117647,0.1568628,0.7843137;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;0,0;Float;False;False;-1;2;ASEMaterialInspector;0;4;New Amplify Shader;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;ExtraPrePass;0;0;ExtraPrePass;6;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;False;True;3;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;True;1;1;False;;0;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;True;True;0;False;;0;False;;True;1;LightMode=ForwardBase;False;False;0;;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;ASEMaterialInspector;0;4;New Amplify Shader;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;ForwardAdd;0;2;ForwardAdd;0;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;False;True;3;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;True;4;5;False;;1;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;True;1;LightMode=ForwardAdd;False;False;0;;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;3;0,0;Float;False;False;-1;2;ASEMaterialInspector;0;4;New Amplify Shader;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;Deferred;0;3;Deferred;0;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;False;True;3;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Deferred;True;2;False;0;;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;4;0,0;Float;False;False;-1;2;ASEMaterialInspector;0;4;New Amplify Shader;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;Meta;0;4;Meta;0;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;False;True;3;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=Meta;False;False;0;;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;5;0,0;Float;False;False;-1;2;ASEMaterialInspector;0;4;New Amplify Shader;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;ShadowCaster;0;5;ShadowCaster;0;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;1;False;;True;3;False;;False;True;3;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;False;;True;3;False;;False;True;1;LightMode=ShadowCaster;False;False;0;;0;0;Standard;0;False;0
+Node;AmplifyShaderEditor.ColorNode;35;-274.8148,-158.5004;Inherit;False;Property;_Color0;Color 0;2;0;Create;True;0;0;0;False;0;False;0,0.8398378,1,0.4901961;0,0.8398378,1,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.VoronoiNode;54;-53.15685,-434.4244;Inherit;True;0;0;1;3;2;False;1;False;False;False;4;0;FLOAT2;0,0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;0;False;3;FLOAT;0;FLOAT2;1;FLOAT2;2
+Node;AmplifyShaderEditor.VoronoiNode;60;-59.99442,-717.6319;Inherit;True;0;0;1;3;2;False;1;False;False;False;4;0;FLOAT2;0,0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;0;False;3;FLOAT;0;FLOAT2;1;FLOAT2;2
+Node;AmplifyShaderEditor.ScaleAndOffsetNode;31;-997.6174,24.03078;Inherit;True;3;0;FLOAT3;0,0,0;False;1;FLOAT;1;False;2;FLOAT3;0,0,0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.WorldPosInputsNode;32;-1252.51,0.4200883;Inherit;False;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.DynamicAppendNode;18;-1125.17,147.0184;Inherit;False;FLOAT4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
+Node;AmplifyShaderEditor.RangedFloatNode;20;-1493.756,157.575;Inherit;False;Constant;_Float1;Float 1;0;0;Create;True;0;0;0;False;0;False;0.5;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleTimeNode;19;-1302.756,162.575;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.ScaleAndOffsetNode;61;-412.0868,-753.5228;Inherit;True;3;0;FLOAT3;0,0,0;False;1;FLOAT;1;False;2;FLOAT;0;False;1;FLOAT3;0
+Node;AmplifyShaderEditor.WorldPosInputsNode;62;-666.9795,-777.1334;Inherit;False;0;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.RangedFloatNode;64;-908.2253,-619.9785;Inherit;False;Constant;_Float5;Float 1;0;0;Create;True;0;0;0;False;0;False;1.5;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleTimeNode;65;-717.2255,-614.9785;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
+Node;AmplifyShaderEditor.StepOpNode;56;344.2544,-438.0822;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleMultiplyOpNode;66;204.7134,-514.6484;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.SaturateNode;48;151.8258,108.638;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;427.3586,-10.19712;Float;False;True;-1;2;ASEMaterialInspector;0;4;S_Water;ed95fe726fd7b4644bb42f4d1ddd2bcd;True;ForwardBase;0;1;ForwardBase;18;False;True;0;1;False;;0;False;;0;1;False;;0;False;;True;0;False;;0;False;;False;False;False;False;False;False;False;False;False;True;0;False;;False;True;0;False;;False;True;True;True;True;True;0;False;;False;False;False;False;False;False;False;True;False;0;False;;255;False;;255;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;0;False;;False;True;2;False;;True;3;False;;False;True;3;RenderType=Transparent=RenderType;Queue=Transparent=Queue=0;DisableBatching=False=DisableBatching;True;2;False;0;False;True;1;5;False;;10;False;;0;1;False;;0;False;;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;LightMode=ForwardBase;False;False;0;;0;0;Standard;40;Workflow,InvertActionOnDeselection;1;0;Surface;1;638380217772393833;  Blend;0;0;  Refraction Model;0;0;  Dither Shadows;1;0;Two Sided;1;638380217638964345;Deferred Pass;1;0;Transmission;0;0;  Transmission Shadow;0.5,False,;0;Translucency;0;0;  Translucency Strength;1,False,;0;  Normal Distortion;0.5,False,;0;  Scattering;2,False,;0;  Direct;0.9,False,;0;  Ambient;0.1,False,;0;  Shadow;0.5,False,;0;Cast Shadows;1;0;  Use Shadow Threshold;0;0;Receive Shadows;1;0;GPU Instancing;1;0;LOD CrossFade;1;0;Built-in Fog;1;0;Ambient Light;1;0;Meta Pass;1;0;Add Pass;1;0;Override Baked GI;0;0;Extra Pre Pass;0;0;Tessellation;1;638380202418093074;  Phong;0;0;  Strength;0.5,False,;0;  Type;0;638380211430213389;  Tess;32,False,;638380207714050521;  Min;10,False,;638380210899614585;  Max;500,False,;638380210959352385;  Edge Length;50,False,;638380211347171669;  Max Displacement;25,False,;0;Fwd Specular Highlights Toggle;0;0;Fwd Reflections Toggle;0;0;Disable Batching;0;0;Vertex Position,InvertActionOnDeselection;1;0;0;6;False;True;True;True;True;True;False;;False;0
+Node;AmplifyShaderEditor.BreakToComponentsNode;67;-349.4808,6.547352;Inherit;False;COLOR;1;0;COLOR;0,0,0,0;False;16;FLOAT;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT;5;FLOAT;6;FLOAT;7;FLOAT;8;FLOAT;9;FLOAT;10;FLOAT;11;FLOAT;12;FLOAT;13;FLOAT;14;FLOAT;15
 WireConnection;22;0;14;0
 WireConnection;22;1;23;0
 WireConnection;8;1;22;0
-WireConnection;19;0;20;0
-WireConnection;31;0;32;0
-WireConnection;31;2;18;0
-WireConnection;18;0;19;0
 WireConnection;14;0;31;0
 WireConnection;14;2;15;0
-WireConnection;46;0;36;0
+WireConnection;46;0;67;3
 WireConnection;46;1;47;0
-WireConnection;1;0;35;0
-WireConnection;1;7;48;0
-WireConnection;1;15;8;0
-WireConnection;48;0;46;0
 WireConnection;40;0;39;1
 WireConnection;40;1;41;0
 WireConnection;50;0;51;0
@@ -2156,5 +2695,27 @@ WireConnection;50;1;39;1
 WireConnection;52;0;40;0
 WireConnection;52;1;50;0
 WireConnection;47;0;52;0
+WireConnection;58;0;35;0
+WireConnection;58;1;59;0
+WireConnection;58;2;56;0
+WireConnection;54;0;31;0
+WireConnection;54;2;55;0
+WireConnection;60;0;61;0
+WireConnection;31;0;32;0
+WireConnection;31;2;18;0
+WireConnection;18;0;19;0
+WireConnection;19;0;20;0
+WireConnection;61;0;62;0
+WireConnection;61;2;65;0
+WireConnection;65;0;64;0
+WireConnection;56;0;66;0
+WireConnection;56;1;57;0
+WireConnection;66;0;54;0
+WireConnection;66;1;60;0
+WireConnection;48;0;46;0
+WireConnection;1;0;58;0
+WireConnection;1;7;48;0
+WireConnection;1;15;8;0
+WireConnection;67;0;58;0
 ASEEND*/
-//CHKSM=EE00449B8BDA1E00B2313671871196A93BEB28E5
+//CHKSM=AD4352BBCDBCB2ACA216290AE639B7B518A7C4D7
