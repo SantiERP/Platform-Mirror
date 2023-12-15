@@ -27243,6 +27243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487ba2dcf90ecdd469b1a6fe7a884e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Small: 0
   _renderer: {fileID: 0}
   _matColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!54 &1203162321
@@ -33388,6 +33389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc0133ebfc52894e8d4f08730fef640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Small: 0
   _renderer: {fileID: 800986639}
   _matColor: {r: 0.06945181, g: 0, b: 1, a: 1}
   _onWhichAccelerationPointItsIn: 0
@@ -33418,7 +33420,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   _coyoteTime: 0.1
   _howLongSinceITouchedTheFloor: 0
-  _jumpStrength: 40
+  _normalJumpStrength: 35
+  _gravityMultiplier: 1
   _airVelocity: 6
   _importanceCurveOfPressingJumpButton:
     serializedVersion: 2
@@ -70863,7 +70866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3316430674732204508}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -69.5, y: 7.13, z: -10}
+  m_LocalPosition: {x: -69.5, y: 7.13, z: -4.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -70978,6 +70981,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487ba2dcf90ecdd469b1a6fe7a884e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Small: 0
   _renderer: {fileID: 0}
   _matColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!54 &3316430674986627136
@@ -71111,6 +71115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487ba2dcf90ecdd469b1a6fe7a884e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Small: 0
   _renderer: {fileID: 0}
   _matColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &3328594676536147199
@@ -118158,6 +118163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _activationButton: {fileID: 3662249588818214589}
   _whereDoIMoveTo: {x: 0, y: 10, z: 0}
+  _doorVelocity: 0.05
   _audioSource: {fileID: 3783846844737698843}
 --- !u!33 &8782877349237494581
 MeshFilter:
