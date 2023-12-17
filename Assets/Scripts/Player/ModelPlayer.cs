@@ -43,6 +43,7 @@ public class ModelPlayer : Player , IMementeable
 
         SaveManager.AddToSaveManager(this);
         _jumpStrength = _normalJumpStrength;
+        Debug.Log(_controller);
     }
 
     void LoadLastPos(object[] parameters)
