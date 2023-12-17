@@ -161,6 +161,8 @@ public class ModelPlayer : Player , IMementeable
     {
         _timePressingJumpButton = 1;
     }
+    
+    
     #region Remembering
     [SerializeField] public object[] Memories { get; set; }
 
@@ -171,6 +173,24 @@ public class ModelPlayer : Player , IMementeable
             transform.position = (Vector3)Memories[0];
             transform.rotation = (Quaternion)Memories[1];
             Physics.gravity = (Vector3)Memories[2];
+
+            //Si esta chibieado
+            if((bool)Memories[3])
+            {
+                transform.localScale = Vector3.one * 0.5f;
+                JumpStrenght = 0;
+                GravityMultiplier = 0.5f;
+                _visual.Jump = delegate { _visual.TinyJump(); };
+            }
+            else
+            {
+                transform.localScale = Vector3.one;
+                JumpStrenght = NormalJump;
+                _visual.Jump = delegate { _visual.VisualJump(); };
+                GravityMultiplier = 1;
+            }
+
+            Small = (bool)Memories[3];
         }
     }
     public void Forget()
@@ -179,7 +199,7 @@ public class ModelPlayer : Player , IMementeable
     }
     public void Save()
     {
-        Memories = new object[] { transform.position, transform.rotation , Physics.gravity};
+        Memories = new object[] { transform.position, transform.rotation , Physics.gravity , (transform.localScale.x == 0.5f) };
     }
     #endregion
 }

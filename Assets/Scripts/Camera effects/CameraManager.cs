@@ -18,10 +18,10 @@ public class CameraManager : MonoBehaviour, IMementeable
         Instance = this;
         SaveManager.AddToSaveManager(this);
     }
+
     void Start()
     {
         _camerasPoints[0].SetCamera(0);
-
         Memories[0] = 0;
     }
 
