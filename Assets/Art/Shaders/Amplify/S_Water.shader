@@ -189,7 +189,7 @@ Shader "S_Water"
 			#include "AutoLight.cginc"
 
 			#define ASE_NEEDS_FRAG_WORLD_POSITION
-			#define ASE_NEEDS_FRAG_NORMAL
+			#define ASE_NEEDS_FRAG_WORLD_NORMAL
 
 			struct appdata {
 				float4 vertex : POSITION;
@@ -231,7 +231,7 @@ Shader "S_Water"
 				#if defined(ASE_NEEDS_FRAG_SCREEN_POSITION)
 				float4 screenPos : TEXCOORD8;
 				#endif
-				float3 ase_normal : NORMAL;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -379,7 +379,6 @@ Shader "S_Water"
 				float voroi14 = voronoi14( coords14, time14, id14, uv14, 0, voronoiSmoothId14 );
 				float4 appendResult8 = (float4(0.0 , ( voroi14 * _Amplitude ) , 0.0 , 0.0));
 				
-				o.ase_normal = v.normal;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -600,6 +599,8 @@ Shader "S_Water"
 				voroi60 /= rest60;
 				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
+				float temp_output_71_0 = ( WorldNormal.x + 0.0 );
+				
 				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
@@ -610,7 +611,7 @@ Shader "S_Water"
 				#endif
 				o.Smoothness = 0;
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( WorldNormal.y , -0.9 ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 				float3 BakedGI = 0;
@@ -797,7 +798,7 @@ Shader "S_Water"
 			#include "AutoLight.cginc"
 
 			#define ASE_NEEDS_FRAG_WORLD_POSITION
-			#define ASE_NEEDS_FRAG_NORMAL
+			#define ASE_NEEDS_FRAG_WORLD_NORMAL
 
 			struct appdata {
 				float4 vertex : POSITION;
@@ -832,7 +833,7 @@ Shader "S_Water"
 				#if defined(ASE_NEEDS_FRAG_SCREEN_POSITION)
 				float4 screenPos : TEXCOORD8;
 				#endif
-				float3 ase_normal : NORMAL;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -980,7 +981,6 @@ Shader "S_Water"
 				float voroi14 = voronoi14( coords14, time14, id14, uv14, 0, voronoiSmoothId14 );
 				float4 appendResult8 = (float4(0.0 , ( voroi14 * _Amplitude ) , 0.0 , 0.0));
 				
-				o.ase_normal = v.normal;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -1182,6 +1182,8 @@ Shader "S_Water"
 				voroi60 /= rest60;
 				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
+				float temp_output_71_0 = ( WorldNormal.x + 0.0 );
+				
 				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
@@ -1192,7 +1194,7 @@ Shader "S_Water"
 				#endif
 				o.Smoothness = 0;
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( WorldNormal.y , -0.9 ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float3 Transmission = 1;
 				float3 Translucency = 1;
@@ -1331,7 +1333,7 @@ Shader "S_Water"
 			#include "UnityPBSLighting.cginc"
 
 			#define ASE_NEEDS_FRAG_WORLD_POSITION
-			#define ASE_NEEDS_FRAG_NORMAL
+			#define ASE_NEEDS_FRAG_WORLD_NORMAL
 
 			struct appdata {
 				float4 vertex : POSITION;
@@ -1362,7 +1364,7 @@ Shader "S_Water"
 				float4 tSpace0 : TEXCOORD5;
 				float4 tSpace1 : TEXCOORD6;
 				float4 tSpace2 : TEXCOORD7;
-				float3 ase_normal : NORMAL;
+				
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -1503,7 +1505,6 @@ Shader "S_Water"
 				float voroi14 = voronoi14( coords14, time14, id14, uv14, 0, voronoiSmoothId14 );
 				float4 appendResult8 = (float4(0.0 , ( voroi14 * _Amplitude ) , 0.0 , 0.0));
 				
-				o.ase_normal = v.normal;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -1706,6 +1707,8 @@ Shader "S_Water"
 				voroi60 /= rest60;
 				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
+				float temp_output_71_0 = ( WorldNormal.x + 0.0 );
+				
 				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
@@ -1716,7 +1719,7 @@ Shader "S_Water"
 				#endif
 				o.Smoothness = 0;
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( WorldNormal.y , -0.9 ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float3 BakedGI = 0;
 
@@ -1852,7 +1855,7 @@ Shader "S_Water"
 			#include "UnityPBSLighting.cginc"
 			#include "UnityMetaPass.cginc"
 
-			#define ASE_NEEDS_FRAG_NORMAL
+			#define ASE_NEEDS_VERT_NORMAL
 
 			struct appdata {
 				float4 vertex : POSITION;
@@ -1874,7 +1877,7 @@ Shader "S_Water"
 					float4 lightCoord : TEXCOORD2;
 				#endif
 				float4 ase_texcoord3 : TEXCOORD3;
-				float3 ase_normal : NORMAL;
+				float4 ase_texcoord4 : TEXCOORD4;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -2013,10 +2016,13 @@ Shader "S_Water"
 				
 				o.ase_texcoord3.xyz = ase_worldPos;
 				
-				o.ase_normal = v.normal;
+				float3 ase_worldNormal = UnityObjectToWorldNormal(v.normal);
+				o.ase_texcoord4.xyz = ase_worldNormal;
+				
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
 				o.ase_texcoord3.w = 0;
+				o.ase_texcoord4.w = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -2193,10 +2199,13 @@ Shader "S_Water"
 				voroi60 /= rest60;
 				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
+				float3 ase_worldNormal = IN.ase_texcoord4.xyz;
+				float temp_output_71_0 = ( ase_worldNormal.x + 0.0 );
+				
 				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
-				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( ase_worldNormal.y , -0.9 ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 
 				#ifdef _ALPHATEST_ON
@@ -2269,7 +2278,7 @@ Shader "S_Water"
 			#include "Lighting.cginc"
 			#include "UnityPBSLighting.cginc"
 
-			#define ASE_NEEDS_FRAG_NORMAL
+			#define ASE_NEEDS_VERT_NORMAL
 
 			struct appdata {
 				float4 vertex : POSITION;
@@ -2284,7 +2293,7 @@ Shader "S_Water"
 			struct v2f {
 				V2F_SHADOW_CASTER;
 				float4 ase_texcoord2 : TEXCOORD2;
-				float3 ase_normal : NORMAL;
+				float4 ase_texcoord3 : TEXCOORD3;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -2425,11 +2434,13 @@ Shader "S_Water"
 				float4 appendResult8 = (float4(0.0 , ( voroi14 * _Amplitude ) , 0.0 , 0.0));
 				
 				o.ase_texcoord2.xyz = ase_worldPos;
+				float3 ase_worldNormal = UnityObjectToWorldNormal(v.normal);
+				o.ase_texcoord3.xyz = ase_worldNormal;
 				
-				o.ase_normal = v.normal;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
 				o.ase_texcoord2.w = 0;
+				o.ase_texcoord3.w = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -2595,10 +2606,12 @@ Shader "S_Water"
 				}//Voronoi60
 				voroi60 /= rest60;
 				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
+				float3 ase_worldNormal = IN.ase_texcoord3.xyz;
+				float temp_output_71_0 = ( ase_worldNormal.x + 0.0 );
 				
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( IN.ase_normal.x , -0.9 ) + step( 0.9 , IN.ase_normal.x ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( ase_worldNormal.y , -0.9 ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 
@@ -2645,14 +2658,7 @@ Node;AmplifyShaderEditor.RangedFloatNode;23;-467.4075,502.4108;Inherit;False;Pro
 Node;AmplifyShaderEditor.RangedFloatNode;15;-693.5812,286.298;Inherit;False;Property;_Scale;Scale;1;0;Create;True;0;0;0;False;0;False;12.73;12.73;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.DynamicAppendNode;8;-212.7911,166.6911;Inherit;True;FLOAT4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.VoronoiNode;14;-512.0042,242.6152;Inherit;True;0;0;1;0;1;False;1;False;False;False;4;0;FLOAT2;0,0;False;1;FLOAT;0;False;2;FLOAT;1;False;3;FLOAT;0;False;3;FLOAT;0;FLOAT2;1;FLOAT2;2
-Node;AmplifyShaderEditor.NormalVertexDataNode;39;-251.6692,449.867;Inherit;True;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;41;-108.6936,629.8607;Inherit;False;Constant;_Float2;Float 2;2;0;Create;True;0;0;0;False;0;False;-0.9;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;46;9.203247,97.5188;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.StepOpNode;40;87.3064,488.8607;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.StepOpNode;50;215.2032,757.6836;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;51;-18.07007,721.7338;Inherit;False;Constant;_Float3;Float 3;2;0;Create;True;0;0;0;False;0;False;0.9;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.SimpleAddOpNode;52;431.2271,694.1038;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.SaturateNode;47;319.7579,561.2533;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;36;-182.7306,68.12155;Inherit;False;Property;_Transparency;Transparency;3;0;Create;True;0;0;0;False;0;False;0.5;0.5;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;55;-215.1641,-414.3093;Inherit;False;Constant;_Float0;Float 0;4;0;Create;True;0;0;0;False;0;False;1.84;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;57;61.9521,-182.0667;Inherit;False;Constant;_Float4;Float 4;4;0;Create;True;0;0;0;False;0;False;0.01;0;0;0;0;1;FLOAT;0
@@ -2680,6 +2686,15 @@ Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;1;427.3586,-10.19712;Float;
 Node;AmplifyShaderEditor.BreakToComponentsNode;67;-349.4808,6.547352;Inherit;False;COLOR;1;0;COLOR;0,0,0,0;False;16;FLOAT;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4;FLOAT;5;FLOAT;6;FLOAT;7;FLOAT;8;FLOAT;9;FLOAT;10;FLOAT;11;FLOAT;12;FLOAT;13;FLOAT;14;FLOAT;15
 Node;AmplifyShaderEditor.ColorNode;59;-636.3905,-91.72359;Inherit;False;Constant;_Color1;Color 1;4;0;Create;True;0;0;0;False;0;False;0.4705882,0.4117647,0.1568628,0.7843137;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.ColorNode;35;-520.4673,-262.9028;Inherit;False;Property;_Color0;Color 0;2;0;Create;True;0;0;0;False;0;False;0,0.8398378,1,0.4901961;0,0.8398378,1,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.SaturateNode;47;657.5797,607.5044;Inherit;True;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.StepOpNode;40;-218.8304,660.6498;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;51;-324.2069,893.5231;Inherit;False;Constant;_Float3;Float 3;2;0;Create;True;0;0;0;False;0;False;0.9;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;52;125.0903,865.8929;Inherit;False;3;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.StepOpNode;50;-90.93363,929.4728;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;41;-414.8304,801.6498;Inherit;False;Constant;_Float2;Float 2;2;0;Create;True;0;0;0;False;0;False;-0.9;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.SimpleAddOpNode;71;-408.1644,631.9736;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.WorldNormalVector;72;-636.0206,617.3907;Inherit;False;False;1;0;FLOAT3;0,0,1;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
+Node;AmplifyShaderEditor.StepOpNode;74;-485.6196,998.4401;Inherit;True;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 WireConnection;22;0;14;0
 WireConnection;22;1;23;0
 WireConnection;8;1;22;0
@@ -2687,13 +2702,6 @@ WireConnection;14;0;31;0
 WireConnection;14;2;15;0
 WireConnection;46;0;67;3
 WireConnection;46;1;47;0
-WireConnection;40;0;39;1
-WireConnection;40;1;41;0
-WireConnection;50;0;51;0
-WireConnection;50;1;39;1
-WireConnection;52;0;40;0
-WireConnection;52;1;50;0
-WireConnection;47;0;52;0
 WireConnection;58;0;35;0
 WireConnection;58;1;59;0
 WireConnection;58;2;56;0
@@ -2716,5 +2724,16 @@ WireConnection;1;0;58;0
 WireConnection;1;7;48;0
 WireConnection;1;15;8;0
 WireConnection;67;0;58;0
+WireConnection;47;0;52;0
+WireConnection;40;0;71;0
+WireConnection;40;1;41;0
+WireConnection;52;0;40;0
+WireConnection;52;1;50;0
+WireConnection;52;2;74;0
+WireConnection;50;0;51;0
+WireConnection;50;1;71;0
+WireConnection;71;0;72;1
+WireConnection;74;0;72;2
+WireConnection;74;1;41;0
 ASEEND*/
-//CHKSM=7C1464B864759C06DCE169F3C46AB93F880D7FC6
+//CHKSM=72A001194876079AE51C3D38989F9DB5EA8E1916
