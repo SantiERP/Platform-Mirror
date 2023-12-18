@@ -48,8 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397ce4b0f5f387f48900e631157cd582, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivationButton: {fileID: 0}
-  WhereDoIMoveTo: {x: 0, y: 14, z: 0}
+  _activationButton: {fileID: 0}
+  _whereDoIMoveTo: {x: 0, y: 0, z: 0}
+  _doorVelocity: 0.05
   _audioSource: {fileID: -5439525192286057329}
 --- !u!33 &8782877349003846561
 MeshFilter:

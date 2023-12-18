@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 
 [RequireComponent(typeof(AudioSource))]
 public class PressableButton : Interruptor
@@ -9,6 +10,7 @@ public class PressableButton : Interruptor
     int _amountOfObjectsPressing;
 
     AudioSource _audioSource;
+    [SerializeField] GameObject[] _pointLight;
 
     void Start()
     {
@@ -30,8 +32,8 @@ public class PressableButton : Interruptor
         {
             ButtonAction();
             _amountOfObjectsPressing++;
-
-            if(_amountOfObjectsPressing == 1)
+            Lights();
+            if (_amountOfObjectsPressing == 1)
             {
                 _audioSource.Play();
             }
@@ -43,11 +45,12 @@ public class PressableButton : Interruptor
         if (other.TryGetComponent<Bouncing>(out Bouncing bounceable))
         {
             _amountOfObjectsPressing--;
-
+            Lights();
             if (_amountOfObjectsPressing <= 0)
             {
                 ButtonAntiAction(); 
             }
+
         }
     }
 
@@ -61,4 +64,11 @@ public class PressableButton : Interruptor
         _desiredPosition = _normalPosition;
     }
 
+    void Lights()
+    {
+        foreach (GameObject pointLight in _pointLight)
+        {
+            pointLight.SetActive(!pointLight.activeSelf);
+        }
+    }
 }
