@@ -4,11 +4,13 @@ public class Box : MonoBehaviour , IMementeable
 {
     public object[] Memories { get; set; }
     Rigidbody _body;
+
     void Awake()
     {
         SaveManager.AddToSaveManager(this);
         _body = GetComponent<Rigidbody>();
     }
+
     public void Remember()
     {
         if (Memories != null)

@@ -75,7 +75,7 @@ public class ModelPlayer : Player , IMementeable
     {
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
-        return Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, 0.6F * transform.localScale.y, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, 0.6F * transform.localScale.y, layerMask, QueryTriggerInteraction.Ignore);
+        return Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, transform.localScale.y, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, transform.localScale.y, layerMask, QueryTriggerInteraction.Ignore);
     }
 
     public bool TouchingTheWall(int direccion)
