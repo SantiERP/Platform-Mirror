@@ -2,41 +2,41 @@ using UnityEngine;
 
 public class BulletFactory : MonoBehaviour
 {
-    public static BulletFactory Instance { get; private set; }
+    //public static BulletFactory Instance { get; private set; }
 
-    [SerializeField] Bullet _bulletPrefab;
-    [SerializeField] int _initialAmount;
+    //[SerializeField] Bullet _bulletPrefab;
+    //[SerializeField] int _initialAmount;
 
-    Pool<Bullet> _myBulletPool;
+    //Pool<Bullet> _myBulletPool;
 
-    void Awake()
-    {
+    //void Awake()
+    //{
 
-        if (Instance)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        else
-        {
-            Instance = this;
-        }
+    //    if (Instance)
+    //    {
+    //        Destroy(gameObject);
+    //        return;
+    //    }
+    //    else
+    //    {
+    //        Instance = this;
+    //    }
 
-        _myBulletPool = new Pool<Bullet>(CreatorMethod, Bullet.TurnOn, Bullet.TurnOff, _initialAmount);
-    }
+    //    _myBulletPool = new Pool<Bullet>(CreatorMethod, Bullet.TurnOn, Bullet.TurnOff, _initialAmount);
+    //}
 
-    private Bullet CreatorMethod()
-    {
-        return Instantiate(_bulletPrefab);
-    }
+    //private Bullet CreatorMethod()
+    //{
+    //    return Instantiate(_bulletPrefab);
+    //}
 
-    public Bullet GetObjectFromPool()
-    {
-        return _myBulletPool.GetObject();
-    }
+    //public Bullet GetObjectFromPool()
+    //{
+    //    return _myBulletPool.GetObject();
+    //}
 
-    public void ReturnToPool(Bullet obj)
-    {
-        _myBulletPool.ReturnObject(obj);
-    }
+    //public void ReturnToPool(Bullet obj)
+    //{
+    //    _myBulletPool.ReturnObject(obj);
+    //}
 }
