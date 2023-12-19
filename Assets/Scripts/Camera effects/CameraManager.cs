@@ -22,7 +22,7 @@ public class CameraManager : MonoBehaviour, IMementeable
     void Start()
     {
         _camerasPoints[0].SetCamera(0);
-        Memories[0] = 0;
+        Memories = new object[] {0};
     }
 
     #region Camera Movement
@@ -50,8 +50,8 @@ public class CameraManager : MonoBehaviour, IMementeable
     {
         if (Memories != null)
         {
-            _camerasPoints[(int)Memories[(int)infoPos.lastPos]].SetCamera(0);
             ActualPos = (int)Memories[(int)infoPos.lastPos];
+            _camerasPoints[(int)Memories[(int)infoPos.lastPos]].SetCamera(0);
         }
     }
     public void Forget()
@@ -60,7 +60,7 @@ public class CameraManager : MonoBehaviour, IMementeable
     }
     public void Save()
     {
-        Memories = new object[] { ActualPos + 1};
+        Memories = new object[] {ActualPos + 1};
     }
     #endregion
 }

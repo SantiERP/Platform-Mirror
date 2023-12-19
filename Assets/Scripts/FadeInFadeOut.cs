@@ -12,7 +12,6 @@ public class FadeInFadeOut : MonoBehaviour
     // Start is called before the first frame update
     IEnumerator Start()
     {
-        
         RectTransform rect = GetComponent<RectTransform>();
         WaitForSeconds wait = new WaitForSeconds(0.01f);
 
