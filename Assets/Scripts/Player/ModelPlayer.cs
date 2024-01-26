@@ -70,9 +70,9 @@ public class ModelPlayer : Player, IMementeable
         Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, out hit, 0.6F * transform.localScale.y, layerMask);
         rig = hit.rigidbody;
 
-        bool answer = Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, 0.6F * transform.localScale.y, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, 0.6F * transform.localScale.y, layerMask, QueryTriggerInteraction.Ignore);
+        bool answer = Physics.CheckBox(transform.position - transform.up, Vector3.one * 0.5f, Quaternion.identity, layerMask);
 
-        if(answer)
+        if (answer)
         {
             stopedJumping = false;
         }
@@ -84,7 +84,8 @@ public class ModelPlayer : Player, IMementeable
     {
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
-        bool answer = Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, .6f * transform.localScale.y, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, .6f * transform.localScale.y, layerMask, QueryTriggerInteraction.Ignore);
+        bool answer = Physics.CheckBox(transform.position - transform.up * .6f, Vector3.up * 0.05f + Vector3.forward + Vector3.right, Quaternion.identity, layerMask);
+        Debug.Log(answer);
 
         if (answer)
         {
