@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class ModelPlayer : Player , IMementeable
+public class ModelPlayer : Player, IMementeable
 {
     public static ModelPlayer Entity;
 
@@ -24,6 +24,7 @@ public class ModelPlayer : Player , IMementeable
     [SerializeField] float _airVelocity = 6;
     [SerializeField] AnimationCurve _importanceCurveOfPressingJumpButton;
     float _timePressingJumpButton = 0;
+    [SerializeField] bool stopedJumping = true;
 
     IController _controller;
     VisualPlayer _visual;
@@ -68,14 +69,29 @@ public class ModelPlayer : Player , IMementeable
         RaycastHit hit;
         Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, out hit, 0.6F * transform.localScale.y, layerMask);
         rig = hit.rigidbody;
-        return Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, 0.6F*transform.localScale.y, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, 0.6F * transform.localScale.y, layerMask, QueryTriggerInteraction.Ignore);
+
+        bool answer = Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, 0.6F * transform.localScale.y, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, 0.6F * transform.localScale.y, layerMask, QueryTriggerInteraction.Ignore);
+
+        if(answer)
+        {
+            stopedJumping = false;
+        }
+
+        return answer;
     }
 
     public bool TouchingTheFloor()
     {
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
-        return Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, .6f * transform.localScale.y, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, .6f * transform.localScale.y, layerMask, QueryTriggerInteraction.Ignore);
+        bool answer = Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, .6f * transform.localScale.y, layerMask) || Physics.Raycast(transform.position - transform.right * 0.48f, -transform.up, .6f * transform.localScale.y, layerMask, QueryTriggerInteraction.Ignore);
+
+        if (answer)
+        {
+            stopedJumping = false;
+        }
+
+        return answer;
     }
 
     public bool TouchingTheWall(int direccion)
@@ -142,11 +158,12 @@ public class ModelPlayer : Player , IMementeable
     {
         _timePressingJumpButton += Time.fixedDeltaTime;
 
-        if (_timePressingJumpButton < 0.5f)
+        if (_timePressingJumpButton < 0.5f && !stopedJumping)
         {
             Rig.AddForce(transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
             Rigidbody boxRigidbody;
             TouchingTheFloor(out boxRigidbody);
+
             try
             {
                 boxRigidbody.AddForce(-transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
@@ -160,6 +177,7 @@ public class ModelPlayer : Player , IMementeable
     }
     public void StopJumping()
     {
+        stopedJumping = true;
         _timePressingJumpButton = 1;
     }
     

@@ -21,6 +21,7 @@ public class ControllerPlayer : IController
             _player.Jump();
             Debug.Log("Salta");
         }
+
         if (Input.GetButtonDown("Jump"))
         {
             if(_player.TouchingTheFloor())
@@ -35,6 +36,7 @@ public class ControllerPlayer : IController
             SaveManager.Remember();
             Debug.Log("Remembering");
         }
+
         if (Input.GetButtonUp("Jump"))
         {
             _player.StopJumping();
