@@ -9145,6 +9145,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  stopedJumping: 1
 --- !u!4 &528710465
 Transform:
   m_ObjectHideFlags: 0
@@ -16238,7 +16239,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 255680972, guid: 25859fb282010f5409fe7fbde1311784, type: 3}
       propertyPath: m_Range
-      value: 30
+      value: 58.362946
       objectReference: {fileID: 0}
     - target: {fileID: 255680972, guid: 25859fb282010f5409fe7fbde1311784, type: 3}
       propertyPath: m_Color.b
@@ -16254,7 +16255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 255680972, guid: 25859fb282010f5409fe7fbde1311784, type: 3}
       propertyPath: m_Intensity
-      value: 5
+      value: 8.72
       objectReference: {fileID: 0}
     - target: {fileID: 4665549113584002476, guid: 25859fb282010f5409fe7fbde1311784, type: 3}
       propertyPath: m_Name
@@ -46465,11 +46466,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6993758634411374126, guid: e31bfc609de1a15429e3c452187225b7, type: 3}
       propertyPath: m_Range
-      value: 8.95
+      value: 9.82
       objectReference: {fileID: 0}
     - target: {fileID: 6993758634411374126, guid: e31bfc609de1a15429e3c452187225b7, type: 3}
       propertyPath: m_Intensity
       value: 14.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993758634411374126, guid: e31bfc609de1a15429e3c452187225b7, type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 1.46966e-39
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993758634411374126, guid: e31bfc609de1a15429e3c452187225b7, type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6993758634411374126, guid: e31bfc609de1a15429e3c452187225b7, type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 11.333333
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e31bfc609de1a15429e3c452187225b7, type: 3}
