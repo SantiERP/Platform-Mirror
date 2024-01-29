@@ -84,7 +84,7 @@ public class ModelPlayer : Player, IMementeable
     {
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
-        bool answer = Physics.CheckBox(transform.position - transform.up * .6f, Vector3.up * 0.05f + Vector3.forward + Vector3.right, Quaternion.identity, layerMask);
+        bool answer = Physics.CheckBox(transform.position - transform.up * .6f, Vector3.up * 0.05f + Vector3.forward + Vector3.right * .49f, Quaternion.identity, layerMask);
         Debug.Log(answer);
 
         if (answer)
