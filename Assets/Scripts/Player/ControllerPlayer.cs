@@ -33,6 +33,13 @@ public class ControllerPlayer : IController
     {
         if (Input.GetButtonDown("Restart"))
         {
+            foreach(Mirrors mirror in Mirrors.allMirrors)
+            {
+                if (mirror == null) continue;
+                mirror.StopAllCoroutines();
+                mirror.UnconstrainAllRigs();
+            }
+
             SaveManager.Remember();
             Debug.Log("Remembering");
         }

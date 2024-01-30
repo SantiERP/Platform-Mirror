@@ -14,8 +14,6 @@ public class AntigravityMirror : Mirrors
     public override void Skill(Bouncing b)
     {     
         EntityLister.DadoVuelta = !EntityLister.DadoVuelta;
-
-
         Physics.gravity = transform.up * Physics.gravity.magnitude;
 
         StartCoroutine(Rotate((-transform.up)));

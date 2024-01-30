@@ -70,7 +70,7 @@ public class ModelPlayer : Player, IMementeable
         Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, out hit, 0.6F * transform.localScale.y, layerMask);
         rig = hit.rigidbody;
 
-        bool answer = Physics.CheckBox(transform.position - transform.up, Vector3.one * 0.5f, Quaternion.identity, layerMask);
+        bool answer = Physics.CheckBox(transform.position - transform.up, Vector3.one * 0.5f, Quaternion.identity, layerMask , QueryTriggerInteraction.Ignore);
 
         if (answer)
         {
@@ -84,7 +84,7 @@ public class ModelPlayer : Player, IMementeable
     {
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
-        bool answer = Physics.CheckBox(transform.position - transform.up * .6f, Vector3.up * 0.05f + Vector3.forward + Vector3.right * .49f, Quaternion.identity, layerMask);
+        bool answer = Physics.CheckBox(transform.position - transform.up * .6f, Vector3.up * 0.05f + Vector3.forward + Vector3.right * .49f, Quaternion.identity, layerMask,QueryTriggerInteraction.Ignore);
         Debug.Log(answer);
 
         if (answer)
@@ -102,21 +102,22 @@ public class ModelPlayer : Player, IMementeable
 
         direccion = Mathf.Clamp(direccion, -1, 1);
         Debug.DrawRay(transform.position + transform.up * 0.5f, transform.right * direccion, Color.yellow);
-        return Physics.Raycast(transform.position + transform.up * 0.5f, transform.right * direccion, 0.5F, layerMask) || Physics.Raycast(transform.position - transform.up * 0.5f, transform.right * direccion, 0.5F, layerMask, QueryTriggerInteraction.Ignore);        
+        return Physics.Raycast(transform.position + transform.up * 0.5f, transform.right * direccion, 0.5F, layerMask , QueryTriggerInteraction.Ignore) || Physics.Raycast(transform.position - transform.up * 0.5f, transform.right * direccion, 0.5F, layerMask, QueryTriggerInteraction.Ignore);        
     }
 
     public override void NormalMove(float horizontal, float vertical)
     {
+        //if I was floating for long enought, gravity starts to afect me
+        if (_howLongSinceITouchedTheFloor > _coyoteTime)
+        {
+            Rig.AddForce(Physics.gravity * _gravityMultiplier, ForceMode.Acceleration);
+        }
+
         #region Aerial Movement
         if (!TouchingTheFloor())
         {
             _howLongSinceITouchedTheFloor += Time.fixedDeltaTime;
 
-            //if I was floating for long enought, gravity starts to afect me
-            if (_howLongSinceITouchedTheFloor > _coyoteTime)
-            {
-                Rig.AddForce(Physics.gravity * _gravityMultiplier, ForceMode.Acceleration);
-            }
             if (!TouchingTheWall((int)(horizontal)))
             {
                 Rig.AddForce(horizontal * transform.right * _airVelocity);
@@ -125,7 +126,6 @@ public class ModelPlayer : Player, IMementeable
         #endregion
 
         #region Terrestial Movement
-
         else
         {
             if (Rig.velocity.y <= 0)

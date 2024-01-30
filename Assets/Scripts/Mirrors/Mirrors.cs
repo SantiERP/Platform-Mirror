@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Mirrors : MonoBehaviour 
@@ -6,6 +7,15 @@ public abstract class Mirrors : MonoBehaviour
     [SerializeField] AnimationCurve _characterEntrance;
     [SerializeField] ParticleSystem _throwParticles;
     [SerializeField] AudioSource _audioSource;
+
+    List<Rigidbody> allRigs = new List<Rigidbody>();
+
+    public static List<Mirrors> allMirrors = new List<Mirrors>();
+
+    private void Awake()
+    {
+        allMirrors.Add(this);
+    }
 
     public abstract void Skill(Bouncing b);
     public static float TimeSpeed = 0.01f;
@@ -42,6 +52,7 @@ public abstract class Mirrors : MonoBehaviour
         float actualInstant = 0f;
         Vector3 finalPos = intialPos + (Vector3.Reflect(dir + transform.up, transform.up).normalized);
 
+        allRigs.Add(rig);
         rig.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 
         WaitForSeconds wait = new WaitForSeconds(0.01f);
@@ -74,6 +85,8 @@ public abstract class Mirrors : MonoBehaviour
             rig.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
         }
 
+        allRigs.Remove(rig);
+
         charBouncing.EndBounce();
 
         if(newAudio != null)
@@ -92,5 +105,23 @@ public abstract class Mirrors : MonoBehaviour
         //Normalize the vector
 
         Debug.Log($"<color=blue>{dir}</color>");
+    }
+
+    public void UnconstrainAllRigs()
+    {
+        foreach (Rigidbody rig in allRigs)
+        {
+            if (rig == null) continue;
+            rig.GetComponent<Collider>().enabled = true;
+            if (rig.GetComponent<ModelPlayer>())
+            {
+                rig.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+            }
+
+            else
+            {
+                rig.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezeRotationY;
+            }
+        }
     }
 }
