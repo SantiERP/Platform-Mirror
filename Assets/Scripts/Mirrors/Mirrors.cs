@@ -101,10 +101,20 @@ public abstract class Mirrors : MonoBehaviour
 
     void Throw(Vector3 dir, Rigidbody r)
     {
-        r.velocity = Vector3.Reflect(dir - dir.normalized, transform.up);
-        //Normalize the vector
+        Vector3 newVelocity = Vector3.Reflect(dir - dir.normalized, transform.up);
+        r.velocity = AtLeastNormalized(newVelocity, 5);
 
         Debug.Log($"<color=blue>{dir}</color>");
+    }
+
+    Vector3 AtLeastNormalized(Vector3 vector, float minimum)
+    {
+        if(vector.sqrMagnitude < minimum)
+        {
+            return vector.normalized * minimum;
+        }
+
+        return vector;
     }
 
     public void UnconstrainAllRigs()
