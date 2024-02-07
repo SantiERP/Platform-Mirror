@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class PassToNextLevel : MonoBehaviour
 {
-        delegate void Actividad();
+    delegate void Actividad();
 
-        Actividad _go;
-        Actividad _goBack;
+    Actividad _go;
+    Actividad _goBack;
 
-        Actividad _actual;
+    Actividad _actual;
+    bool passedThroughHere = false;
 
     void Start()
     {
@@ -19,13 +20,14 @@ public class PassToNextLevel : MonoBehaviour
     void OnTriggerExit(Collider collider)
     {
         Player character;
-        SaveManager.Save();
+        if(!passedThroughHere)
+            SaveManager.Save(); passedThroughHere = true;
 
-        if(collider.TryGetComponent<Player>(out character))        
+        if (collider.TryGetComponent<Player>(out character))
         {
             _actual();
 
-            if(_actual == _go)
+            if (_actual == _go)
             {
                 _actual = _goBack;
             }

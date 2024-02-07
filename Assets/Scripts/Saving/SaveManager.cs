@@ -21,11 +21,10 @@ public static class SaveManager
 
     public static void RestartSaveManager()
     {
+        Remember = null;
+        Forget = null;
+        Save = null;
 
-            Remember = null;
-            Forget = null;
-            Save = null;
-        
 
         AllMementeables = new List<IMementeable>();
         Debug.Log(AllMementeables.Count);

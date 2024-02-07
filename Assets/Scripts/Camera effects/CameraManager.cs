@@ -10,6 +10,7 @@ public class CameraManager : MonoBehaviour, IMementeable
     public static CameraManager Instance;
     [SerializeField] CameraPoints[] _camerasPoints;
     public int ActualPos = 0;
+    bool lastMovementWasForward = true;
 
     public object[] Memories { get; set; }
 
@@ -30,12 +31,14 @@ public class CameraManager : MonoBehaviour, IMementeable
     {
         ActualPos++;
         _camerasPoints[ActualPos].SetCamera(1);
+        lastMovementWasForward = true;
     }
 
     public void BeforePosition()
     {
         ActualPos--;
         _camerasPoints[ActualPos].SetCamera(-1);
+        lastMovementWasForward = false;
     }
     #endregion
 
@@ -51,7 +54,7 @@ public class CameraManager : MonoBehaviour, IMementeable
         if (Memories != null)
         {
             ActualPos = (int)Memories[(int)infoPos.lastPos];
-            _camerasPoints[(int)Memories[(int)infoPos.lastPos]].SetCamera(0);
+            _camerasPoints[ActualPos].SetCamera(0);
         }
     }
     public void Forget()
