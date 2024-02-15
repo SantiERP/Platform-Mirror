@@ -64,13 +64,17 @@ public class ModelPlayer : Player, IMementeable
     
     public bool TouchingTheFloor(out Rigidbody rig)
     {
+        float scale = 1;
+        if(Small)
+            scale = 0.5f;
+
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
         RaycastHit hit;
-        Physics.Raycast(transform.position + transform.right * 0.48f, -transform.up, out hit, 0.6F * transform.localScale.y, layerMask);
+        Physics.Raycast(transform.position + transform.right * 0.48f * scale, -transform.up, out hit, 0.6F * transform.localScale.y, layerMask, QueryTriggerInteraction.Ignore);
         rig = hit.rigidbody;
 
-        bool answer = Physics.CheckBox(transform.position - transform.up, Vector3.one * 0.5f, Quaternion.identity, layerMask , QueryTriggerInteraction.Ignore);
+        bool answer = Physics.CheckBox(transform.position - transform.up, Vector3.one * 0.5f * scale, Quaternion.identity, layerMask , QueryTriggerInteraction.Ignore);
 
         if (answer)
         {
@@ -82,9 +86,13 @@ public class ModelPlayer : Player, IMementeable
 
     public bool TouchingTheFloor()
     {
+        float scale = 1;
+        if (Small)
+            scale = 0.5f;
+
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
-        bool answer = Physics.CheckBox(transform.position - transform.up * .6f, Vector3.up * 0.05f + Vector3.forward + Vector3.right * .49f, Quaternion.identity, layerMask,QueryTriggerInteraction.Ignore);
+        bool answer = Physics.CheckBox(transform.position - transform.up * .6f * scale, (Vector3.up * 0.05f + Vector3.forward + Vector3.right * .49f) * scale, Quaternion.identity, layerMask,QueryTriggerInteraction.Ignore);
         Debug.Log(answer);
 
         if (answer)
