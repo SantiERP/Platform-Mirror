@@ -19,6 +19,18 @@ public class Box : MonoBehaviour , IMementeable
 
             transform.position = (Vector3)Memories[0];
             transform.rotation = (Quaternion)Memories[1];
+            Bouncing b = GetComponent<Bouncing>();
+            bool wasSmall = (bool)Memories[2];
+
+            if (wasSmall != b.Small)
+            {
+                if(wasSmall)
+                    transform.localScale *= 0.5f;
+                else
+                    transform.localScale *= 2;
+            }
+
+            b.Small = wasSmall;
         }
     }
     public void Forget()
@@ -27,6 +39,6 @@ public class Box : MonoBehaviour , IMementeable
     }
     public void Save()
     {
-        Memories = new object[] {transform.position , transform.rotation};
+        Memories = new object[] {transform.position , transform.rotation, GetComponent<Bouncing>().Small};
     }
 }
