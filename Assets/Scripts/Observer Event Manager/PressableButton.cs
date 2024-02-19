@@ -12,12 +12,16 @@ public class PressableButton : Interruptor
     AudioSource _audioSource;
     [SerializeField] GameObject[] _pointLight;
 
+    [SerializeField] int _IntensityExit;
+    [SerializeField] int _IntensityEnter;
+
     void Start()
     {
         _normalPosition = transform.position;
         _desiredPosition = _normalPosition;
 
         _audioSource = GetComponent<AudioSource>();
+        Lights(_IntensityExit);
     }
 
     private void Update()
@@ -32,7 +36,7 @@ public class PressableButton : Interruptor
         {
             ButtonAction();
             _amountOfObjectsPressing++;
-            Lights();
+            Lights(_IntensityEnter);
             if (_amountOfObjectsPressing == 1)
             {
                 _audioSource.Play();
@@ -45,7 +49,7 @@ public class PressableButton : Interruptor
         if (other.TryGetComponent<Bouncing>(out Bouncing bounceable))
         {
             _amountOfObjectsPressing--;
-            Lights();
+            Lights(_IntensityExit);
             if (_amountOfObjectsPressing <= 0)
             {
                 ButtonAntiAction(); 
@@ -64,11 +68,11 @@ public class PressableButton : Interruptor
         _desiredPosition = _normalPosition;
     }
 
-    void Lights()
+    void Lights(int i)
     {
         foreach (GameObject pointLight in _pointLight)
         {
-            pointLight.SetActive(!pointLight.activeSelf);
+            pointLight.GetComponent<Light>().intensity = i;
         }
     }
 }
