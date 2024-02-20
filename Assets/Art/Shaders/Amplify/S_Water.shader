@@ -153,13 +153,13 @@ Shader "S_Water"
 			Blend SrcAlpha OneMinusSrcAlpha
 
 			CGPROGRAM
+			#define _ALPHABLEND_ON 1
+			#define UNITY_STANDARD_USE_DITHER_MASK 1
 			#define ASE_NEEDS_FRAG_SHADOWCOORDS
 			#pragma multi_compile_instancing
 			#pragma multi_compile __ LOD_FADE_CROSSFADE
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
-			#define _ALPHABLEND_ON 1
-			#define UNITY_STANDARD_USE_DITHER_MASK 1
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -184,7 +184,7 @@ Shader "S_Water"
 			#include "AutoLight.cginc"
 
 			#define ASE_NEEDS_FRAG_WORLD_POSITION
-			#define ASE_NEEDS_FRAG_WORLD_NORMAL
+			#define ASE_NEEDS_FRAG_NORMAL
 
 			struct appdata {
 				float4 vertex : POSITION;
@@ -226,7 +226,7 @@ Shader "S_Water"
 				#if defined(ASE_NEEDS_FRAG_SCREEN_POSITION)
 				float4 screenPos : TEXCOORD8;
 				#endif
-				
+				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -374,6 +374,7 @@ Shader "S_Water"
 				float voroi14 = voronoi14( coords14, time14, id14, uv14, 0, voronoiSmoothId14 );
 				float4 appendResult8 = (float4(0.0 , ( voroi14 * _Amplitude ) , 0.0 , 0.0));
 				
+				o.ase_normal = v.normal;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -594,7 +595,7 @@ Shader "S_Water"
 				voroi60 /= rest60;
 				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
-				float temp_output_71_0 = ( WorldNormal.x + 0.0 );
+				float temp_output_71_0 = ( IN.ase_normal.x + 0.0 );
 				
 				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
@@ -606,7 +607,7 @@ Shader "S_Water"
 				#endif
 				o.Smoothness = 0;
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( WorldNormal.y , -0.9 ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( IN.ase_normal.y , -0.9 ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 				float3 BakedGI = 0;
@@ -756,13 +757,13 @@ Shader "S_Water"
 			Blend SrcAlpha One
 
 			CGPROGRAM
+			#define _ALPHABLEND_ON 1
+			#define UNITY_STANDARD_USE_DITHER_MASK 1
 			#define ASE_NEEDS_FRAG_SHADOWCOORDS
 			#pragma multi_compile_instancing
 			#pragma multi_compile __ LOD_FADE_CROSSFADE
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
-			#define _ALPHABLEND_ON 1
-			#define UNITY_STANDARD_USE_DITHER_MASK 1
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -788,7 +789,7 @@ Shader "S_Water"
 			#include "AutoLight.cginc"
 
 			#define ASE_NEEDS_FRAG_WORLD_POSITION
-			#define ASE_NEEDS_FRAG_WORLD_NORMAL
+			#define ASE_NEEDS_FRAG_NORMAL
 
 			struct appdata {
 				float4 vertex : POSITION;
@@ -823,7 +824,7 @@ Shader "S_Water"
 				#if defined(ASE_NEEDS_FRAG_SCREEN_POSITION)
 				float4 screenPos : TEXCOORD8;
 				#endif
-				
+				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -971,6 +972,7 @@ Shader "S_Water"
 				float voroi14 = voronoi14( coords14, time14, id14, uv14, 0, voronoiSmoothId14 );
 				float4 appendResult8 = (float4(0.0 , ( voroi14 * _Amplitude ) , 0.0 , 0.0));
 				
+				o.ase_normal = v.normal;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -1172,7 +1174,7 @@ Shader "S_Water"
 				voroi60 /= rest60;
 				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
-				float temp_output_71_0 = ( WorldNormal.x + 0.0 );
+				float temp_output_71_0 = ( IN.ase_normal.x + 0.0 );
 				
 				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
@@ -1184,7 +1186,7 @@ Shader "S_Water"
 				#endif
 				o.Smoothness = 0;
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( WorldNormal.y , -0.9 ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( IN.ase_normal.y , -0.9 ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float3 Transmission = 1;
 				float3 Translucency = 1;
@@ -1286,13 +1288,13 @@ Shader "S_Water"
 			AlphaToMask Off
 
 			CGPROGRAM
+			#define _ALPHABLEND_ON 1
+			#define UNITY_STANDARD_USE_DITHER_MASK 1
 			#define ASE_NEEDS_FRAG_SHADOWCOORDS
 			#pragma multi_compile_instancing
 			#pragma multi_compile __ LOD_FADE_CROSSFADE
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
-			#define _ALPHABLEND_ON 1
-			#define UNITY_STANDARD_USE_DITHER_MASK 1
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -1318,7 +1320,7 @@ Shader "S_Water"
 			#include "UnityPBSLighting.cginc"
 
 			#define ASE_NEEDS_FRAG_WORLD_POSITION
-			#define ASE_NEEDS_FRAG_WORLD_NORMAL
+			#define ASE_NEEDS_FRAG_NORMAL
 
 			struct appdata {
 				float4 vertex : POSITION;
@@ -1349,7 +1351,7 @@ Shader "S_Water"
 				float4 tSpace0 : TEXCOORD5;
 				float4 tSpace1 : TEXCOORD6;
 				float4 tSpace2 : TEXCOORD7;
-				
+				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -1490,6 +1492,7 @@ Shader "S_Water"
 				float voroi14 = voronoi14( coords14, time14, id14, uv14, 0, voronoiSmoothId14 );
 				float4 appendResult8 = (float4(0.0 , ( voroi14 * _Amplitude ) , 0.0 , 0.0));
 				
+				o.ase_normal = v.normal;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -1692,7 +1695,7 @@ Shader "S_Water"
 				voroi60 /= rest60;
 				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
-				float temp_output_71_0 = ( WorldNormal.x + 0.0 );
+				float temp_output_71_0 = ( IN.ase_normal.x + 0.0 );
 				
 				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
@@ -1704,7 +1707,7 @@ Shader "S_Water"
 				#endif
 				o.Smoothness = 0;
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( WorldNormal.y , -0.9 ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( IN.ase_normal.y , -0.9 ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float3 BakedGI = 0;
 
@@ -1804,13 +1807,13 @@ Shader "S_Water"
 			Cull Off
 
 			CGPROGRAM
+			#define _ALPHABLEND_ON 1
+			#define UNITY_STANDARD_USE_DITHER_MASK 1
 			#define ASE_NEEDS_FRAG_SHADOWCOORDS
 			#pragma multi_compile_instancing
 			#pragma multi_compile __ LOD_FADE_CROSSFADE
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
-			#define _ALPHABLEND_ON 1
-			#define UNITY_STANDARD_USE_DITHER_MASK 1
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -1835,7 +1838,7 @@ Shader "S_Water"
 			#include "UnityPBSLighting.cginc"
 			#include "UnityMetaPass.cginc"
 
-			#define ASE_NEEDS_VERT_NORMAL
+			#define ASE_NEEDS_FRAG_NORMAL
 
 			struct appdata {
 				float4 vertex : POSITION;
@@ -1857,7 +1860,7 @@ Shader "S_Water"
 					float4 lightCoord : TEXCOORD2;
 				#endif
 				float4 ase_texcoord3 : TEXCOORD3;
-				float4 ase_texcoord4 : TEXCOORD4;
+				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -1996,13 +1999,10 @@ Shader "S_Water"
 				
 				o.ase_texcoord3.xyz = ase_worldPos;
 				
-				float3 ase_worldNormal = UnityObjectToWorldNormal(v.normal);
-				o.ase_texcoord4.xyz = ase_worldNormal;
-				
+				o.ase_normal = v.normal;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
 				o.ase_texcoord3.w = 0;
-				o.ase_texcoord4.w = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -2179,13 +2179,12 @@ Shader "S_Water"
 				voroi60 /= rest60;
 				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
 				
-				float3 ase_worldNormal = IN.ase_texcoord4.xyz;
-				float temp_output_71_0 = ( ase_worldNormal.x + 0.0 );
+				float temp_output_71_0 = ( IN.ase_normal.x + 0.0 );
 				
 				o.Albedo = lerpResult58.rgb;
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Emission = half3( 0, 0, 0 );
-				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( ase_worldNormal.y , -0.9 ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( IN.ase_normal.y , -0.9 ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 
 				#ifdef _ALPHATEST_ON
@@ -2220,13 +2219,13 @@ Shader "S_Water"
 			AlphaToMask Off
 
 			CGPROGRAM
+			#define _ALPHABLEND_ON 1
+			#define UNITY_STANDARD_USE_DITHER_MASK 1
 			#define ASE_NEEDS_FRAG_SHADOWCOORDS
 			#pragma multi_compile_instancing
 			#pragma multi_compile __ LOD_FADE_CROSSFADE
 			#pragma multi_compile_fog
 			#define ASE_FOG 1
-			#define _ALPHABLEND_ON 1
-			#define UNITY_STANDARD_USE_DITHER_MASK 1
 
 			#pragma vertex vert
 			#pragma fragment frag
@@ -2253,7 +2252,7 @@ Shader "S_Water"
 			#include "Lighting.cginc"
 			#include "UnityPBSLighting.cginc"
 
-			#define ASE_NEEDS_VERT_NORMAL
+			#define ASE_NEEDS_FRAG_NORMAL
 
 			struct appdata {
 				float4 vertex : POSITION;
@@ -2268,7 +2267,7 @@ Shader "S_Water"
 			struct v2f {
 				V2F_SHADOW_CASTER;
 				float4 ase_texcoord2 : TEXCOORD2;
-				float4 ase_texcoord3 : TEXCOORD3;
+				float3 ase_normal : NORMAL;
 				UNITY_VERTEX_INPUT_INSTANCE_ID
 				UNITY_VERTEX_OUTPUT_STEREO
 			};
@@ -2409,13 +2408,11 @@ Shader "S_Water"
 				float4 appendResult8 = (float4(0.0 , ( voroi14 * _Amplitude ) , 0.0 , 0.0));
 				
 				o.ase_texcoord2.xyz = ase_worldPos;
-				float3 ase_worldNormal = UnityObjectToWorldNormal(v.normal);
-				o.ase_texcoord3.xyz = ase_worldNormal;
 				
+				o.ase_normal = v.normal;
 				
 				//setting value to unused interpolator channels and avoid initialization warnings
 				o.ase_texcoord2.w = 0;
-				o.ase_texcoord3.w = 0;
 				#ifdef ASE_ABSOLUTE_VERTEX_POS
 					float3 defaultVertexValue = v.vertex.xyz;
 				#else
@@ -2581,12 +2578,11 @@ Shader "S_Water"
 				}//Voronoi60
 				voroi60 /= rest60;
 				float4 lerpResult58 = lerp( _Color0 , color59 , step( ( voroi54 * voroi60 ) , 0.01 ));
-				float3 ase_worldNormal = IN.ase_texcoord3.xyz;
-				float temp_output_71_0 = ( ase_worldNormal.x + 0.0 );
+				float temp_output_71_0 = ( IN.ase_normal.x + 0.0 );
 				
 				o.Normal = fixed3( 0, 0, 1 );
 				o.Occlusion = 1;
-				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( ase_worldNormal.y , -0.9 ) ) ) ) );
+				o.Alpha = saturate( ( lerpResult58.a - saturate( ( step( temp_output_71_0 , -0.9 ) + step( 0.9 , temp_output_71_0 ) + step( IN.ase_normal.y , -0.9 ) ) ) ) );
 				float AlphaClipThreshold = 0.5;
 				float AlphaClipThresholdShadow = 0.5;
 
@@ -2671,6 +2667,7 @@ Node;AmplifyShaderEditor.BreakToComponentsNode;97;-205.4644,85.63089;Inherit;Fal
 Node;AmplifyShaderEditor.WireNode;99;-334.9833,64.41283;Inherit;False;1;0;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;46;9.203247,97.5188;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SaturateNode;48;151.8258,108.638;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
+Node;AmplifyShaderEditor.NormalVertexDataNode;100;-700.6971,797.8188;Inherit;False;0;5;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 WireConnection;22;0;14;0
 WireConnection;22;1;23;0
 WireConnection;14;0;31;0
@@ -2696,8 +2693,8 @@ WireConnection;52;1;50;0
 WireConnection;52;2;74;0
 WireConnection;50;0;51;0
 WireConnection;50;1;71;0
-WireConnection;71;0;72;1
-WireConnection;74;0;72;2
+WireConnection;71;0;100;1
+WireConnection;74;0;100;2
 WireConnection;74;1;41;0
 WireConnection;87;0;58;0
 WireConnection;87;7;48;0
@@ -2714,4 +2711,4 @@ WireConnection;46;0;97;3
 WireConnection;46;1;47;0
 WireConnection;48;0;46;0
 ASEEND*/
-//CHKSM=D6258BF548F23E9521CFBAFC9AD4EA133B89D554
+//CHKSM=EBAF44ED771DB35D3E3C9A884B6143617E78AE76

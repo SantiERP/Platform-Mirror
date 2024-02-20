@@ -72,6 +72,7 @@ public class PressableButton : Interruptor
     {
         foreach (GameObject pointLight in _pointLight)
         {
+            pointLight.SetActive(true);
             pointLight.GetComponent<Light>().intensity = i;
         }
     }
