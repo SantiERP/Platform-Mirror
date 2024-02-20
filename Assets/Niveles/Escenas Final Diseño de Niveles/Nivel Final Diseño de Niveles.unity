@@ -41355,6 +41355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FloorVentilation3.3 (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 8268228109310710121, guid: aeb22ae416e2dae438ef7d6bbba728da, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8788058908123794387, guid: aeb22ae416e2dae438ef7d6bbba728da, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -41725,7 +41729,7 @@ PrefabInstance:
       objectReference: {fileID: 2878220106958031105}
     - target: {fileID: 8782877349003846560, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
       propertyPath: _whereDoIMoveTo.x
-      value: -2.44
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 8782877349003846563, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
       propertyPath: m_RootOrder
@@ -41778,6 +41782,26 @@ PrefabInstance:
     - target: {fileID: 8782877349003852892, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
       propertyPath: m_Name
       value: Puerta
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782877349003852895, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
+      propertyPath: m_Size.y
+      value: 1.2139871
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782877349003852895, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
+      propertyPath: m_Size.z
+      value: 4.8437104
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782877349003852895, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
+      propertyPath: m_Center.x
+      value: -5.206742e-15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782877349003852895, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
+      propertyPath: m_Center.y
+      value: -0.0015974715
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782877349003852895, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
+      propertyPath: m_Center.z
+      value: -1.5419877
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
