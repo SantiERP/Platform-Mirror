@@ -121,24 +121,13 @@ public class ModelPlayer : Player, IMementeable
             Rig.AddForce(Physics.gravity * _gravityMultiplier, ForceMode.Acceleration);
         }
 
-        #region Aerial Movement
-        if (!TouchingTheFloor())
+        #region Terrestrial Movement
+        if (TouchingTheFloor())
         {
-            _howLongSinceITouchedTheFloor += Time.fixedDeltaTime;
-
-            if (!TouchingTheWall((int)(horizontal)))
+            if (!Input.GetButton("Jump"))
             {
-                Rig.AddForce(horizontal * transform.right * _airVelocity);
-            }
-        }
-        #endregion
-
-        #region Terrestial Movement
-        else
-        {
-            if (Rig.velocity.y <= 0)
-            { 
-                _howLongSinceITouchedTheFloor = 0; 
+                Rig.velocity = new Vector3(Rig.velocity.x, 0, 0);
+                _howLongSinceITouchedTheFloor = 0;
                 _timePressingJumpButton = 0;
             }
 
@@ -155,10 +144,22 @@ public class ModelPlayer : Player, IMementeable
 
             _onWhichAccelerationPointItsIn = Mathf.Clamp(_onWhichAccelerationPointItsIn, 0, 1);
 
-            if(!TouchingTheWall((int)(horizontal)))
+            if (!TouchingTheWall((int)(horizontal)))
             {
                 Rig.velocity = new Vector3(horizontal * _acceleration.Evaluate(_onWhichAccelerationPointItsIn) * _maxHorizontalSpeed, Rig.velocity.y, 0);
-            } 
+            }
+        }
+        #endregion
+
+        #region Aerial Movement
+        else
+        {
+            _howLongSinceITouchedTheFloor += Time.fixedDeltaTime;
+
+            if (!TouchingTheWall((int)(horizontal)))
+            {
+                Rig.AddForce(horizontal * transform.right * _airVelocity);
+            }
         }
         #endregion
     }
@@ -173,13 +174,9 @@ public class ModelPlayer : Player, IMementeable
             Rigidbody boxRigidbody;
             TouchingTheFloor(out boxRigidbody);
 
-            try
-            {
+            if(boxRigidbody != null)
+            { 
                 boxRigidbody.AddForce(-transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
-            }
-            catch
-            {
-
             }
         }
 

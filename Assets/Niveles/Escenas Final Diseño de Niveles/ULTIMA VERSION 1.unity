@@ -38627,8 +38627,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2504561, y: 1.7037164, z: 1}
-  m_Center: {x: -0.12522867, y: 0.35185826, z: 0}
+  m_Size: {x: 1.1747019, y: 1.7037164, z: 1}
+  m_Center: {x: -0.08735172, y: 0.35185826, z: 0}
 --- !u!23 &1550040797
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -39661,7 +39661,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   _coyoteTime: 0.1
   _howLongSinceITouchedTheFloor: 0
-  _normalJumpStrength: 37
+  _normalJumpStrength: 33
   _gravityMultiplier: 1
   _airVelocity: 6
   _importanceCurveOfPressingJumpButton:
@@ -39670,20 +39670,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 34
+      inSlope: -0.05364833
+      outSlope: -0.05364833
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
+      outWeight: 0.13188647
     - serializedVersion: 3
       time: 1
       value: 0
-      inSlope: -1
-      outSlope: -1
-      tangentMode: 34
+      inSlope: -3.1228807
+      outSlope: -3.1228807
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.031719625
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
