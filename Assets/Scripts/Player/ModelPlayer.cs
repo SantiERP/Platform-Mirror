@@ -220,6 +220,8 @@ public class ModelPlayer : Player, IMementeable
 
             Small = (bool)Memories[3];
         }
+
+        EndBounce();
     }
     public void Forget()
     {
