@@ -19714,8 +19714,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2581836, y: 1.8173261, z: 9.37}
-  m_Center: {x: 0.2409082, y: 0.74866307, z: 0.98}
+  m_Size: {x: 1.2581836, y: 1.8925614, z: 9.37}
+  m_Center: {x: 0.2409082, y: 0.71104574, z: 0.98}
 --- !u!54 &1039170513
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42813,12 +42813,16 @@ PrefabInstance:
       value: Puerta
       objectReference: {fileID: 0}
     - target: {fileID: 8782877349003852895, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8782877349003852895, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
       propertyPath: m_Size.y
       value: 1.2139871
       objectReference: {fileID: 0}
     - target: {fileID: 8782877349003852895, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
       propertyPath: m_Size.z
-      value: 7.542219
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8782877349003852895, guid: 4123975f48b209a489a58485bc9e855a, type: 3}
       propertyPath: m_Center.x
@@ -43477,8 +43481,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 10.62}
-  m_Center: {x: 0, y: 0.74, z: 0.98}
+  m_Size: {x: 1.2570496, y: 2.036645, z: 10.62}
+  m_Center: {x: 0.20761137, y: 0.5182482, z: 0.98}
 --- !u!1 &660247584803325773
 GameObject:
   m_ObjectHideFlags: 0
@@ -46007,8 +46011,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.82, y: 1, z: 5.21}
-  m_Center: {x: 0, y: 1.5, z: 0.98}
+  m_Size: {x: 1.82, y: 2.7073033, z: 5.209999}
+  m_Center: {x: -7.2191236e-14, y: 0.6463476, z: 0.9799999}
 --- !u!1 &2753469734286125696
 GameObject:
   m_ObjectHideFlags: 0
