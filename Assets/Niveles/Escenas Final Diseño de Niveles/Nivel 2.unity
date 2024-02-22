@@ -31323,7 +31323,7 @@ GameObject:
   - component: {fileID: 1942299002}
   - component: {fileID: 1942299001}
   m_Layer: 0
-  m_Name: GameObject (1)
+  m_Name: Collider Piso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31362,8 +31362,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 29.853409, y: 17.012356, z: 8.58643}
-  m_Center: {x: 15.205605, y: 0.0005130768, z: 0.066547394}
+  m_Size: {x: 29.853409, y: 17.01236, z: 8.58643}
+  m_Center: {x: 15.205605, y: 0, z: 0.066547394}
 --- !u!65 &1942299001
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31375,8 +31375,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5054626, y: 16.902674, z: 14.040535}
-  m_Center: {x: -1.3981171, y: -0.013615608, z: 0.5582428}
+  m_Size: {x: 1.5054626, y: 17.01236, z: 14.040535}
+  m_Center: {x: -1.3981171, y: 0, z: 0.5582428}
 --- !u!65 &1942299002
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -31388,8 +31388,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.4908142, y: 16.387106, z: 9.340585}
-  m_Center: {x: -0.17329407, y: -0.2239809, z: -0.2027421}
+  m_Size: {x: 3.4908142, y: 16.76236, z: 9.340585}
+  m_Center: {x: -0.17329407, y: -0.55, z: -0.2027421}
 --- !u!1001 &1952333130
 PrefabInstance:
   m_ObjectHideFlags: 0
