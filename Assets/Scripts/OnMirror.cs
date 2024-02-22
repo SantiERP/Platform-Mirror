@@ -14,7 +14,7 @@ public class OnMirror : MonoBehaviour
             {
                 if (i == null) continue;
                 i.SetActive(!i.activeSelf);
-                
+
                 if(i.transform.parent == this.transform)
                 {
                     i.transform.parent = null;
