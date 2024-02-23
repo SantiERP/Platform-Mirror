@@ -26,7 +26,7 @@ public class PressableButton : Interruptor
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, _desiredPosition, 0.01f);
+        transform.position = Vector3.Lerp(transform.position, _desiredPosition, 0.1f);
     }
 
 
