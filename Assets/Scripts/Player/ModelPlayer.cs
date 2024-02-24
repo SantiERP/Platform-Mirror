@@ -93,7 +93,6 @@ public class ModelPlayer : Player, IMementeable
         int layerMask = 4 << 6;
         layerMask = ~layerMask;
         bool answer = Physics.CheckBox(transform.position - transform.up * .6f * scale, (transform.up * 0.05f + Vector3.forward + Vector3.right * .49f) * scale, Quaternion.identity, layerMask,QueryTriggerInteraction.Ignore);
-        Debug.Log(answer);
 
         if (answer)
         {
