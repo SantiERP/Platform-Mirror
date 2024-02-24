@@ -153,6 +153,11 @@ public class ModelPlayer : Player, IMementeable
         #region Aerial Movement
         else
         {
+            if(!Input.GetButton("Jump"))
+            {
+                _timePressingJumpButton = 1;
+            }
+
             _howLongSinceITouchedTheFloor += Time.fixedDeltaTime;
 
             if (!TouchingTheWall((int)(horizontal)))
