@@ -16,7 +16,7 @@ public class ModelPlayer : Player, IMementeable
     float _jumpStrength;
     [SerializeField] float _normalJumpStrength = 40;
 
-    public float JumpStrenght { get => _jumpStrength; set { Debug.Log(value); _jumpStrength = value; } }
+    public float JumpStrenght { get => _jumpStrength; set {_jumpStrength = value; } }
     public float NormalJump { get => _normalJumpStrength; }
     [SerializeField] float _gravityMultiplier;
     public float GravityMultiplier { get => _gravityMultiplier; set { _gravityMultiplier = value; } }
@@ -44,7 +44,6 @@ public class ModelPlayer : Player, IMementeable
 
         SaveManager.AddToSaveManager(this);
         _jumpStrength = _normalJumpStrength;
-        Debug.Log(_controller);
     }
 
     void LoadLastPos(object[] parameters)

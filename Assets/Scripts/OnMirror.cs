@@ -19,6 +19,11 @@ public class OnMirror : MonoBehaviour
                 {
                     i.transform.parent = null;
                 }
+
+                if(!i.activeSelf)
+                {
+                    Destroy(i.gameObject);
+                }
             }
 
             Destroy(this.gameObject);
