@@ -24,6 +24,7 @@ public abstract class Mirrors : MonoBehaviour
     {
         if (other.TryGetComponent<Bouncing>(out Bouncing bounceable))
         {
+            if (Vector3.Dot(transform.position - other.transform.position, transform.up) > 0) return;
             StartCoroutine(CharacterEntrance(bounceable.transform.position, bounceable.Rig, bounceable));
         }
     }
