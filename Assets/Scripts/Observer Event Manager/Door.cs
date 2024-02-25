@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : MonoBehaviour, IMementeable
 {
     [SerializeField] Interruptor _activationButton;
     [SerializeField] Vector3 _whereDoIMoveTo;
@@ -12,6 +12,12 @@ public class Door : MonoBehaviour
     Rigidbody _rig;
     [SerializeField] AudioSource _audioSource;
 
+    public object[] Memories { get; set; }
+
+    private void Awake()
+    {
+        SaveManager.AddToSaveManager(this);
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -45,5 +51,24 @@ public class Door : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position , transform.position + _whereDoIMoveTo);
+    }
+
+    public void Remember()
+    {
+        if (Memories != null)
+        {
+            transform.position = (Vector3)Memories[0];
+            transform.rotation = (Quaternion)Memories[1];
+        }
+    }
+
+    public void Forget()
+    {
+        Memories = null;
+    }
+
+    public void Save()
+    {
+        Memories = new object[] { transform.position, transform.rotation };
     }
 }
