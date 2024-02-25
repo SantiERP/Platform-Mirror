@@ -36,9 +36,10 @@ public class PressableButton : Interruptor
         {
             ButtonAction();
             _amountOfObjectsPressing++;
-            Lights(_IntensityEnter);
+
             if (_amountOfObjectsPressing == 1)
             {
+                Lights(_IntensityEnter);
                 _audioSource.Play();
             }
         }
@@ -49,9 +50,10 @@ public class PressableButton : Interruptor
         if (other.TryGetComponent<Bouncing>(out Bouncing bounceable))
         {
             _amountOfObjectsPressing--;
-            Lights(_IntensityExit);
+
             if (_amountOfObjectsPressing <= 0)
             {
+                Lights(_IntensityExit);
                 ButtonAntiAction(); 
             }
 
