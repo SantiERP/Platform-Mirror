@@ -48,5 +48,10 @@ public class ControllerPlayer : IController
         {
             _player.StopJumping();
         }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.Stop();
+        }
     }
 }
