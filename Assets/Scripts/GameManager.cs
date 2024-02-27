@@ -6,9 +6,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Cursor.visible = false;
         ScreenManagerDefault.Instance.Push(new ScreenGameplay(_game));
         SaveManager.Save();
-
     }
 
     public static void Stop()
