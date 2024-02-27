@@ -22,6 +22,11 @@ public class OnMirror : MonoBehaviour
 
                 if(!i.activeSelf)
                 {
+                    if(i.TryGetComponent(out IMementeable remember))
+                    {
+                        SaveManager.RemoveFromSaveManager(remember);
+                    }
+
                     Destroy(i.gameObject);
                 }
             }

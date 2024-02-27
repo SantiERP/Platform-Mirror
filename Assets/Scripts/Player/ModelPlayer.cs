@@ -13,7 +13,7 @@ public class ModelPlayer : Player, IMementeable
     [SerializeField] float _coyoteTime = 0.1f;
     [SerializeField] float _howLongSinceITouchedTheFloor = 0;
 
-    float _jumpStrength;
+    [SerializeField] float _jumpStrength;
     [SerializeField] float _normalJumpStrength = 40;
 
     public float JumpStrenght { get => _jumpStrength; set {_jumpStrength = value; } }
@@ -116,7 +116,11 @@ public class ModelPlayer : Player, IMementeable
         //if I was floating for long enought, gravity starts to afect me
         if (_howLongSinceITouchedTheFloor > _coyoteTime)
         {
-            Rig.AddForce(Physics.gravity * _gravityMultiplier, ForceMode.Acceleration);
+            float gravityFromJumping = 1;
+            if (!stopedJumping)
+                gravityFromJumping = 0.5f;
+
+            Rig.AddForce(Physics.gravity * _gravityMultiplier * gravityFromJumping, ForceMode.Acceleration);
         }
 
         #region Terrestrial Movement
@@ -164,20 +168,24 @@ public class ModelPlayer : Player, IMementeable
 
     public void Jump()
     {
-        _timePressingJumpButton += Time.fixedDeltaTime;
+        //_timePressingJumpButton += Time.fixedDeltaTime;
 
-        if (_timePressingJumpButton < 0.5f && !stopedJumping)
+        //if (_timePressingJumpButton < 0.5f && !stopedJumping)
+        //{
+        //    Rig.AddForce(transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
+        //    Rigidbody boxRigidbody;
+        //    TouchingTheFloor(out boxRigidbody);
+
+        //    if(boxRigidbody != null)
+        //    { 
+        //        boxRigidbody.AddForce(-transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
+        //    }
+        //}
+
+        if(TouchingTheFloor())
         {
-            Rig.AddForce(transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
-            Rigidbody boxRigidbody;
-            TouchingTheFloor(out boxRigidbody);
-
-            if(boxRigidbody != null)
-            { 
-                boxRigidbody.AddForce(-transform.up * _jumpStrength * _importanceCurveOfPressingJumpButton.Evaluate(_timePressingJumpButton) * Time.fixedDeltaTime, ForceMode.Impulse);
-            }
+            Rig.velocity = transform.right * Rig.velocity.x + transform.up * _jumpStrength;
         }
-
     }
     public void StopJumping()
     {

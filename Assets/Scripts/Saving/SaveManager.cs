@@ -13,10 +13,21 @@ public static class SaveManager
 
     public static void AddToSaveManager(IMementeable memento)
     {
-        Remember += delegate { memento.Remember(); };
-        Forget += delegate { memento.Forget(); };
-        Save += delegate { memento.Save(); };
+        Remember += memento.Remember;
+        Forget += memento.Forget;
+        Save +=  memento.Save;
         AllMementeables.Add(memento);
+    }
+
+    public static void RemoveFromSaveManager(IMementeable memento)
+    {
+        if (AllMementeables.Contains(memento))
+        {
+            Remember -= memento.Remember;
+            Forget -= memento.Forget;
+            Save -= memento.Save;
+            AllMementeables.Remove(memento);
+        }
     }
 
     public static void RestartSaveManager()
