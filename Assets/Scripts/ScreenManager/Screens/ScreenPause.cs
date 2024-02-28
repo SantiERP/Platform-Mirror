@@ -29,6 +29,7 @@ public class ScreenPause : MonoBehaviour, IScreen
     public void BTN_Back()
     {
         ScreenManagerDefault.Instance.Pop();
+        Cursor.visible = false;
     }
     public void BTN_Quit()
     {

@@ -17,10 +17,11 @@ public class GameManager : MonoBehaviour
         {
             var screenPause = Instantiate(Resources.Load<ScreenPause>("Canvas Pause"));
             ScreenManagerDefault.Instance.Push(screenPause);
+            Cursor.visible = true;
         }
         else if (ScreenManagerDefault.Instance.ScreenCount>1)
         {
             ScreenManagerDefault.Instance.Pop();
-        }
+        }        
     }
 }
